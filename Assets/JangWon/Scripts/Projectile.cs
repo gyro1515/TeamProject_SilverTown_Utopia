@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     //projectile RigidBody
-    Rigidbody2D rigidbody2D;
+    Rigidbody2D _rigidbody2D;
     //Who shoot projectile
     string ShooterTag;
     //projectile damage
@@ -14,7 +14,7 @@ public class Projectile : MonoBehaviour
 
     private void Awake()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     //temporary destroy
@@ -25,14 +25,14 @@ public class Projectile : MonoBehaviour
 
 
 
-    public void Init(/*Entity e,*/ Vector2 force, int damage)
+    public void Init(/*Entity entity,*/ Vector2 force, int damage)
     {
-        if (rigidbody2D == null)
+        if (_rigidbody2D == null)
         {
             Debug.Log("RigidBody not exists in projectile");
             return;
         }
-        rigidbody2D.velocity = force;
+        _rigidbody2D.velocity = force;
         this.damage = damage;
 
         //ShooterTag = e.gameObject.tag;
@@ -40,7 +40,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == ShooterTag || collision.CompareTag("Projectile"))
+        if (collision.tag == ShooterTag || collision.CompareTag("Attack"))
             return;
 
         //if entity, give damage

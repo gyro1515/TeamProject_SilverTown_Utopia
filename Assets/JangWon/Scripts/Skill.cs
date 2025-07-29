@@ -8,14 +8,13 @@ public abstract class Skill : ScriptableObject
     //Entity who cast skill
     //public Entity entity;
 
-
     //Delay of the skill itself
-    private float _coolTime;
+    protected float _coolTime;
     public float coolTime { get => _coolTime; }
 
     //damage value of skill
-    private int _skillDamage;
-    public float skillDamage { get => _skillDamage; }
+    protected int _skillDamage;
+    public int skillDamage { get => _skillDamage; }
 
     SpriteRenderer _spriteRenderer;
 

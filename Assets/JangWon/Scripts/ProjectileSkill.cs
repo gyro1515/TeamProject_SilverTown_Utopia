@@ -8,8 +8,6 @@ public class ProjectileSkill : Skill
 {
     [SerializeField] Projectile projectilePrefab;
 
-    //Damage of Proejctile
-    [SerializeField] int damage = 0;
     //number of projectiile Generated
     [SerializeField] int projectileQuantity = 0;
     //Radius how to shoow projectile
@@ -18,7 +16,7 @@ public class ProjectileSkill : Skill
     [SerializeField] float projectileSpeed = 0.0f;
     //Entity who shoot Projectile
 
-    //Temp direction to shoot projectiles
+    //direction to shoot projectiles
     public Vector2 direction;
 
     public override void UseSkill()
@@ -36,14 +34,14 @@ public class ProjectileSkill : Skill
 
         Projectile firstProjectile = Instantiate(projectilePrefab, Vector3.zero, Quaternion.identity);
 
-        firstProjectile.Init(RotateVector2(direction * projectileSpeed, startangle), damage);
+        firstProjectile.Init(RotateVector2(direction * projectileSpeed, startangle), skillDamage);
         firstProjectile.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         for (int count = 1; count < projectileQuantity; count++)
         {
             startangle += (spread / 2.0f) / (projectileQuantity / 2);
             Projectile projectile = Instantiate(projectilePrefab, Vector3.zero, Quaternion.identity);
 
-            projectile.Init(RotateVector2(direction * projectileSpeed, startangle), damage);
+            projectile.Init(RotateVector2(direction * projectileSpeed, startangle), skillDamage);
         }
     }
 

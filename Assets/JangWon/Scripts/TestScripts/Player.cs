@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
     [SerializeField] Skill baseattack = null;
 
 
-
     //Temporary shooting test
     private void Update()
     {
