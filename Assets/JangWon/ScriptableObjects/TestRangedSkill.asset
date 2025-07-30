@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54ee12395610fa240a5d93fa8432423c, type: 3}
   m_Name: TestRangedSkill
   m_EditorClassIdentifier: 
+  shooter: {fileID: 0}
+  _skillDamage: 5
   PositionCenter: {x: 0, y: 0, z: 0}
   colliderPrefab: {fileID: 3617344549384259999, guid: ddff3a9b92fcc4b4984a933e4374ab12, type: 3}
   warningDuration: 1
   attackRemain: 0
+  attackAngle: 0
+  isLocal: 1

@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2194e5ab6e65f5f42aea95da7f589cdc, type: 3}
   m_Name: TestProjectileSkill
   m_EditorClassIdentifier: 
+  shooter: {fileID: 0}
+  _skillDamage: 10
   projectilePrefab: {fileID: 8324435634244213426, guid: cac8bffb8dd1e2c439f81fa8be92be0c, type: 3}
   projectileQuantity: 18
   spread: 360
-  projectileSpeed: 10
+  projectileSpeed: 5
   direction: {x: 1, y: 0}

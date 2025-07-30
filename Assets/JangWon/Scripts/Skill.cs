@@ -6,22 +6,21 @@ using UnityEngine;
 public abstract class Skill : ScriptableObject
 {
     //Entity who cast skill
-    //public Entity entity;
+    public Entity shooter;
 
     //Delay of the skill itself
     protected float _coolTime;
     public float coolTime { get => _coolTime; }
 
     //damage value of skill
-    protected int _skillDamage;
+    [SerializeField] protected int _skillDamage;
     public int skillDamage { get => _skillDamage; }
 
     SpriteRenderer _spriteRenderer;
 
-    protected virtual void Init(/*Entity entity*/)
-    {
-        //this.entity = entity;
-    }
 
-    public abstract void UseSkill();
+    public virtual void UseSkill(Entity entity)
+    {
+        this.shooter = entity;
+    }
 }

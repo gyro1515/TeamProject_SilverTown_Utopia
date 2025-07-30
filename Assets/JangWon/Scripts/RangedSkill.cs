@@ -9,12 +9,16 @@ public class RangedSkill : Skill
     [SerializeField] float warningDuration = 0.0f;
     [SerializeField] float attackRemain = 0.0f;
     [SerializeField] float attackAngle = 0.0f;
+    [SerializeField] bool isLocal = true;
 
 
-    public override void UseSkill()
+    public override void UseSkill(Entity entity)
     {
+        base.UseSkill(entity);
         HitCollider collider = Instantiate(colliderPrefab);
-        collider.Init(PositionCenter, warningDuration, attackRemain, attackAngle);
+        collider.Init(shooter, 
+            isLocal ? shooter.transform.localPosition + PositionCenter : PositionCenter,
+            warningDuration, attackRemain, attackAngle, skillDamage);
     }
 
 }

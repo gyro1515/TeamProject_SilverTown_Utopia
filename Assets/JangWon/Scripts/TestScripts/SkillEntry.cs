@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class SkillEntry : Entity
 {
     [SerializeField] List<Skill> skills = new List<Skill>();
     [SerializeField] Skill baseattack = null;
@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            baseattack.UseSkill();
+            baseattack.UseSkill(this as Entity);
         }
     }
 }
