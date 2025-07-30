@@ -7,9 +7,10 @@ public class Projectile : MonoBehaviour
     //projectile RigidBody
     Rigidbody2D _rigidbody2D;
     //Who shoot projectile
-    string ShooterTag;
+    Entity shooter;
     //projectile damage
     int damage = 0;
+
 
 
     private void Awake()
@@ -25,8 +26,9 @@ public class Projectile : MonoBehaviour
 
 
 
-    public void Init(/*Entity entity,*/ Vector2 force, int damage)
+    public void Init(Entity entity, Vector2 force, int damage)
     {
+        shooter = entity;
         if (_rigidbody2D == null)
         {
             Debug.Log("RigidBody not exists in projectile");
@@ -34,23 +36,20 @@ public class Projectile : MonoBehaviour
         }
         _rigidbody2D.velocity = force;
         this.damage = damage;
-
-        //ShooterTag = e.gameObject.tag;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == ShooterTag || collision.CompareTag("Attack"))
+        if (collision.CompareTag("Attack"))
+            return;
+        if (collision.CompareTag(shooter.tag))
             return;
 
-        //if entity, give damage
-        /*
         if (collision.gameObject.GetComponent<Entity>() != null)
         {
             Entity entity = collision.gameObject.GetComponent<Entity>();
-            entity.TakeDamage(damage)
+            shooter.ApplyDamage(entity, damage);
         }
-        */
-        Destroy(collision.gameObject);
+        Destroy(gameObject);
     }
 }

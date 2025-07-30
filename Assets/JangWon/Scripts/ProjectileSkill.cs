@@ -19,8 +19,9 @@ public class ProjectileSkill : Skill
     //direction to shoot projectiles
     public Vector2 direction;
 
-    public override void UseSkill()
+    public override void UseSkill(Entity entity)
     {
+        base.UseSkill(entity);
         //Temp Code
         direction = direction.normalized;
         //TempCode End
@@ -34,14 +35,14 @@ public class ProjectileSkill : Skill
 
         Projectile firstProjectile = Instantiate(projectilePrefab, Vector3.zero, Quaternion.identity);
 
-        firstProjectile.Init(RotateVector2(direction * projectileSpeed, startangle), skillDamage);
+        firstProjectile.Init(shooter, RotateVector2(direction * projectileSpeed, startangle), skillDamage);
         firstProjectile.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         for (int count = 1; count < projectileQuantity; count++)
         {
             startangle += (spread / 2.0f) / (projectileQuantity / 2);
             Projectile projectile = Instantiate(projectilePrefab, Vector3.zero, Quaternion.identity);
 
-            projectile.Init(RotateVector2(direction * projectileSpeed, startangle), skillDamage);
+            projectile.Init(shooter, RotateVector2(direction * projectileSpeed, startangle), skillDamage);
         }
     }
 
