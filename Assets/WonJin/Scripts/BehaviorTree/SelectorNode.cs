@@ -7,6 +7,9 @@ using static Unity.VisualScripting.Metadata;
 public class SelectorNode : INode
 {
     private List<INode> childrens;
+    // 러닝일떄 바로 해당 인덱스로 가도록 캐시 구조 적용
+    private int currentIndex = 0;
+
     public SelectorNode(List<INode> nodes)
     {
         childrens = nodes;
@@ -17,17 +20,26 @@ public class SelectorNode : INode
         if (childrens == null)
             return INode.ENodeState.Failure;
 
-        foreach (var child in childrens)
+        while (currentIndex < childrens.Count)
         {
-            switch (child.Evaluate())
+            INode.ENodeState result = childrens[currentIndex].Evaluate();
+
+            switch (result)
             {
+                case INode.ENodeState.Success:
+                    currentIndex = 0;
+                    return INode.ENodeState.Success;
+
                 case INode.ENodeState.Running:
                     return INode.ENodeState.Running;
-                case INode.ENodeState.Success:
-                    return INode.ENodeState.Success;
+
+                case INode.ENodeState.Failure:
+                    currentIndex++;
+                    continue;
             }
         }
 
+        currentIndex = 0;
         return INode.ENodeState.Failure;
     }
 }
