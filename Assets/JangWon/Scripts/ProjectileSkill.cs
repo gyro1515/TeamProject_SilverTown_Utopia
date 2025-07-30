@@ -14,17 +14,11 @@ public class ProjectileSkill : Skill
     [SerializeField] float spread = 0.0f;
     //Each Projectile Speed
     [SerializeField] float projectileSpeed = 0.0f;
-    //Entity who shoot Projectile
 
-    //direction to shoot projectiles
-    public Vector2 direction;
-
-    public override void UseSkill(Entity entity)
+    public override void UseSkill(Entity entity, Vector2 dir)
     {
-        base.UseSkill(entity);
-        //Temp Code
-        direction = direction.normalized;
-        //TempCode End
+
+        base.UseSkill(entity, dir);
         if (projectileQuantity <= 0)
             return;
         float startangle;
@@ -33,14 +27,17 @@ public class ProjectileSkill : Skill
         else
             startangle = (-spread / 2.0f);
 
-        Projectile firstProjectile = Instantiate(projectilePrefab, Vector3.zero, Quaternion.identity);
+        Projectile firstProjectile = Instantiate(projectilePrefab,
+            isLocal ? shooter.transform.localPosition + PositionCenter : PositionCenter
+            , Quaternion.identity);
 
         firstProjectile.Init(shooter, RotateVector2(direction * projectileSpeed, startangle), skillDamage);
-        firstProjectile.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         for (int count = 1; count < projectileQuantity; count++)
         {
             startangle += (spread / 2.0f) / (projectileQuantity / 2);
-            Projectile projectile = Instantiate(projectilePrefab, Vector3.zero, Quaternion.identity);
+            Projectile projectile = Instantiate(projectilePrefab,
+                isLocal ? shooter.transform.localPosition + PositionCenter : PositionCenter,
+                Quaternion.identity);
 
             projectile.Init(shooter, RotateVector2(direction * projectileSpeed, startangle), skillDamage);
         }

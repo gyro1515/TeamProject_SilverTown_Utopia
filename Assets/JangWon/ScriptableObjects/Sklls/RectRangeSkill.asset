@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
   _skillDamage: 15
+  direction: {x: 0, y: 0}
+  isLocal: 1
   PositionCenter: {x: 0, y: 0, z: 0}
   colliderPrefab: {fileID: 3617344549384259999, guid: 9b8a40c66a1a6ba4ca60c0f2d551ffb8, type: 3}
   warningDuration: 1
   attackRemain: 0
-  attackAngle: -180
-  isLocal: 1
+  attackAngle: -90
+  isFixedRotation: 0

@@ -16,11 +16,16 @@ public abstract class Skill : ScriptableObject
     [SerializeField] protected int _skillDamage;
     public int skillDamage { get => _skillDamage; }
 
-    SpriteRenderer _spriteRenderer;
+    //direction to attack
+    public Vector2 direction;
 
+    [SerializeField] protected bool isLocal = true;
 
-    public virtual void UseSkill(Entity entity)
+    [SerializeField] public Vector3 PositionCenter = Vector3.zero;
+
+    public virtual void UseSkill(Entity entity, Vector2 dir)
     {
         this.shooter = entity;
+        this.direction = dir.normalized;
     }
 }

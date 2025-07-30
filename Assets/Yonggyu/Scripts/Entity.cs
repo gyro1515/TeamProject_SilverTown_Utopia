@@ -18,7 +18,7 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void TakeDamage(int damage) 
     {
-        Debug.Log(damage.ToString() + "Damaged");
+        Debug.Log("Entity " + this.gameObject.name + " Took " +damage.ToString() + "Damage");
     }
 
     public void ApplyDamage(Entity e, int damage = 0) 

@@ -10,9 +10,6 @@ public class Projectile : MonoBehaviour
     Entity shooter;
     //projectile damage
     int damage = 0;
-
-
-
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();

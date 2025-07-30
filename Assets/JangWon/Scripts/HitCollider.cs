@@ -8,6 +8,7 @@ public class HitCollider : MonoBehaviour
     [SerializeField] Collider2D _collider;
     [SerializeField] SpriteRenderer warningZoneSprite;
     [SerializeField] SpriteRenderer OutlineSprite;
+
     Entity shooter;
     float start = 0.0f;
     float endDuration = 0.0f;
@@ -20,7 +21,7 @@ public class HitCollider : MonoBehaviour
         _collider.enabled = false;
         shooter = entity;
         transform.localPosition = pos;
-        transform.localRotation = Quaternion.Euler(new Vector3(0, 0, attackAngle));
+        transform.rotation = Quaternion.Euler(0.0f, 0.0f, attackAngle);
         endDuration = end;
         attackRemain = remain;
         if (endDuration != 0.0f)
@@ -58,6 +59,7 @@ public class HitCollider : MonoBehaviour
 
     void ApplyDamage()
     {
+        Debug.Log("Attack");
         _collider.enabled = true;
         Destroy(gameObject, attackRemain + 0.1f);
     }

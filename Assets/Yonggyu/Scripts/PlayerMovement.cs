@@ -12,6 +12,9 @@ public class PlayerController : Entity
     [SerializeField] private const float invincibleDelay = 0.25f;
     public float parringStartTime = 0;
 
+    //Attack
+    [SerializeField] Skill baseAttack= null;
+
 
     protected override void TakeDamage(int damage)
     {
@@ -30,6 +33,7 @@ public class PlayerController : Entity
 
     private void Start()
     {
+        baseAttack = Instantiate(baseAttack);
         parringStartTime -= parringDelay;
     }
 
@@ -40,8 +44,11 @@ public class PlayerController : Entity
         direction = new Vector2(direction.x, direction.y).normalized;
         MoveAnimation(direction);
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
             Parring();
+
+        if (Input.GetMouseButtonDown(0))
+            BaseAttack((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - (Vector2)transform.position);
 
     }
 
@@ -72,5 +79,18 @@ public class PlayerController : Entity
         parringStartTime = Time.fixedTime;
 
         Debug.Log("Parring tried at : " + parringStartTime.ToString());
+    }
+
+    private void BaseAttack(Vector2 mousepos)
+    {
+        if (baseAttack == null)
+        {
+            Debug.Log("Player BaseAttack is null");
+            return;
+        }
+        if ((mousepos.magnitude) < 0.9f)
+            baseAttack.UseSkill(this as Entity, Vector2.zero);
+        else
+            baseAttack.UseSkill(this as Entity, mousepos.normalized);
     }
 }
