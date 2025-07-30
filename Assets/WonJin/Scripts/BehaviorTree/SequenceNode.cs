@@ -15,6 +15,8 @@ public class SequenceNode : INode
 
     public INode.ENodeState Evaluate()
     {
+        Debug.Log("SequenceNode");
+
         if (childrens == null || childrens.Count == 0)
             return INode.ENodeState.Failure;
 

@@ -57,6 +57,7 @@ public class TestBoss : MonoBehaviour
     }
     INode.ENodeState Chase()
     {
+        Debug.Log("Chase");
         if (Vector3.Distance(target.transform.position, transform.position) <= chaseRange)
         {
             //Debug.Log("ChaseSuccess");
@@ -70,7 +71,7 @@ public class TestBoss : MonoBehaviour
 
             return INode.ENodeState.Success;
         }
-        else if (Vector3.Distance(target.transform.position, transform.position) <= chaseRange * 1.5f)
+        else if (Vector3.Distance(target.transform.position, transform.position) <= chaseRange * 2.0f)
         {
             //Debug.Log("ChaseSuccess");
             moveDir = (target.transform.position - transform.position).normalized;
@@ -88,12 +89,16 @@ public class TestBoss : MonoBehaviour
             //Debug.Log("ChaseFailure");
             moveDir = Vector2.zero;
             speed = monSpeed;
-            return INode.ENodeState.Failure;
+            //return INode.ENodeState.Failure;
+            return INode.ENodeState.Running; // 범위 밖이라고 판단되면 계속 Chase()부분만 실행가는 하도록
+            // 쫓아가기 범위 밖이면 애초에 공격 범위 생각할 필요 없음
         }
 
     }
     INode.ENodeState CanAttack()
     {
+        Debug.Log("CanAttack");
+
         // 공격 범위 내 혹은 공격 중이라면 성공 판정
         if (Vector3.Distance(target.transform.position, transform.position) <= attackRange || isAttacking) 
         {
@@ -106,9 +111,11 @@ public class TestBoss : MonoBehaviour
     }
     INode.ENodeState Attack()
     {
+        Debug.Log("Attack");
+
         if (!isAttacking) // 공격 중이 아니라면 
         {
-            Debug.Log("공격 시작");
+            //Debug.Log("공격 시작");
             isAttacking = true;
             attackTimer = attackDuration;
 
@@ -127,7 +134,7 @@ public class TestBoss : MonoBehaviour
         }
 
         // 공격 종료
-        Debug.Log("공격 종료");
+        //Debug.Log("공격 종료");
         isAttacking = false;
         return INode.ENodeState.Success;
     }

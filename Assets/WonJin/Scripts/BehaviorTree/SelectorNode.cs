@@ -17,6 +17,8 @@ public class SelectorNode : INode
 
     public INode.ENodeState Evaluate()
     {
+        Debug.Log("SelectorNode");
+
         if (childrens == null)
             return INode.ENodeState.Failure;
 
