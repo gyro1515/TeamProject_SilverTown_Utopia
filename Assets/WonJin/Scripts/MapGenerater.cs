@@ -289,15 +289,6 @@ public class MapGenerater : MonoBehaviour
         }
     }
 
-    bool IsInAnyRoom(Vector2Int pos)
-    {
-        foreach (var room in finalRooms)
-            if (room.Contains(pos)) return true;
-        return false;
-    }
-
-
-
     void SetCharacter()
     {
         player.transform.position = finalRooms[0].center;
@@ -337,9 +328,9 @@ public class MapGenerater : MonoBehaviour
                 maxDist = tmpDist;
             }
         }
-
-        boss.transform.position = finalRooms[bossRoomIdx].center;
-        Debug.Log(maxMoveCnt);
+        // 테스트로 현재는 캐릭터 옆으로 이동
+        //boss.transform.position = finalRooms[bossRoomIdx].center;
+        boss.transform.position = player.transform.position + (Vector3)(Vector2.right * 3);
 
     }
 }
