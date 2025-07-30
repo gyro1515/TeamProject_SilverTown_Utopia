@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,12 +11,12 @@ public class TestBoss : MonoBehaviour
 
     INode root;
     public GameObject target;
-    // °ø°İ »ç°Å¸®
+    // ê³µê²© ì‚¬ê±°ë¦¬
     public float attackRange = 3.0f;
     public float chaseRange = 10.0f;
     bool isAttacking = false;
     float attackTimer = 0f;
-    public float attackDuration = 1.0f; // °ø°İ ¸ğ¼Ç ½Ã°£
+    public float attackDuration = 1.0f; // ê³µê²© ëª¨ì…˜ ì‹œê°„
 
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class TestBoss : MonoBehaviour
     }
     private void Update()
     {
-        root.Evaluate(); // Æ®¸® °Ë»ç
+        root.Evaluate(); // íŠ¸ë¦¬ ê²€ì‚¬
     }
     private void FixedUpdate()
     {
@@ -36,18 +36,22 @@ public class TestBoss : MonoBehaviour
 
     INode SetBehaviorTree()
     {
-        ActionNode canAttack = new ActionNode(CanAttack); // ¾×¼Ç ³ëµå´Â ÇÔ¼ö ¹ÙÀÎµù
-        ActionNode attack = new ActionNode(Attack); // ¾×¼Ç ³ëµå´Â ÇÔ¼ö ¹ÙÀÎµù
+        ActionNode canAttack = new ActionNode(CanAttack); // ì•¡ì…˜ ë…¸ë“œëŠ” í•¨ìˆ˜ ë°”ì¸ë”©
+        ActionNode attack = new ActionNode(Attack); // ì•¡ì…˜ ë…¸ë“œëŠ” í•¨ìˆ˜ ë°”ì¸ë”©
         ActionNode chase = new ActionNode(Chase);
         SequenceNode attackSequence = new SequenceNode(new List<INode>() { canAttack, attack });
-        SelectorNode selector = new SelectorNode(new List<INode>() { attackSequence, chase}); // ·çÆ®¿¡ ÇØ´ç
+        SelectorNode selector = new SelectorNode(new List<INode>() { attackSequence, chase}); // ë£¨íŠ¸ì— í•´ë‹¹
 
-        // Selector ³ëµå: ÇÏ³ª¶óµµ ¼º°øÇÏ¸é ¼º°ø
-        // Sequence ³ëµå: ¸ğµÎ ¼º°øÇØ¾ß ¼º°ø
-        // ÇöÀç BT
-        // ·çÆ®:                                       selector 
-        // ·çÆ®ÀÇ ÀÚ½Ä:                   attackSequence,     chase
-        // attackSequenceÀÇ ÀÚ½Ä:     canAttack, Attack
+        // Selector ë…¸ë“œ: í•˜ë‚˜ë¼ë„ ì„±ê³µí•˜ë©´ ì„±ê³µ
+        // Sequence ë…¸ë“œ: ëª¨ë‘ ì„±ê³µí•´ì•¼ ì„±ê³µ
+        // í˜„ì¬ BT
+        // ë£¨íŠ¸:                                       selector 
+        // ë£¨íŠ¸ì˜ ìì‹:                   attackSequence,     chase
+        // attackSequenceì˜ ìì‹:     canAttack, Attack
+        // ì²´í¬ ìˆœì„œ 1. selector, 2. attackSequence, 3. canAttack, 4. Attack, 5. chase
+        // ì˜ˆì‹œ: 1 -> 2 -> 3 ì„±ê³µ -> 4 ì„±ê³µ -> 2 ì„±ê³µ -> SelectorëŠ” ì²« ë²ˆì§¸ ìì‹ì´ Successì˜€ìœ¼ë¯€ë¡œ íŠ¸ë¦¬ ì „ì²´ëŠ” Successë¡œ ì¢…ë£Œ
+        //       1 -> 2 -> 3 ì„±ê³µ -> 4 ëŸ¬ë‹ -> 2 ëŸ¬ë‹ -> Selectorë„ Running ìƒíƒœë¡œ ì¢…ë£Œ (ë‹¤ìŒ í”„ë ˆì„ì—ì„œ ì´ì–´ì„œ í‰ê°€)
+        //       1 -> 2 -> 3 ì‹¤íŒ¨ -> 5 ì„±ê³µ -> SelectorëŠ” ë‘ ë²ˆì§¸ ìì‹(chase)ì´ ì„±ê³µí–ˆìœ¼ë¯€ë¡œ íŠ¸ë¦¬ ì „ì²´ëŠ” Successë¡œ ì¢…ë£Œ
 
         return selector;
     }
@@ -57,9 +61,9 @@ public class TestBoss : MonoBehaviour
         {
             //Debug.Log("ChaseSuccess");
             moveDir = (target.transform.position - transform.position).normalized;
-            //speed = target.GetComponent<TestPlayer>().speed * 2; // Å¸°Ù ½ºÇÇµåÀÇ 2¹è·Î
+            //speed = target.GetComponent<TestPlayer>().speed * 2; // íƒ€ê²Ÿ ìŠ¤í”¼ë“œì˜ 2ë°°ë¡œ
             speed = monSpeed;
-            // È¸Àü ÇÏ¸é¼­ ÂÑ¾Æ°¡±â
+            // íšŒì „ í•˜ë©´ì„œ ì«“ì•„ê°€ê¸°
             Vector3 dir = target.transform.position - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0, angle);
@@ -70,9 +74,9 @@ public class TestBoss : MonoBehaviour
         {
             //Debug.Log("ChaseSuccess");
             moveDir = (target.transform.position - transform.position).normalized;
-            speed = target.GetComponent<TestPlayer>().speed * 2; // Å¸°Ù ½ºÇÇµåÀÇ 2¹è·Î
+            speed = target.GetComponent<TestPlayer>().speed * 2; // íƒ€ê²Ÿ ìŠ¤í”¼ë“œì˜ 2ë°°ë¡œ
 
-            // È¸Àü ÇÏ¸é¼­ ÂÑ¾Æ°¡±â
+            // íšŒì „ í•˜ë©´ì„œ ì«“ì•„ê°€ê¸°
             Vector3 dir = target.transform.position - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0, angle);
@@ -90,7 +94,7 @@ public class TestBoss : MonoBehaviour
     }
     INode.ENodeState CanAttack()
     {
-        // °ø°İ ¹üÀ§ ³» È¤Àº °ø°İ ÁßÀÌ¶ó¸é ¼º°ø ÆÇÁ¤
+        // ê³µê²© ë²”ìœ„ ë‚´ í˜¹ì€ ê³µê²© ì¤‘ì´ë¼ë©´ ì„±ê³µ íŒì •
         if (Vector3.Distance(target.transform.position, transform.position) <= attackRange || isAttacking) 
         {
             //Debug.Log("CanAttackSuccess");
@@ -102,28 +106,28 @@ public class TestBoss : MonoBehaviour
     }
     INode.ENodeState Attack()
     {
-        if (!isAttacking) // °ø°İ ÁßÀÌ ¾Æ´Ï¶ó¸é 
+        if (!isAttacking) // ê³µê²© ì¤‘ì´ ì•„ë‹ˆë¼ë©´ 
         {
-            Debug.Log("°ø°İ ½ÃÀÛ");
+            Debug.Log("ê³µê²© ì‹œì‘");
             isAttacking = true;
             attackTimer = attackDuration;
 
-            // ÀÌ ½ÃÁ¡¿¡ ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ³ª ÀÌÆåÆ® ½ÇÇàµµ °¡´É
+            // ì´ ì‹œì ì— ì• ë‹ˆë©”ì´ì…˜ì´ë‚˜ ì´í™íŠ¸ ì‹¤í–‰ë„ ê°€ëŠ¥
             // animator.SetTrigger("Attack");
-            // È¸Àü ÇÏ¸é¼­ ÂÑ¾Æ°¡±â
+            // íšŒì „ í•˜ë©´ì„œ ì«“ì•„ê°€ê¸°
             Vector3 dir = target.transform.position - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0, angle);
-            return INode.ENodeState.Running; // ÁøÇà Áß Ç¥½Ã, ³ëµå°¡ ´Ù¸¥ °÷À¸·Î ¾È°¡µµ·Ï
+            return INode.ENodeState.Running; // ì§„í–‰ ì¤‘ í‘œì‹œ, ë…¸ë“œê°€ ë‹¤ë¥¸ ê³³ìœ¼ë¡œ ì•ˆê°€ë„ë¡
         }
         if (attackTimer > 0)
         {
             attackTimer -= Time.deltaTime;
-            return INode.ENodeState.Running; // ¾ÆÁ÷ °ø°İÀÌ ÁøÇà ÁßÀÌ¶ó¸é Running
+            return INode.ENodeState.Running; // ì•„ì§ ê³µê²©ì´ ì§„í–‰ ì¤‘ì´ë¼ë©´ Running
         }
 
-        // °ø°İ Á¾·á
-        Debug.Log("°ø°İ Á¾·á");
+        // ê³µê²© ì¢…ë£Œ
+        Debug.Log("ê³µê²© ì¢…ë£Œ");
         isAttacking = false;
         return INode.ENodeState.Success;
     }
