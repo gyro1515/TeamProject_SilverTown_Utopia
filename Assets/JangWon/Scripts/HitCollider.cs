@@ -12,22 +12,33 @@ public class HitCollider : MonoBehaviour
     float start = 0.0f;
     float endDuration = 0.0f;
     float attackRemain = 0.0f;
+    Vector3 incremental = Vector3.zero;
 
-    public void Init(/*Entity entity,*/ Vector2 pos, float end, float remain)
+    public void Init(/*Entity entity,*/ Vector2 pos, float end, float remain, float attackAngle)
     {
         //ShooterTag = entity.gameObject.tag;
         transform.localPosition = pos;
+        transform.localRotation = Quaternion.Euler(new Vector3(0, 0, attackAngle));
         endDuration = end;
         attackRemain = remain;
+        if (endDuration != 0.0f)
+        {
+            Vector3 originalScale = warningZoneSprite.transform.localScale;
+            incremental = new Vector3(
+                (1 - originalScale.x) * Time.fixedDeltaTime / (endDuration),
+                (1 - originalScale.y) * Time.fixedDeltaTime / (endDuration),
+                (1 - originalScale.z) * Time.fixedDeltaTime / (endDuration)
+                );
+        }
         StartCoroutine(showWarning());
     }
 
 
     public IEnumerator showWarning()
     {
-        while (endDuration !=0.0f && endDuration > start)
+        while (endDuration != 0.0f && endDuration > start)
         {
-            warningZoneSprite.transform.localScale = Vector3.one * (start / endDuration);
+            warningZoneSprite.transform.localScale += incremental;
             start += Time.deltaTime;
             yield return new WaitForFixedUpdate();
         }

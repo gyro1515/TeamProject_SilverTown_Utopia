@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skills: []
-  baseattack: {fileID: 11400000, guid: 689548a9b0c174a4db52004993ed266b, type: 2}
+  baseattack: {fileID: 11400000, guid: 59802fb20d1ecd64d880341366a34def, type: 2}
 --- !u!4 &1209036693
 Transform:
   m_ObjectHideFlags: 0

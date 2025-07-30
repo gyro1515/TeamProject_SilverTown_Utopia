@@ -8,12 +8,13 @@ public class RangedSkill : Skill
     [SerializeField] HitCollider colliderPrefab;
     [SerializeField] float warningDuration = 0.0f;
     [SerializeField] float attackRemain = 0.0f;
+    [SerializeField] float attackAngle = 0.0f;
 
 
     public override void UseSkill()
     {
         HitCollider collider = Instantiate(colliderPrefab);
-        collider.Init(PositionCenter, warningDuration, attackRemain);
+        collider.Init(PositionCenter, warningDuration, attackRemain, attackAngle);
     }
 
 }
