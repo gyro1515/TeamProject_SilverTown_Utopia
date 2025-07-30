@@ -16,12 +16,14 @@ public abstract class Entity : MonoBehaviour
     //protected List<Skill> skills;
 
 
-    protected void TakeDamage() 
+    protected virtual void TakeDamage(int damage) 
     {
+        Debug.Log(damage.ToString() + "Damaged");
     }
 
-    protected void ApplyDamage(Entity e) 
+    public void ApplyDamage(Entity e, int damage = 0) 
     {
+        e.TakeDamage(damage);
     }
 
     protected void Move()
