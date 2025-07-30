@@ -53,14 +53,16 @@ public class HitCollider : MonoBehaviour
             warningZoneSprite.transform.localScale = Vector3.one;
             warningZoneSprite.color = new Color(255, 0, 0, 0);
             OutlineSprite.color = new Color(255, 255, 255, 0);
+
+            SkillEntry enemy = shooter.GetComponent<SkillEntry>();
             ApplyDamage();
             StopCoroutine(showWarning());
+            
         }
     }
 
     void ApplyDamage()
     {
-        Debug.Log("Attack");
         _collider.enabled = true;
         Destroy(gameObject, attackRemain + 0.1f);
     }

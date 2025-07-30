@@ -21,5 +21,4 @@ public class RangedSkill : Skill
             isFixedRotation ? attackAngle : Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + attackAngle,
             skillDamage);
     }
-
 }

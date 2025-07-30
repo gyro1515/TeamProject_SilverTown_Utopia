@@ -17,7 +17,6 @@ public class ProjectileSkill : Skill
 
     public override void UseSkill(Entity entity, Vector2 dir)
     {
-
         base.UseSkill(entity, dir);
         if (projectileQuantity <= 0)
             return;

@@ -2,25 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class SkillEntry : Entity
 {
-    [SerializeField] List<Skill> skills = new List<Skill>();
-    [SerializeField] Skill baseAttack = null;
-    [SerializeField] PlayerController player;
+    PatternActor actor;
+    public PlayerController player;
+    public bool isPatternEnd = true;
 
     private void Start()
     {
-        baseAttack = Instantiate(baseAttack);
+        actor = GetComponent<PatternActor>();
     }
 
 
     //Temporary shooting test
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && isPatternEnd)
         {
-            //baseAttack.PositionCenter = player.transform.position;
-            baseAttack.UseSkill(this as Entity, player.transform.position - this.transform.position);
+            actor.StartCoroutine("ActivePattern");
         }
     }
 }
