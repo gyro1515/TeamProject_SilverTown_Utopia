@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2194e5ab6e65f5f42aea95da7f589cdc, type: 3}
-  m_Name: TestProjectileSkill
+  m_Name: SpreadProjectleSkll
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
   _skillDamage: 10
