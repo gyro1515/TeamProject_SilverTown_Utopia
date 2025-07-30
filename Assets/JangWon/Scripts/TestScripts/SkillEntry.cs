@@ -19,7 +19,7 @@ public class SkillEntry : Entity
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //baseattack.PositionCenter = player.transform.position;
+            //baseAttack.PositionCenter = player.transform.position;
             baseAttack.UseSkill(this as Entity, player.transform.position - this.transform.position);
         }
     }

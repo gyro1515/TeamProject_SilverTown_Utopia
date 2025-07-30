@@ -8,6 +8,7 @@ public class HitCollider : MonoBehaviour
     [SerializeField] Collider2D _collider;
     [SerializeField] SpriteRenderer warningZoneSprite;
     [SerializeField] SpriteRenderer OutlineSprite;
+    [SerializeField] float xAngle = 0.0f;
 
     Entity shooter;
     float start = 0.0f;
@@ -21,7 +22,7 @@ public class HitCollider : MonoBehaviour
         _collider.enabled = false;
         shooter = entity;
         transform.localPosition = pos;
-        transform.rotation = Quaternion.Euler(0.0f, 0.0f, attackAngle);
+        transform.rotation = Quaternion.Euler(xAngle, 0.0f, attackAngle);
         endDuration = end;
         attackRemain = remain;
         if (endDuration != 0.0f)

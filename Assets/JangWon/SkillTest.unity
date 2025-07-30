@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skills: []
-  baseAttack: {fileID: 11400000, guid: 59802fb20d1ecd64d880341366a34def, type: 2}
+  baseAttack: {fileID: 11400000, guid: e9a43f29172769747956be86c8e39aea, type: 2}
   player: {fileID: 1991043233}
 --- !u!4 &1209036693
 Transform:
