@@ -19,4 +19,4 @@ MonoBehaviour:
   PositionCenter: {x: 0, y: 0, z: 0}
   warningPrefab: {fileID: -4062254150371820900, guid: 6ac8a4039cf45f940b34a33734c3a4e7, type: 3}
   WarningDuration: 1
-  ChargeDuration: 3
+  ChargeDuration: 1

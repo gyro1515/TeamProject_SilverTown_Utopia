@@ -10,17 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbd5c2f239e6bc64a89bd82fa9ccb3c2, type: 3}
-  m_Name: PlayerCharge
+  m_Name: ChargeAndCircle
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
   skills:
   - {fileID: 11400000, guid: 3d0c334239374764794569e5087c8d29, type: 2}
+  - {fileID: 11400000, guid: 689548a9b0c174a4db52004993ed266b, type: 2}
   - {fileID: 11400000, guid: fadd6dfaa2af9dc42bd13466f4715881, type: 2}
   activeTime:
   - 0
   - 0
-  positionStates: 0000000000000000
+  - 0
+  positionStates: 000000000000000000000000
   positions:
+  - {x: 0, y: 0}
   - {x: 0, y: 0}
   - {x: 0, y: 0}
   ignoreSkillCooldown: 0

@@ -15,6 +15,7 @@ public class ChargeSkill : Skill
             return;
         SkillEntry enemy = entity as SkillEntry;
         base.UseSkill(entity, dir);
+        _coolTime = WarningDuration + ChargeDuration;
         ChargeWarning warning = Instantiate(warningPrefab);
         warning.transform.localPosition = enemy.transform.position;
         warning.Init(entity, enemy.player.transform.position, WarningDuration, ChargeDuration, skillDamage);

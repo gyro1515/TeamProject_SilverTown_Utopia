@@ -463,7 +463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Shooter: {fileID: 0}
-  pattern: {fileID: 11400000, guid: feef3d1a26ca6504babcd9e284196939, type: 2}
+  pattern: {fileID: 11400000, guid: 5b9e23067b8173c48980d2a5102b53a5, type: 2}
 --- !u!114 &1991043233 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4774656843711481409, guid: bda094ea27ca23c438f58049134e792b, type: 3}

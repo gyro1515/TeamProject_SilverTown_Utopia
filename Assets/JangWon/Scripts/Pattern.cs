@@ -13,11 +13,12 @@ public class Pattern : ScriptableObject
         PlayerRandom,
         PlayerFixed
     }
-    [SerializeField] public Entity Player;
     [SerializeField] public Skill[] skills;
     [SerializeField] public float[] activeTime;
     [SerializeField] public PositionState[] positionStates;
     [SerializeField] public Vector2[] positions;
+    [SerializeField] public bool ignoreSkillCooldown = true;
+
 
     private void Awake()
     {

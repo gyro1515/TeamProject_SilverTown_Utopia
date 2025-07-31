@@ -13,7 +13,7 @@ public class RangedSkill : Skill
     public override void UseSkill(Entity entity, Vector2 dir)
     {
         base.UseSkill(entity, dir);
-
+        _coolTime = warningDuration;
         HitCollider collider = Instantiate(colliderPrefab);
         collider.Init(shooter, 
             isLocal ? shooter.transform.localPosition + PositionCenter : PositionCenter,

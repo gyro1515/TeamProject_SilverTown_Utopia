@@ -18,13 +18,13 @@ public class PatternActor : MonoBehaviour
     public IEnumerator ActivePattern()
     {
         Shooter.isPatternEnd = false;
-        for (int i = 0; i < pattern.skills.Length - 1; i++)
+        for (int i = 0; i < pattern.skills.Length; i++)
         {
             Vector2 dir;
             if (pattern.positionStates[i] == Pattern.PositionState.Player 
                 || pattern.positionStates[i] == Pattern.PositionState.PlayerRandom 
                 || pattern.positionStates[i] == Pattern.PositionState.PlayerFixed)
-                dir = pattern.Player.transform.position - Shooter.transform.position;
+                dir = Shooter.player.transform.position - Shooter.transform.position;
             else
                 dir = Vector2.zero;
 
@@ -45,11 +45,27 @@ public class PatternActor : MonoBehaviour
             }
 
             pattern.skills[i].UseSkill(Shooter, dir);
-            if (i == pattern.skills.Length -1)
+            if (i+1 == pattern.skills.Length)
                 break;
-            yield return new WaitForSeconds(pattern.activeTime[i + 1] - pattern.activeTime[i]);
+            float waitDelay = pattern.activeTime[i + 1] - pattern.activeTime[i];
+            if (pattern.ignoreSkillCooldown)
+            {
+                if (waitDelay < 0)
+                    waitDelay = 0;
+                yield return new WaitForSeconds(waitDelay);
+            }
+            else
+            {
+                waitDelay += pattern.skills[i].coolTime;
+                if (waitDelay < 0)
+                    waitDelay = 0;
+                yield return new WaitForSeconds(waitDelay);
+            }
         }
-        Shooter.isPatternEnd = true;
+        if (Shooter.isPatternEnd)
+            Debug.Log("Pattern end success");
+        else
+            Debug.Log("Pattern end failed");
         StopCoroutine(ActivePattern());
     }
 }

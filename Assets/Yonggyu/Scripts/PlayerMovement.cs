@@ -55,7 +55,6 @@ public class PlayerController : Entity
     private void FixedUpdate()
     {
         rigidBody2D.velocity = direction * MoveSpeed;
-        
     }
 
     private void MoveAnimation(Vector2 direction) 

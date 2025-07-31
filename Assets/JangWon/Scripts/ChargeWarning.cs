@@ -94,7 +94,7 @@ public class ChargeWarning : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-        if ((chargeDuration == 0.0f) || (start >= chargeDuration))
+        if ((chargeDuration == 0.0f) || (start >= chargeDuration) || 1.0f - sinValue < errorMargain)
         {
             shooter.transform.position = endPos;
             Destroy(this.gameObject);

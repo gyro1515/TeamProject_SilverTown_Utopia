@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbd5c2f239e6bc64a89bd82fa9ccb3c2, type: 3}
   m_Name: PlayerFollowCircle
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
   skills:
   - {fileID: 11400000, guid: e9a43f29172769747956be86c8e39aea, type: 2}
   - {fileID: 11400000, guid: e9a43f29172769747956be86c8e39aea, type: 2}
@@ -21,9 +20,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fadd6dfaa2af9dc42bd13466f4715881, type: 2}
   activeTime:
   - 0
-  - 1
-  - 2
-  - 3
+  - 0.4
+  - 0.8
+  - 1.2
   - 0
   positionStates: 0200000002000000020000000200000000000000
   positions:
@@ -32,3 +31,4 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
   - {x: 0, y: 0}
+  ignoreSkillCooldown: 1
