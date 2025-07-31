@@ -17,12 +17,4 @@ public class Room : MonoBehaviour
         testBoss = boss.GetComponent<TestBoss>();
     }
 
-    private void Update()
-    {
-        if (testBoss.BossState == TestBoss.EBossState.Active) return; // 활성화되어 있다면 리턴
-
-        // 비활성되어 있다면 맵 중앙으로
-        
-
-    }
 }

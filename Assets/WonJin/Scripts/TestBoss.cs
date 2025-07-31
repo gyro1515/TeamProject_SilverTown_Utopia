@@ -116,8 +116,10 @@ public class TestBoss : MonoBehaviour
             //Debug.Log("ChaseFailure");
             moveDir = Vector2.zero;
             speed = monSpeed;
-            //return INode.ENodeState.Failure;
-            return INode.ENodeState.Running; // 범위 밖이라고 판단되면 계속 Chase()부분만 실행가는 하도록
+            return INode.ENodeState.Failure; // 이 다음에 행동 노드가 있다면 다른 걸 해야할 수도 있다. 지금은 상관 없다.
+
+            // SetBehaviorTree()에서는 러닝으로 해도 됨
+            //return INode.ENodeState.Running; // 범위 밖이라고 판단되면 계속 Chase()부분만 실행가는 하도록
             // 쫓아가기 범위 밖이면 애초에 공격 범위 생각할 필요 없음
         }
 
@@ -179,6 +181,9 @@ public class TestBoss : MonoBehaviour
     }
     INode.ENodeState MoveToCenter()
     {
+        Debug.Log("MoveToCenter");
+        moveDir = Vector2.zero;
+        speed = monSpeed;
         if ((Vector2)transform.position != bossRoom.center)
         {
             // 아직 가운데에 도달 안했다면 러닝
@@ -190,10 +195,11 @@ public class TestBoss : MonoBehaviour
             }
             else
             {
-                transform.position = (Vector2)transform.position;
+                transform.position = bossRoom.center;
             }
             return INode.ENodeState.Running;
         }
+        Debug.Log("MoveToCenterSuccess");
         return INode.ENodeState.Success;
     }
 }

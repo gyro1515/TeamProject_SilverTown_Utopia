@@ -23,6 +23,9 @@ public class RoadTriger : MonoBehaviour
         bIsOnRoad = true;
         if(testCam == null) testCam = FindObjectOfType<TestCam>();
 
+        // 보스 전부 비활성화
+        mapGenerater.SetBossDeActive();
+
         testCam.CamState = TestCam.ECameraState.ChageToRoad;
     }
     private void OnTriggerExit2D(Collider2D collision)

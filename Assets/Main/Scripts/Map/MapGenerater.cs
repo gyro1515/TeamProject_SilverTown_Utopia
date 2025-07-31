@@ -48,6 +48,8 @@ public class MapGenerater : MonoBehaviour
     private List<Vector2Int> roomCenters = new List<Vector2Int>();
     private HashSet<(int, int)> connections = new HashSet<(int, int)>();
     private Dictionary<int, List<int>> connectionMap = new Dictionary<int, List<int>>();
+    // 보스룸 체크용, 몬스터가 많아진다면 방 클래스 만들어야...?
+    
 
     private void Awake()
     {
@@ -111,8 +113,8 @@ public class MapGenerater : MonoBehaviour
         {
             int w = Random.Range(roomMinSize.x, roomMaxSize.x);
             int h = Random.Range(roomMinSize.y, roomMaxSize.y);
-            int x = Random.Range(-5 - w / 2, 5 - w / 2); // 중심 맞추기
-            int y = Random.Range(-5 - h / 2, 5 - h / 2); // 중심 맞추기
+            int x = Random.Range(-5 - w / 2, 5 - w / 2 + 1); // 중심 맞추기
+            int y = Random.Range(-5 - h / 2, 5 - h / 2 + 1); // 중심 맞추기
             /*int x = -w / 2; // 중심 맞추기
             int y = -h / 2; // 중심 맞추기*/
             candidateRooms.Add(new RectInt(x, y, w, h));
@@ -438,6 +440,11 @@ public class MapGenerater : MonoBehaviour
             RectInt expanded = new RectInt(room.xMin - roomPadding, room.yMin - roomPadding, room.width + roomPadding * 2, room.height + roomPadding * 2);
             if (expanded.Contains(tmpPos))
             {
+                TestBoss testBoss = boss.GetComponent<TestBoss>();
+                if (testBoss?.bossRoom.center == room.center) // 보스방이라면 보스 활성화
+                {
+                    testBoss.BossState = TestBoss.EBossState.Active;
+                }
                 return room;
             }
         }
@@ -467,5 +474,13 @@ public class MapGenerater : MonoBehaviour
     void OpenBossRoom()
     {
         bossWallMap.gameObject.SetActive(false);
+    }
+    public void SetBossDeActive()
+    {
+        // 모든 보스 비활성화 하기.
+        TestBoss testBoss = boss.GetComponent<TestBoss>();
+        if (testBoss == null) return;
+        testBoss.BossState = TestBoss.EBossState.Deactivate;
+
     }
 }
