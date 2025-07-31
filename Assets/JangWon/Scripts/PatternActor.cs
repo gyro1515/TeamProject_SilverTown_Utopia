@@ -21,12 +21,7 @@ public class PatternActor : MonoBehaviour
         for (int i = 0; i < pattern.skills.Length; i++)
         {
             Vector2 dir;
-            if (pattern.positionStates[i] == Pattern.PositionState.Player
-                || pattern.positionStates[i] == Pattern.PositionState.PlayerRandom
-                || pattern.positionStates[i] == Pattern.PositionState.PlayerFixed)
-                dir = enemy.player.transform.position - enemy.transform.position;
-            else
-                dir = Vector2.zero;
+            dir = enemy.player.transform.position - enemy.transform.position;
 
 
             pattern.SetSkills(i);
