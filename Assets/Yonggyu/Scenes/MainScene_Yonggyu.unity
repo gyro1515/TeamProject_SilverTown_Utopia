@@ -277,6 +277,7 @@ MonoBehaviour:
   targetTransform: {fileID: 0}
   <CameraSpeed>k__BackingField: 5
 
+
   m_ObjectHideFlags: 0
   serializedVersion: 2
 
