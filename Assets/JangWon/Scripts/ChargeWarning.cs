@@ -19,10 +19,12 @@ public class ChargeWarning : MonoBehaviour
     float chargeDuration = 0.0f;
     float start = 0.0f;
     Vector3 WarningIncremental = Vector3.zero;
-    Vector2 ChargeIncremental = Vector2.zero;
+    float ChargeIncremental = 0.0f;
+    const float errorMargain = 0.1f;
 
     public void Init(Entity entity, Vector2 targetpos, float end, float chargeDuration, int damage)
     {
+        ChargeSkill.isChargning = true;
         shooter = entity as SkillEntry;
         startPos = shooter.transform.position;
         endPos = targetpos;
@@ -48,10 +50,7 @@ public class ChargeWarning : MonoBehaviour
         this.chargeDuration = chargeDuration;
         if (chargeDuration != 0.0f)
         {
-            ChargeIncremental = new Vector2(
-                dir.x * Time.fixedDeltaTime / (chargeDuration),
-                dir.y * Time.fixedDeltaTime / (chargeDuration)
-                );
+            ChargeIncremental = (90.0f) * Time.fixedDeltaTime / chargeDuration ;
         }
 
         this.damage = damage;
@@ -74,7 +73,7 @@ public class ChargeWarning : MonoBehaviour
             warningZoneSprite.color = new Color(255, 0, 0, 0);
             OutlineSprite.color = new Color(255, 255, 255, 0);
 
-
+            Debug.Log("End of Warning");
             start = 0.0f;
             StartCoroutine(Charge());
             StopCoroutine(showWarning());
@@ -84,20 +83,28 @@ public class ChargeWarning : MonoBehaviour
 
     public IEnumerator Charge()
     {
+        float angle = 0.0f;
+        float sinValue = Mathf.Sin(angle * Mathf.Deg2Rad);
         while (chargeDuration != 0.0f && chargeDuration > start)
         {
-            shooter.transform.position += (Vector3)ChargeIncremental;
+            shooter.transform.position = Vector2.Lerp(shooter.transform.position, endPos, sinValue);
             start += Time.deltaTime;
+            angle += ChargeIncremental;
+            sinValue = Mathf.Sin(angle * Mathf.Deg2Rad);
             yield return new WaitForFixedUpdate();
         }
-
 
         if ((chargeDuration == 0.0f) || (start >= chargeDuration))
         {
             shooter.transform.position = endPos;
-            Destroy(this, 0.1f);
-            StopCoroutine(Charge());
+            Destroy(this.gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        ChargeSkill.isChargning = false;
+        StopAllCoroutines();
     }
 
 }

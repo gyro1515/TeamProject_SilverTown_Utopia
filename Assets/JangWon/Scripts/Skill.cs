@@ -9,7 +9,7 @@ public abstract class Skill : ScriptableObject
     public Entity shooter;
 
     //Delay of the skill itself
-    protected float _coolTime;
+    [SerializeField]protected float _coolTime;
     public float coolTime { get => _coolTime; }
 
     //damage value of skill
