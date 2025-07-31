@@ -20,9 +20,6 @@ public class Projectile : MonoBehaviour
     {
         Destroy(gameObject, 3.0f);
     }
-
-
-
     public void Init(Entity entity, Vector2 force, int damage)
     {
         shooter = entity;

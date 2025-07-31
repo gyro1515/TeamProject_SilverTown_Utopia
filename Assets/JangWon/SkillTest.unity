@@ -285,6 +285,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1209036693}
+  - component: {fileID: 1209036697}
   - component: {fileID: 1209036692}
   - component: {fileID: 1209036695}
   - component: {fileID: 1209036694}
@@ -308,9 +309,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e443782d0130f7e4d8bcea2ab767f9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skills: []
-  baseAttack: {fileID: 11400000, guid: e9a43f29172769747956be86c8e39aea, type: 2}
   player: {fileID: 1991043233}
+  isPatternEnd: 1
 --- !u!4 &1209036693
 Transform:
   m_ObjectHideFlags: 0
@@ -450,6 +450,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1209036697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209036691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a0aa99a68af44b45882d74b61d5714d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  pattern: {fileID: 11400000, guid: 753bc1e8de6b20647b756834910f4f52, type: 2}
 --- !u!114 &1991043233 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4774656843711481409, guid: bda094ea27ca23c438f58049134e792b, type: 3}
