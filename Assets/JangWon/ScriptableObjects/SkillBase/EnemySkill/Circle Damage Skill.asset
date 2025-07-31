@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54ee12395610fa240a5d93fa8432423c, type: 3}
-  m_Name: QuadCircleRangeSkill
+  m_Name: Circle Damage Skill
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
   _skillDamage: 5
   direction: {x: 0, y: 0}
-  isLocal: 1
+  isLocal: 0
   PositionCenter: {x: 0, y: 0, z: 0}
-  colliderPrefab: {fileID: 3617344549384259999, guid: 1f591c1b6b784174a975c7fa791c2e3d, type: 3}
+  colliderPrefab: {fileID: 3617344549384259999, guid: ddff3a9b92fcc4b4984a933e4374ab12, type: 3}
   warningDuration: 1
   attackRemain: 0
-  attackAngle: -135
-  isFixedRotation: 0
+  attackAngle: 0
+  isFixedRotation: 1

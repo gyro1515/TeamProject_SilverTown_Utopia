@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbd5c2f239e6bc64a89bd82fa9ccb3c2, type: 3}
-  m_Name: BahamutPattern4
+  m_Name: DemonPattern3
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   skills:
-  - {fileID: 11400000, guid: 4a53b852d49c8004bb4dd7036dfc0835, type: 2}
+  - {fileID: 11400000, guid: 7c8ecb8f2a750a14bae97aa295a1d1cd, type: 2}
   - {fileID: 11400000, guid: fadd6dfaa2af9dc42bd13466f4715881, type: 2}
   activeTime:
   - 0
@@ -23,7 +23,7 @@ MonoBehaviour:
   positions:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
-  ignoreSkillCooldown: 0
+  ignoreSkillCooldown: 1
   randomMin: {x: 0, y: 0}
   randomMax: {x: 0, y: 0}
-  entityToPlayerScale: 0.1
+  entityToPlayerScale: 0.5

@@ -29,7 +29,7 @@ MonoBehaviour:
   - 2.1
   - 2.1
   - 5.1
-  positionStates: 03000000030000000300000001000000010000000100000000000000
+  positionStates: 0500000005000000050000000c0000000c0000000c0000000c000000
   positions:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
@@ -39,6 +39,7 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
   ignoreSkillCooldown: 1
-  randomMin: {x: -4, y: -2.25}
-  randomMax: {x: 4, y: 2.25}
+  randomMin: {x: -5, y: -5}
+  randomMax: {x: 5, y: 5}
+  entityToPlayerScale: 0.5
   floorCount: 3

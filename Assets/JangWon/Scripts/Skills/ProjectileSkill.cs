@@ -14,7 +14,7 @@ public class ProjectileSkill : Skill
     [SerializeField] float spread = 0.0f;
     //Each Projectile Speed
     [SerializeField] float projectileSpeed = 0.0f;
-    [SerializeField] Vector2 scale = Vector2.one;
+    [SerializeField] public Vector2 scale = Vector2.one;
 
     public override void UseSkill(Entity entity, Vector2 dir)
     {
@@ -27,17 +27,13 @@ public class ProjectileSkill : Skill
         else
             startangle = (-spread / 2.0f);
 
-        Projectile firstProjectile = Instantiate(projectilePrefab,
-            isLocal ? shooter.transform.localPosition + PositionCenter : PositionCenter
-            , Quaternion.identity);
+        Projectile firstProjectile = Instantiate(projectilePrefab, PositionCenter, Quaternion.identity);
         firstProjectile.transform.localScale = scale;
         firstProjectile.Init(shooter, RotateVector2(direction * projectileSpeed, startangle), skillDamage);
         for (int count = 1; count < projectileQuantity; count++)
         {
             startangle += (spread / 2.0f) / (projectileQuantity / 2);
-            Projectile projectile = Instantiate(projectilePrefab,
-                isLocal ? shooter.transform.localPosition + PositionCenter : PositionCenter,
-                Quaternion.identity);
+            Projectile projectile = Instantiate(projectilePrefab, PositionCenter, Quaternion.identity);
             projectile.transform.localScale = scale;
             projectile.Init(shooter, RotateVector2(direction * projectileSpeed, startangle), skillDamage);
         }

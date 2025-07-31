@@ -19,13 +19,12 @@ public abstract class Skill : ScriptableObject
     //direction to attack
     public Vector2 direction;
 
-    [SerializeField] protected bool isLocal = true;
-
+    //Position where attack will be held
     [SerializeField] public Vector3 PositionCenter = Vector3.zero;
 
     public virtual void UseSkill(Entity entity, Vector2 dir)
     {
         this.shooter = entity;
-        this.direction = dir.normalized;
+        this.direction = dir;
     }
 }

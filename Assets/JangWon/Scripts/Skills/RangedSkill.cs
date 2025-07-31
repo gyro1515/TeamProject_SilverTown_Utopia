@@ -18,9 +18,7 @@ public class RangedSkill : Skill
         _coolTime = warningDuration;
         collider = Instantiate(colliderPrefab);
         collider.transform.localScale = size;
-        collider.Init(shooter, 
-            isLocal ? shooter.transform.localPosition + PositionCenter : PositionCenter,
-            warningDuration, attackRemain, 
+        collider.Init(shooter, PositionCenter,warningDuration, attackRemain,
             isFixedRotation ? attackAngle : Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + attackAngle,
             skillDamage);
     }

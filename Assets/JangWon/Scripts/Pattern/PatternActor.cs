@@ -6,6 +6,7 @@ using static Pattern;
 
 public class PatternActor : MonoBehaviour
 {
+    Vector2 dir;
     [SerializeField] SkillEntry enemy;
     [SerializeField] Pattern pattern;
 
@@ -20,10 +21,8 @@ public class PatternActor : MonoBehaviour
     {
         for (int i = 0; i < pattern.skills.Length; i++)
         {
-            Vector2 dir;
             dir = enemy.player.transform.position - enemy.transform.position;
-
-
+            dir = dir.normalized;
             pattern.SetSkills(i);
             pattern.skills[i].UseSkill(enemy, dir);
             if (i + 1 == pattern.skills.Length)

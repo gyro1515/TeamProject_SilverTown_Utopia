@@ -21,10 +21,11 @@ MonoBehaviour:
   - 0
   - 0
   - 2
-  positionStates: 000000000000000000000000
+  positionStates: 07000000070000000c000000
   positions:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
   ignoreSkillCooldown: 1
   randomMin: {x: 0, y: 0}
   randomMax: {x: 0, y: 0}
+  entityToPlayerScale: 0.5

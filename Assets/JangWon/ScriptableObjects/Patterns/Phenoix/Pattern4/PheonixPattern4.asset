@@ -23,7 +23,7 @@ MonoBehaviour:
   - 0
   - 0
   - 1
-  positionStates: 04000000040000000400000000000000
+  positionStates: 0400000004000000040000000c000000
   positions:
   - {x: -2, y: 0}
   - {x: 0, y: 0}
@@ -32,3 +32,4 @@ MonoBehaviour:
   ignoreSkillCooldown: 1
   randomMin: {x: 0, y: 0}
   randomMax: {x: 0, y: 0}
+  entityToPlayerScale: 0.5
