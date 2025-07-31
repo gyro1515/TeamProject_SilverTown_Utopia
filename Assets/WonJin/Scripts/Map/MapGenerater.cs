@@ -1,11 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class MapGenerater : MonoBehaviour
 {
+    struct Map
+    {
+        RectInt map;
+        int mapIdx;
+    }
+    private int bossRoomIdx;
+
     [Header("Map Settings")]
     public int totalCandidates = 50;
     public int desiredRoomCount = 20;
@@ -14,24 +22,31 @@ public class MapGenerater : MonoBehaviour
     public int roomSpacing = 3;
 
     [Header("Tilemap Settings")]
-    public Tilemap tilemap;
-    public Tilemap wallTilemap;
-    public TileBase floorTile;
-    public TileBase wallTile;
+    [SerializeField] Tilemap tilemap;
+    [SerializeField] Tilemap wallTilemap;
+    [SerializeField] Tilemap roadTriger;
+    [SerializeField] TileBase floorTile;
+    [SerializeField] TileBase wallTile;
 
     [Header("Character Setting")]
-    public GameObject player;
-    public GameObject boss;
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject boss;
 
     [Header("DrawLine Setting")]
-    public float time = 4.0f;
+    [SerializeField] float time = 4.0f;
 
     private List<RectInt> candidateRooms = new List<RectInt>();
     private List<RectInt> finalRooms = new List<RectInt>();
+    public List<RectInt> FinalRooms { get { return finalRooms; } private set { } }
     private List<Vector2Int> roomCenters = new List<Vector2Int>();
     private HashSet<(int, int)> connections = new HashSet<(int, int)>();
     private Dictionary<int, List<int>> connectionMap = new Dictionary<int, List<int>>();
 
+    private void Awake()
+    {
+        roadTriger.GetComponent<RoadTriger>().Init(this, player);
+
+    }
     void Start() => GenerateMap();
 
     void Update()
@@ -46,6 +61,7 @@ public class MapGenerater : MonoBehaviour
     {
         tilemap.ClearAllTiles();
         wallTilemap.ClearAllTiles();
+        roadTriger.ClearAllTiles();
         candidateRooms.Clear();
         finalRooms.Clear();
         roomCenters.Clear();
@@ -62,6 +78,10 @@ public class MapGenerater : MonoBehaviour
         DrawWalls();
 
         SetCharacter();
+
+        tilemap.CompressBounds(); // 타일 맵 크기 최적화
+        wallTilemap.CompressBounds(); // 타일 맵 크기 최적화
+        roadTriger.CompressBounds(); // 타일 맵 크기 최적화
     }
 
     void GenerateInitialRooms()
@@ -118,6 +138,9 @@ public class MapGenerater : MonoBehaviour
         // 사이즈 큰걸로 선별
         largeEnough.Sort((a, b) => b.size.magnitude.CompareTo(a.size.magnitude));
         finalRooms = largeEnough.GetRange(0, Mathf.Min(desiredRoomCount, largeEnough.Count));
+        // 작은 것부터 큰 걸로 정렬
+        finalRooms.Sort((a, b) => a.size.magnitude.CompareTo(b.size.magnitude));
+
         for (int i = 0; i < finalRooms.Count; i++)
         {
             Vector2Int center = new Vector2Int((int)finalRooms[i].center.x, (int)finalRooms[i].center.y);
@@ -145,7 +168,7 @@ public class MapGenerater : MonoBehaviour
                     if (visited[j]) continue;
                     float dist = Vector2Int.Distance(roomCenters[i], roomCenters[j]);
                     //if (dist < minDist && CanAddConnection(i, j)) // 최단거리이며, 연결 안된 룸인지 체크
-                    if (dist < minDist) // 최단거리이며, 연결 안된 룸인지 체크
+                    if (dist < minDist) // 최단거리 룸
                     {
                         minDist = dist;
                         from = i;
@@ -253,7 +276,26 @@ public class MapGenerater : MonoBehaviour
         for (int i = 0; i <= 1; i++)
         {
             Vector2Int tilePos = pos + perp * i;
+            if (tilemap.GetTile((Vector3Int)tilePos) == floorTile) continue; // 이미 깔렸다면 다음
+            
             tilemap.SetTile(new Vector3Int(tilePos.x, tilePos.y, 0), floorTile);
+
+            // 문에 해당 하는 부분은 트리거 설정 안하기
+            bool bDraw = true;
+            foreach (var room in finalRooms)
+            {
+                RectInt expanded = new RectInt(room.xMin - 1, room.yMin - 1, room.width + 1 * 2, room.height + 1 * 2);
+
+                if (expanded.Contains(tilePos)) // 해당 좌표가 맵 안에 있다면 안그리기
+                {
+                    //Debug.Log($"Skip: {tilePos}");
+                    bDraw = false;
+                    break;
+                }
+            }
+            if (!bDraw) continue;
+            roadTriger.SetTile(new Vector3Int(tilePos.x, tilePos.y, 0), floorTile);
+            //Debug.Log($"Draw: {tilePos}");
         }
     }
 
@@ -292,6 +334,11 @@ public class MapGenerater : MonoBehaviour
     void SetCharacter()
     {
         player.transform.position = finalRooms[0].center;
+        // 카메라 세팅
+        TestCam testCam = FindObjectOfType<TestCam>();
+        testCam.SetMap(finalRooms[0]);
+        testCam.CamState = TestCam.ECameraState.InRoom;
+
         // BFS
         Queue<int> queue = new Queue<int>();
         bool[] visited = new bool[finalRooms.Count]; // 방문 처리
@@ -328,9 +375,32 @@ public class MapGenerater : MonoBehaviour
                 maxDist = tmpDist;
             }
         }
-        // 테스트로 현재는 캐릭터 옆으로 이동
-        //boss.transform.position = finalRooms[bossRoomIdx].center;
-        boss.transform.position = player.transform.position + (Vector3)(Vector2.right * 3);
+        boss.transform.position = finalRooms[bossRoomIdx].center;
 
+
+        // 테스트로 현재는 캐릭터 옆으로 이동
+        //boss.transform.position = player.transform.position + (Vector3)(Vector2.right * 3);
+
+    }
+    public RectInt GetRoomByPos(Vector3 pos)
+    {
+        Vector2Int tmpPos = new Vector2Int();
+        tmpPos.x = (int)pos.x;
+        tmpPos.y = (int)pos.y;
+        
+        //Debug.Log(tmpPos);
+        foreach(var room in finalRooms)
+        {
+            // 판정을 위해 상 하 좌우 n 칸씩 확대
+            int roomPadding = 2;
+            RectInt expanded = new RectInt(room.xMin - roomPadding, room.yMin - roomPadding, room.width + roomPadding * 2, room.height + roomPadding * 2);
+            if (expanded.Contains(tmpPos))
+            {
+                return room;
+            }
+        }
+
+        // 그럴리는 없겠지만 방을 못찾았다면 멀리 있는 값 리턴
+        return new RectInt(666, 666, 0, 0);
     }
 }
