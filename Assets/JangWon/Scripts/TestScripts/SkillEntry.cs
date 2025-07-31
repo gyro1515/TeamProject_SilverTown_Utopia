@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class SkillEntry : Entity
 {
-    PatternActor actor;
+    PatternActor patternActor;
     public PlayerController player;
     public bool isPatternEnd = true;
 
     private void Start()
     {
-        actor = GetComponent<PatternActor>();
+        patternActor = GetComponent<PatternActor>();
     }
 
 
@@ -20,7 +20,8 @@ public class SkillEntry : Entity
     {
         if (Input.GetKeyDown(KeyCode.Space) && isPatternEnd)
         {
-            actor.StartCoroutine("ActivePattern");
+            isPatternEnd = false;
+            StartCoroutine(patternActor.ActivePattern());
         }
     }
 }

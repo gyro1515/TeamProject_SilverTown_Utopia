@@ -462,8 +462,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a0aa99a68af44b45882d74b61d5714d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Shooter: {fileID: 0}
-  pattern: {fileID: 11400000, guid: 5b9e23067b8173c48980d2a5102b53a5, type: 2}
+  enemy: {fileID: 0}
+  pattern: {fileID: 11400000, guid: 1fdef7b1b81a57c4fb732b7e0fd9ca82, type: 2}
 --- !u!114 &1991043233 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4774656843711481409, guid: bda094ea27ca23c438f58049134e792b, type: 3}

@@ -9,6 +9,7 @@ public class HitCollider : MonoBehaviour
     [SerializeField] SpriteRenderer warningZoneSprite;
     [SerializeField] SpriteRenderer OutlineSprite;
     [SerializeField] float xAngle = 0.0f;
+    [SerializeField] bool visualizeFloor = false;
 
     Entity shooter;
     float start = 0.0f;
@@ -51,8 +52,16 @@ public class HitCollider : MonoBehaviour
         if ((endDuration == 0.0f) || (start >= endDuration))
         {
             warningZoneSprite.transform.localScale = Vector3.one;
-            warningZoneSprite.color = new Color(255, 0, 0, 0);
-            OutlineSprite.color = new Color(255, 255, 255, 0);
+            if (visualizeFloor)
+            {
+                warningZoneSprite.color = new Color(255, 0, 255, 255);
+                OutlineSprite.color = new Color(255, 255, 255, 255);
+            }
+            else
+            {
+                warningZoneSprite.color = new Color(255, 0, 0, 0);
+                OutlineSprite.color = new Color(255, 255, 255, 0);
+            }
 
             SkillEntry enemy = shooter.GetComponent<SkillEntry>();
             ApplyDamage();
