@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: CircleDamageAttack
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
-  _skillDamage: 5
+  _skillDamage: 30
   direction: {x: 0, y: 0}
   isLocal: 0
   PositionCenter: {x: 0, y: 0, z: 0}
   colliderPrefab: {fileID: 3617344549384259999, guid: ddff3a9b92fcc4b4984a933e4374ab12, type: 3}
+  collider: {fileID: 0}
   warningDuration: 1
   attackRemain: 0
   attackAngle: 0
   isFixedRotation: 1
+  size: {x: 3, y: 3}
