@@ -34,6 +34,10 @@ public class MapGenerater : MonoBehaviour
 
     [Header("DrawLine Setting")]
     [SerializeField] float time = 4.0f;
+    [Header("ObstacleObjcet 세팅")]
+    [SerializeField] List<GameObject> obstacles = new List<GameObject>();
+    List<GameObject> spawnObstacles = new List<GameObject>();
+
 
     private List<RectInt> candidateRooms = new List<RectInt>();
     private List<RectInt> finalRooms = new List<RectInt>();
@@ -67,6 +71,11 @@ public class MapGenerater : MonoBehaviour
         roomCenters.Clear();
         connections.Clear();
         connectionMap.Clear();
+        foreach(var obs in spawnObstacles)
+        {
+            Destroy(obs);
+        }
+        spawnObstacles.Clear();
 
         GenerateInitialRooms();
         ResolveRoomCollisions();
@@ -78,6 +87,7 @@ public class MapGenerater : MonoBehaviour
         DrawWalls();
 
         SetCharacter();
+        SetObstacles();
 
         tilemap.CompressBounds(); // 타일 맵 크기 최적화
         wallTilemap.CompressBounds(); // 타일 맵 크기 최적화
@@ -351,13 +361,13 @@ public class MapGenerater : MonoBehaviour
         while (queue.Count > 0)
         {
             int current = queue.Dequeue();
-            foreach (var neighbor in connectionMap[current]) // current와 연결된 맵 모두 체크
+            foreach (var next in connectionMap[current]) // current와 연결된 맵 모두 체크
             {
-                if (visited[neighbor]) continue; // 다음 방문해야 할 맵에 이미 방문 했다면 continue;
+                if (visited[next]) continue; // 다음 방문해야 할 맵에 이미 방문 했다면 continue;
 
-                visited[neighbor] = true;
-                moveCnt[neighbor] = moveCnt[current] + 1; // 이동 횟수 + 1
-                queue.Enqueue(neighbor);
+                visited[next] = true;
+                moveCnt[next] = moveCnt[current] + 1; // 이동 횟수 + 1
+                queue.Enqueue(next);
             }
         }
 
@@ -377,10 +387,27 @@ public class MapGenerater : MonoBehaviour
         }
         boss.transform.position = finalRooms[bossRoomIdx].center;
 
-
-        // 테스트로 현재는 캐릭터 옆으로 이동
+        // 테스트로 캐릭터 옆으로 이동
         //boss.transform.position = player.transform.position + (Vector3)(Vector2.right * 3);
-
+    }
+    void SetObstacles()
+    {
+        foreach(var room in finalRooms)
+        {
+            // 몇개 설치할 것인가 -> 대충 최대 10개
+            int obsCnt = Random.Range(0, 10);
+            for (int i = 0; i < obsCnt; i++)
+            {
+                // 소환할 위치
+                Vector3 pos = new Vector3();
+                pos.x = Random.Range(room.min.x + 1, room.max.x - 1) + 0.5f;
+                pos.y = Random.Range(room.min.y + 1, room.max.y - 1) + 0.5f;
+                // 장애물 인덱스 선택
+                int obsIdx = Random.Range(0, obstacles.Count);
+                // 지정 위치에 소환
+                spawnObstacles.Add(Instantiate(obstacles[obsIdx], pos, Quaternion.identity));
+            }
+        }
     }
     public RectInt GetRoomByPos(Vector3 pos)
     {

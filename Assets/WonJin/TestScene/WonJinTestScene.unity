@@ -1406,6 +1406,10 @@ MonoBehaviour:
   player: {fileID: 1023619316}
   boss: {fileID: 1116319337}
   time: 3
+  obstacles:
+  - {fileID: 1602827136951235873, guid: 1055e6aa07e6ed54aa498b66cd4f69bf, type: 3}
+  - {fileID: 2374766826625083467, guid: aae9595b6a301e649aeb5712789e3922, type: 3}
+  - {fileID: 4189207589073314067, guid: 8fc746cf44ebe08458f59172295a4787, type: 3}
 --- !u!4 &1401505466
 Transform:
   m_ObjectHideFlags: 0
