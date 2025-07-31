@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // 이 부분을 보스에서 구현해야 할지도...?
-public class Room : MonoBehaviour
+public class BossRoom
 {
     RectInt room;
-    // 나중에 Enemy 만들어지면 바꿔야함
-    GameObject boss;
-    TestBoss testBoss;
+    public RectInt Room { get { return room; } set { room = value; } }
+    int roomIdx = -1;
+    public int RoomIdx { get { return roomIdx; } set { roomIdx = value; } }
 
-    public void Init(RectInt _room, GameObject _boss)
+    public BossRoom(RectInt _room, int _roomIdx)
     {
-        room = _room;
-        boss = _boss;
-        testBoss = boss.GetComponent<TestBoss>();
+        Room = _room;
+        RoomIdx = _roomIdx;
     }
-
 }

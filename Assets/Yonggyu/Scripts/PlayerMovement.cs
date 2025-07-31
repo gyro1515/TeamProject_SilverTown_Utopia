@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class PlayerController : Entity
 {
-    private Rigidbody2D rigidBody2D;
+    // 문제 없으면 지울 예정**************
+
+
+
+    /*private Rigidbody2D rigidBody2D;
     //private Animator animator;
-    [SerializeField] public float MoveSpeed { get; private set; } = 5f;
     private Vector2 direction;
 
     //Parring
@@ -91,5 +94,5 @@ public class PlayerController : Entity
             baseAttack.UseSkill(this as Entity, Vector2.zero);
         else
             baseAttack.UseSkill(this as Entity, mousepos.normalized);
-    }
+    }*/
 }
