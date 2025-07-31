@@ -16,6 +16,8 @@ public class RoadTriger : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!collision.CompareTag("Player")) return;
+
         // 복도 진입
         //Debug.Log("복도 진입");
         bIsOnRoad = true;
@@ -27,7 +29,7 @@ public class RoadTriger : MonoBehaviour
     {
         if (!bIsOnRoad) return;
         // 먼저 콜리전이 플레이어인지 체크
-        if (collision.CompareTag("Player")) return;
+        if (!collision.CompareTag("Player")) return;
 
         // 이동한 맵 가져오기
         RectInt tmp = mapGenerater.GetRoomByPos(collision.transform.position);
