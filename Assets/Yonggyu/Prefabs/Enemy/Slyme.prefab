@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5029661371865049722}
   - component: {fileID: 5045240431956173487}
-  - component: {fileID: 852301651862537772}
+  - component: {fileID: 4749485686138096789}
   m_Layer: 0
   m_Name: Slyme
   m_TagString: Untagged
@@ -61,7 +61,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &852301651862537772
+--- !u!114 &4749485686138096789
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,7 +70,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5089717379641732395}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fc9c1c4cccde064b95cc0ae007c1036, type: 3}
+  m_Script: {fileID: 11500000, guid: 133d9543d4393d64696f994880b07768, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6054347019704313468
@@ -168,7 +168,7 @@ Animator:
   m_GameObject: {fileID: 6054347019704313468}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 32a70bc34f2cdc142b4c9fc2082ebd9d, type: 2}
+  m_Controller: {fileID: 9100000, guid: e1f101be3a3084d49bbaf3eee46be118, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

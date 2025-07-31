@@ -116,7 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3226536097430408011}
   - component: {fileID: 5001150857839329545}
-  - component: {fileID: 2797085927922066326}
+  - component: {fileID: 3662246093425876777}
   m_Layer: 0
   m_Name: DeathNight
   m_TagString: Untagged
@@ -167,7 +167,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2797085927922066326
+--- !u!114 &3662246093425876777
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,6 +176,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6704106922036302281}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fc9c1c4cccde064b95cc0ae007c1036, type: 3}
+  m_Script: {fileID: 11500000, guid: 133d9543d4393d64696f994880b07768, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
