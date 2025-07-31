@@ -10,22 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbd5c2f239e6bc64a89bd82fa9ccb3c2, type: 3}
-  m_Name: DeathKnightPattern4
+  m_Name: PheonixPattern2
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   skills:
-  - {fileID: 11400000, guid: 8b9c943680b267146a68f4fcb3a72a1d, type: 2}
-  - {fileID: 11400000, guid: 8b9c943680b267146a68f4fcb3a72a1d, type: 2}
+  - {fileID: 11400000, guid: f5ff6401e835b0f4ca016b16e7e09ece, type: 2}
   - {fileID: 11400000, guid: fadd6dfaa2af9dc42bd13466f4715881, type: 2}
   activeTime:
   - 0
-  - 0.5
-  - 1
-  positionStates: 000000000000000000000000
+  - 0
+  positionStates: 0000000000000000
   positions:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  ignoreSkillCooldown: 1
+  ignoreSkillCooldown: 0
   randomMin: {x: 0, y: 0}
   randomMax: {x: 0, y: 0}

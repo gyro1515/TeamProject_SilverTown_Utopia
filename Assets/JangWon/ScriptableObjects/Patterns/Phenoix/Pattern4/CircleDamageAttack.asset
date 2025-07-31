@@ -9,16 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2194e5ab6e65f5f42aea95da7f589cdc, type: 3}
-  m_Name: SpreadProjectile
+  m_Script: {fileID: 11500000, guid: 54ee12395610fa240a5d93fa8432423c, type: 3}
+  m_Name: CircleDamageAttack
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
-  _skillDamage: 15
-  direction: {x: 1, y: 0}
-  isLocal: 1
+  _skillDamage: 5
+  direction: {x: 0, y: 0}
+  isLocal: 0
   PositionCenter: {x: 0, y: 0, z: 0}
-  projectilePrefab: {fileID: 8324435634244213426, guid: cac8bffb8dd1e2c439f81fa8be92be0c, type: 3}
-  projectileQuantity: 3
-  spread: 120
-  projectileSpeed: 5
-  scale: {x: 1, y: 1}
+  colliderPrefab: {fileID: 3617344549384259999, guid: ddff3a9b92fcc4b4984a933e4374ab12, type: 3}
+  warningDuration: 1
+  attackRemain: 0
+  attackAngle: 0
+  isFixedRotation: 1
