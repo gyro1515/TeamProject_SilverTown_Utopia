@@ -231,6 +231,11 @@ MonoBehaviour:
   attackRange: 5
   chaseRange: 10
   attackDuration: 1
+  bossRoom:
+    x: 0
+    y: 0
+    width: 0
+    height: 0
 --- !u!4 &245216133
 Transform:
   m_ObjectHideFlags: 0
@@ -1081,8 +1086,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dad385814629ad4bb9549b00d70aa53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalCandidates: 12
-  desiredRoomCount: 12
+  totalCandidates: 5
+  desiredRoomCount: 5
   roomMinSize: {x: 25, y: 20}
   roomMaxSize: {x: 40, y: 40}
   roomSpacing: 4

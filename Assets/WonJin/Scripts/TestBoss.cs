@@ -7,7 +7,7 @@ public class TestBoss : MonoBehaviour
 {
     public enum EBossState
     {
-        Active, Deactivate
+        Active, Deactivate, PowerOff
     }
     EBossState eBossState = EBossState.Deactivate;
     public EBossState BossState { set { eBossState = value; } get { return eBossState; } }
@@ -38,12 +38,14 @@ public class TestBoss : MonoBehaviour
     }
     private void Update()
     {
-        //if (eBossState == EBossState.Deactivate) return; // 비활성화시 트리 실행 x
-
+        if (eBossState == EBossState.PowerOff) return; // 비활성화시 트리 실행 x
+        Debug.Log("Update");
         root.Evaluate(); // 트리 검사
     }
     private void FixedUpdate()
     {
+        if (eBossState == EBossState.PowerOff) return; // 비활성화시 트리 실행 x
+        Debug.Log("FixedUpdate");
         _rig2d.velocity = moveDir * speed;
 
     }
@@ -181,7 +183,7 @@ public class TestBoss : MonoBehaviour
     }
     INode.ENodeState MoveToCenter()
     {
-        Debug.Log("MoveToCenter");
+        //Debug.Log("MoveToCenter");
         moveDir = Vector2.zero;
         speed = monSpeed;
         if ((Vector2)transform.position != bossRoom.center)
@@ -197,9 +199,11 @@ public class TestBoss : MonoBehaviour
             {
                 transform.position = bossRoom.center;
             }
-            return INode.ENodeState.Running;
+            //return INode.ENodeState.Running; // 러닝으로 하면 돌아가는 도중 맵 입장시 보스 활성화 안됨
+            return INode.ENodeState.Success;
         }
-        Debug.Log("MoveToCenterSuccess");
+        //Debug.Log("MoveToCenterSuccess");
+        eBossState = EBossState.PowerOff;
         return INode.ENodeState.Success;
     }
 }
