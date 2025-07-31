@@ -385,10 +385,10 @@ public class MapGenerater : MonoBehaviour
                 maxDist = tmpDist;
             }
         }
-        boss.transform.position = finalRooms[bossRoomIdx].center;
+        //boss.transform.position = finalRooms[bossRoomIdx].center;
 
         // 테스트로 캐릭터 옆으로 이동
-        //boss.transform.position = player.transform.position + (Vector3)(Vector2.right * 3);
+        boss.transform.position = player.transform.position + (Vector3)(Vector2.right * 3);
     }
     void SetObstacles()
     {

@@ -65,9 +65,9 @@ public class TestBoss : MonoBehaviour
             //speed = target.GetComponent<TestPlayer>().speed * 2; // 타겟 스피드의 2배로
             speed = monSpeed;
             // 회전 하면서 쫓아가기
-            Vector3 dir = target.transform.position - transform.position;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, angle);
+            /*Vector3 dir = target.transform.position - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 180f;*/
+            //transform.rotation = Quaternion.Euler(0, 0, angle);
 
             return INode.ENodeState.Success;
         }
@@ -75,12 +75,12 @@ public class TestBoss : MonoBehaviour
         {
             //Debug.Log("ChaseSuccess");
             moveDir = (target.transform.position - transform.position).normalized;
-            speed = target.GetComponent<TestPlayer>().speed * 2; // 타겟 스피드의 2배로
+            //speed = target.GetComponent<TestPlayer>().speed * 2; // 타겟 스피드의 2배로
 
             // 회전 하면서 쫓아가기
-            Vector3 dir = target.transform.position - transform.position;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, angle);
+            /*Vector3 dir = target.transform.position - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 180f;*/
+            //transform.rotation = Quaternion.Euler(0, 0, angle);
 
             return INode.ENodeState.Success;
         }
@@ -122,9 +122,9 @@ public class TestBoss : MonoBehaviour
             // 이 시점에 애니메이션이나 이펙트 실행도 가능
             // animator.SetTrigger("Attack");
             // 회전 하면서 쫓아가기
-            Vector3 dir = target.transform.position - transform.position;
+            /*Vector3 dir = target.transform.position - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, angle);
+            transform.rotation = Quaternion.Euler(0, 0, angle);*/
             return INode.ENodeState.Running; // 진행 중 표시, 노드가 다른 곳으로 안가도록
         }
         if (attackTimer > 0)
