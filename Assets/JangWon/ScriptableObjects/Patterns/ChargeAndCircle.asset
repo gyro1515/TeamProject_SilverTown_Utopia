@@ -18,7 +18,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fadd6dfaa2af9dc42bd13466f4715881, type: 2}
   activeTime:
   - 0
-  - 0
+  - -0.5
   - 0
   positionStates: 000000000000000000000000
   positions:
