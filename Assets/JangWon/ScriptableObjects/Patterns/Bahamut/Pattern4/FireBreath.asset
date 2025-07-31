@@ -9,16 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2194e5ab6e65f5f42aea95da7f589cdc, type: 3}
-  m_Name: FireBall
+  m_Script: {fileID: 11500000, guid: 54ee12395610fa240a5d93fa8432423c, type: 3}
+  m_Name: FireBreath
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
-  _skillDamage: 30
-  direction: {x: 1, y: 0}
+  _skillDamage: 50
+  direction: {x: 0, y: 0}
   isLocal: 1
   PositionCenter: {x: 0, y: 0, z: 0}
-  projectilePrefab: {fileID: 8324435634244213426, guid: cac8bffb8dd1e2c439f81fa8be92be0c, type: 3}
-  projectileQuantity: 1
-  spread: 0
-  projectileSpeed: 5
-  scale: {x: 2, y: 2}
+  colliderPrefab: {fileID: 3617344549384259999, guid: 1f591c1b6b784174a975c7fa791c2e3d, type: 3}
+  warningDuration: 2
+  attackRemain: 1.5
+  attackAngle: -135
+  isFixedRotation: 0
+  size: {x: 8, y: 8}

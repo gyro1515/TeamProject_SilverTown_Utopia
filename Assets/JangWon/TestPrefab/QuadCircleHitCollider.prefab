@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3617344549384259999}
   - component: {fileID: 1130454020744266073}
   m_Layer: 0
-  m_Name: BaseAttackSkill
+  m_Name: QuadCircleHitCollider
   m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
