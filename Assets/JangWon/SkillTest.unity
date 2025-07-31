@@ -463,7 +463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
-  pattern: {fileID: 11400000, guid: 7c059b3f12fdd424d8ce7abd265a9527, type: 2}
+  pattern: {fileID: 11400000, guid: 376de23115664174caf153046299ec3a, type: 2}
 --- !u!114 &1991043233 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4774656843711481409, guid: bda094ea27ca23c438f58049134e792b, type: 3}
