@@ -167,7 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964c1e97aff8d684c9e19b0a0cdba3cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainUIGroup: {fileID: 385820497}
   slideDistance: 1920
   slideDuration: 1
 --- !u!1 &294301985
@@ -335,12 +334,11 @@ MonoBehaviour:
   settingButton: {fileID: 1065246985}
   rankingButton: {fileID: 1414957382}
   exitButton: {fileID: 1853911072}
-  moveController: {fileID: 185671601}
-  fadeDuration: 0.5
-  moveDuration: 0.5
-  targetScale: {x: 1.3, y: 1.3, z: 1}
   startButtonRect: {fileID: 2011595482}
   titleRect: {fileID: 2064264763}
+  moveController: {fileID: 185671601}
+  moveDuration: 0.5
+  scaleAmount: 1.3
 --- !u!4 &513137643
 Transform:
   m_ObjectHideFlags: 0
@@ -1285,6 +1283,7 @@ GameObject:
   - component: {fileID: 1976639602}
   - component: {fileID: 1976639601}
   - component: {fileID: 1976639600}
+  - component: {fileID: 1976639603}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1342,6 +1341,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1976639603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976639599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7036012d20b20394584c1b5709846ccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2011595481
 GameObject:
   m_ObjectHideFlags: 0
