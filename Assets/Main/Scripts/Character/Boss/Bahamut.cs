@@ -22,6 +22,12 @@ public class Bahamut : Enemy
     private float rayDist = -1f; // 벽 감지 레이캐스트용 거리
     // 대시용 bool 변수
     bool bIsDash = false;
+    protected override void SetHp()
+    {
+        currentHp = MaxHp;
+    }
+
+
     protected override void Awake()
     {
         base.Awake();

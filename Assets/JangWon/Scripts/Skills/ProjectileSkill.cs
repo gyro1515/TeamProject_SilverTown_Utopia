@@ -44,5 +44,18 @@ public class ProjectileSkill : Skill
         return Quaternion.Euler(0, 0, degree) * vec ;
     }
 
+    public void UpgradeProjectileCount(int count)
+    {
+        projectileQuantity += count;
+        if (spread >= 0 && spread < 360)
+            spread = Mathf.Clamp(spread + 5.0f, 0, 360);
+            
+    }
 
+    public void UpgradeSpeed(float speedscale)
+    {
+        if (speedscale < 0)
+            return;
+        projectileSpeed = projectileSpeed * (speedscale);
+    }
 }
