@@ -1,9 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.Windows;
+using static UnityEditor.PlayerSettings;
 
 public class MapGenerater : MonoBehaviour
 {
@@ -24,6 +26,7 @@ public class MapGenerater : MonoBehaviour
     [Header("Tilemap Settings")]
     [SerializeField] Tilemap tilemap;
     [SerializeField] Tilemap wallTilemap;
+    [SerializeField] Tilemap bossWallMap;
     [SerializeField] Tilemap roadTriger;
     [SerializeField] TileBase floorTile;
     [SerializeField] TileBase wallTile;
@@ -45,6 +48,8 @@ public class MapGenerater : MonoBehaviour
     private List<Vector2Int> roomCenters = new List<Vector2Int>();
     private HashSet<(int, int)> connections = new HashSet<(int, int)>();
     private Dictionary<int, List<int>> connectionMap = new Dictionary<int, List<int>>();
+    // 보스룸 체크용, 몬스터가 많아진다면 방 클래스 만들어야...?
+    
 
     private void Awake()
     {
@@ -55,9 +60,15 @@ public class MapGenerater : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (UnityEngine.Input.GetKeyDown(KeyCode.E))
         {
             GenerateMap();
+        }
+        else if(UnityEngine.Input.GetKeyDown(KeyCode.R))
+        {
+            // 보스 방 진입 시 호출되는 함수, 추후 함수 다른 곳으로 이동해야 함
+            // 보스 방의 벽 비활성화
+            OpenBossRoom();
         }
     }
 
@@ -65,6 +76,7 @@ public class MapGenerater : MonoBehaviour
     {
         tilemap.ClearAllTiles();
         wallTilemap.ClearAllTiles();
+        bossWallMap.ClearAllTiles();
         roadTriger.ClearAllTiles();
         candidateRooms.Clear();
         finalRooms.Clear();
@@ -91,6 +103,7 @@ public class MapGenerater : MonoBehaviour
 
         tilemap.CompressBounds(); // 타일 맵 크기 최적화
         wallTilemap.CompressBounds(); // 타일 맵 크기 최적화
+        bossWallMap.CompressBounds(); // 타일 맵 크기 최적화
         roadTriger.CompressBounds(); // 타일 맵 크기 최적화
     }
 
@@ -100,8 +113,8 @@ public class MapGenerater : MonoBehaviour
         {
             int w = Random.Range(roomMinSize.x, roomMaxSize.x);
             int h = Random.Range(roomMinSize.y, roomMaxSize.y);
-            int x = Random.Range(-5 - w / 2, 5 - w / 2); // 중심 맞추기
-            int y = Random.Range(-5 - h / 2, 5 - h / 2); // 중심 맞추기
+            int x = Random.Range(-5 - w / 2, 5 - w / 2 + 1); // 중심 맞추기
+            int y = Random.Range(-5 - h / 2, 5 - h / 2 + 1); // 중심 맞추기
             /*int x = -w / 2; // 중심 맞추기
             int y = -h / 2; // 중심 맞추기*/
             candidateRooms.Add(new RectInt(x, y, w, h));
@@ -153,7 +166,8 @@ public class MapGenerater : MonoBehaviour
 
         for (int i = 0; i < finalRooms.Count; i++)
         {
-            Vector2Int center = new Vector2Int((int)finalRooms[i].center.x, (int)finalRooms[i].center.y);
+            //Vector2Int center = new Vector2Int((int)finalRooms[i].center.x, (int)finalRooms[i].center.y);
+            Vector2Int center = Vector2Int.RoundToInt(finalRooms[i].center);
             roomCenters.Add(center);
             connectionMap[i] = new List<int>();
         }
@@ -385,10 +399,14 @@ public class MapGenerater : MonoBehaviour
                 maxDist = tmpDist;
             }
         }
-        //boss.transform.position = finalRooms[bossRoomIdx].center;
+        boss.transform.position = finalRooms[bossRoomIdx].center;
+        boss.GetComponent<Enemy>().MyRoom.Room = finalRooms[bossRoomIdx];
+        boss.GetComponent<Enemy>().MyRoom.RoomIdx = bossRoomIdx;
+        // 보스 방 입구 벽으로 막기
+        SetBossRoom(finalRooms[bossRoomIdx]);
 
         // 테스트로 캐릭터 옆으로 이동
-        boss.transform.position = player.transform.position + (Vector3)(Vector2.right * 3);
+        //boss.transform.position = player.transform.position + (Vector3)(Vector2.right * 3);
     }
     void SetObstacles()
     {
@@ -423,11 +441,47 @@ public class MapGenerater : MonoBehaviour
             RectInt expanded = new RectInt(room.xMin - roomPadding, room.yMin - roomPadding, room.width + roomPadding * 2, room.height + roomPadding * 2);
             if (expanded.Contains(tmpPos))
             {
+                Enemy testBoss = boss.GetComponent<Enemy>();
+                if (testBoss?.MyRoom.Room.center == room.center) // 보스방이라면 보스 활성화
+                {
+                    testBoss.BossState = Enemy.EBossState.Active;
+                }
                 return room;
             }
         }
 
         // 그럴리는 없겠지만 방을 못찾았다면 멀리 있는 값 리턴
         return new RectInt(666, 666, 0, 0);
+    }
+    void SetBossRoom(RectInt bossRoom)
+    {
+        if (bossWallMap == null) return;
+
+        // 버전 1: 가장 쉬운 버전, 벽으로 둘러싸기
+        for (int i = bossRoom.min.x - 1; i < bossRoom.max.x + 1; i++)
+        {
+            bossWallMap.SetTile(new Vector3Int(i, bossRoom.min.y - 1, 0), wallTile);
+            bossWallMap.SetTile(new Vector3Int(i, bossRoom.max.y, 0), wallTile);
+        }
+        for (int j = bossRoom.min.y - 1; j < bossRoom.max.y + 1; j++)
+        {
+            bossWallMap.SetTile(new Vector3Int(bossRoom.min.x - 1, j, 0), wallTile);
+            bossWallMap.SetTile(new Vector3Int(bossRoom.max.x, j, 0), wallTile);
+
+        }
+
+    }
+    
+    void OpenBossRoom()
+    {
+        bossWallMap.gameObject.SetActive(false);
+    }
+    public void SetBossDeActive()
+    {
+        // 모든 보스 비활성화 하기.
+        Enemy testBoss = boss.GetComponent<Enemy>();
+        if (testBoss == null) return;
+        testBoss.BossState = Enemy.EBossState.Deactivate;
+
     }
 }
