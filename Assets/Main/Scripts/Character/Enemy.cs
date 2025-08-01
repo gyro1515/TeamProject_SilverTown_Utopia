@@ -76,6 +76,8 @@ public abstract class Enemy : Entity
     protected override void Start()
     {
         base.Start();
+        if (actor == null) return;
+
         actor = Instantiate(actor, this.transform);
     }
 

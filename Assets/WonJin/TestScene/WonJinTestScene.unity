@@ -447,6 +447,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &519753471 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1703163400481825639, guid: 0ccea072197aa1f409d109147c5fbaaa, type: 3}
+  m_PrefabInstance: {fileID: 1702903152}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &793597079 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1703163400481825639, guid: 0ccea072197aa1f409d109147c5fbaaa, type: 3}
+  m_PrefabInstance: {fileID: 998844368}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &913448771 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2953534751814109578, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
@@ -1249,6 +1259,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ccea072197aa1f409d109147c5fbaaa, type: 3}
+--- !u!1 &1191626664 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1703163400481825639, guid: 0ccea072197aa1f409d109147c5fbaaa, type: 3}
+  m_PrefabInstance: {fileID: 1157895743}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1218764669
 GameObject:
   m_ObjectHideFlags: 0
@@ -1295,6 +1310,12 @@ MonoBehaviour:
   boss: {fileID: 1591525815}
   enemys:
   - {fileID: 1070377539}
+  - {fileID: 1303971889}
+  - {fileID: 1757466369}
+  - {fileID: 519753471}
+  - {fileID: 1191626664}
+  - {fileID: 793597079}
+  - {fileID: 2070349905}
   time: 3
   obstacles:
   - {fileID: 1602827136951235873, guid: 1055e6aa07e6ed54aa498b66cd4f69bf, type: 3}
@@ -1547,6 +1568,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1303971889 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1703163400481825639, guid: 0ccea072197aa1f409d109147c5fbaaa, type: 3}
+  m_PrefabInstance: {fileID: 1763638573}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1307315095
 GameObject:
   m_ObjectHideFlags: 0
@@ -2049,6 +2075,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1757466369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1703163400481825639, guid: 0ccea072197aa1f409d109147c5fbaaa, type: 3}
+  m_PrefabInstance: {fileID: 467398177}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1763638573
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2357,6 +2388,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2070349905 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1703163400481825639, guid: 0ccea072197aa1f409d109147c5fbaaa, type: 3}
+  m_PrefabInstance: {fileID: 1999712907}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
