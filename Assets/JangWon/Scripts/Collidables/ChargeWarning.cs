@@ -44,7 +44,7 @@ public class ChargeWarning : MonoBehaviour
         Vector2 dir = (targetPos - startPos);
         float scale = dir.magnitude;
         float angle = Mathf.Atan2(dir.normalized.y, dir.normalized.x) * Mathf.Rad2Deg;
-        this.transform.localRotation = transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle - 90);
+        this.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, angle - 90);
 
         //<================== Need to be modified -> x Value as shooter's collider Size Value ==================>
         //Set Warning Scale

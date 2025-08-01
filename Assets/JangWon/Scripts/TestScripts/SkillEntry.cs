@@ -18,7 +18,7 @@ public class SkillEntry : Entity
     //Temporary shooting test
     protected override void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && isPatternEnd)
+        if (Input.GetKeyDown(KeyCode.L) && isPatternEnd)
         {
             isPatternEnd = false;
             StartCoroutine(patternActor.ActivePattern());

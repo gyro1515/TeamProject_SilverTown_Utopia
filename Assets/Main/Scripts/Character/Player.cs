@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class Player : Entity
 {
+    //Number of Player contacted Colliders
+    int colliderCount = 0;
+
     // Parring
     [Header("패링")]
     [SerializeField] private const float damageDelay = 1.0f;
@@ -17,7 +20,12 @@ public class Player : Entity
     [Header("점프")]
     bool isJumping = false;
 
+    // Wire Action
+    [Header("와이어 액션")]
+    [SerializeField] private Skill wireAction;
+
     //Attack
+    [Header("공격")]
     [SerializeField] Skill baseAttack = null;
 
     protected override void Awake()
@@ -28,6 +36,7 @@ public class Player : Entity
 
         parringStartTime -= parringDelay;
         damageStartTime -= damageDelay;
+        wireAction = Instantiate(wireAction);
     }
 
     /*protected override void Start()// 사용 안한다면 마지막에 지우기
@@ -119,6 +128,7 @@ public class Player : Entity
     {
         // inputValue.isPressed를 안하면 키 다운, 키 업 두 번 호출 됨
         if (!inputValue.isPressed) return;
+        wireAction.UseSkill(this as Entity, Input.mousePosition.normalized);
 
     }
     void OnSkill1(InputValue inputValue)
@@ -134,6 +144,23 @@ public class Player : Entity
     {
         isJumping = false;
         Debug.Log("Player Jump End");
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        colliderCount++;
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        colliderCount--;
+        if(colliderCount < 0)
+            colliderCount = 0;
+    }
+
+    public bool IsColliding()
+    {
+        return colliderCount > 0;
     }
 
 }
