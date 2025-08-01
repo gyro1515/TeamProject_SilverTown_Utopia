@@ -11,6 +11,10 @@ public class Player : Entity
     [SerializeField] private const float invincibleDelay = 0.25f;
     [SerializeField] private float parringStartTime = 0;
 
+    // Jump
+    [Header("점프")]
+    bool isJumping = false;
+
     //Attack
     [SerializeField] Skill baseAttack = null;
 
@@ -36,13 +40,6 @@ public class Player : Entity
        /* direction.x = Input.GetAxisRaw("Horizontal");
         direction.y = Input.GetAxisRaw("Vertical");
         direction = new Vector2(direction.x, direction.y).normalized;*/
-
-        if (Input.GetMouseButtonDown(1))
-            Parring();
-
-        if (Input.GetMouseButtonDown(0))
-            BaseAttack((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - (Vector2)transform.position);
-
         // 방향을 정하고 애니메이션이 실행되도록
         base.Update();
 
@@ -61,14 +58,21 @@ public class Player : Entity
 
         Debug.Log("Parring tried at : " + parringStartTime.ToString());
     }
-    protected override void TakeDamage(int damage)
+    protected override void TakeDamage(int damage, bool isJumpAvoidable = false)
     {
+        // 패링이 된다면 데미지를 받지 않도록
         if (Time.fixedTime - parringStartTime <= invincibleDelay)
         {
             Debug.Log("Parring success");
             return;
         }
-        // 패링이 된다면 데미지가 받지 않도록
+        //점프로 공격 피하기 가능하다면, 피하기
+        if (isJumping && isJumpAvoidable)
+        {
+            Debug.Log("Jump Avoid");
+            return;
+        }
+
         base.TakeDamage(damage);
     }
     private void BaseAttack(Vector2 mousepos)
@@ -94,7 +98,15 @@ public class Player : Entity
     {
         // inputValue.isPressed를 안하면 키 다운, 키 업 두 번 호출 됨
         if (!inputValue.isPressed) return;
+        if (isJumping)
+            return;
+        isJumping = true;
+        Debug.Log("Player is Jumping");
+        // Animation 처리
+        // 반드시 애니메이션 종료 시점에 이벤트 JumpEnd() 넣어줄 것
 
+        //<=================== Need to be removed Later ===================>
+        Invoke("JumpEnd", 1.0f);
     }
     void OnWire(InputValue inputValue)
     {
@@ -108,4 +120,13 @@ public class Player : Entity
         if (!inputValue.isPressed) return;
 
     }
+
+
+    //Animation Event
+    public void JumpEnd()
+    {
+        isJumping = false;
+        Debug.Log("Player Jump End");
+    }
+
 }

@@ -16,6 +16,9 @@ public class HitCollider : MonoBehaviour
     //if Enable, show Hit Collider after warning delay -> usually for Floor Testing
     //if Disable, don't show Hit Collider after warning delay
     [SerializeField] bool visualizeFloor = false;
+    //if Enable, Can avoid with jump
+    //if not, Can't Avoid with jump
+    [SerializeField] bool isJumpAvoidable = false;
     //Entity who use this skill
     Entity shooter;
     //Checker of Durations
@@ -104,7 +107,7 @@ public class HitCollider : MonoBehaviour
         if (collision.gameObject.GetComponent<Entity>() != null)
         {
             Entity entity = collision.gameObject.GetComponent<Entity>();
-            shooter.ApplyDamage(entity, damage);
+            shooter.ApplyDamage(entity, damage, isJumpAvoidable);
         }
     }
 }
