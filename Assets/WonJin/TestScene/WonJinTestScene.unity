@@ -1029,8 +1029,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dad385814629ad4bb9549b00d70aa53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalCandidates: 3
-  desiredRoomCount: 3
+  totalCandidates: 2
+  desiredRoomCount: 2
   roomMinSize: {x: 25, y: 20}
   roomMaxSize: {x: 40, y: 40}
   roomSpacing: 4
