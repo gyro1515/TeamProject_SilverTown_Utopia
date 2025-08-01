@@ -15,11 +15,12 @@ public class Projectile : MonoBehaviour
         projectileRigidbody = GetComponent<Rigidbody2D>();
     }
 
-    //temporary destroy
+    //temporary destroy end after 3 seconds
     private void Start()
     {
         Destroy(gameObject, 3.0f);
     }
+    //At generation
     public void Init(Entity entity, Vector2 force, int damage)
     {
         shooter = entity;
@@ -28,17 +29,20 @@ public class Projectile : MonoBehaviour
             Debug.Log("RigidBody not exists in projectile");
             return;
         }
+        //set projectile movement
         projectileRigidbody.velocity = force;
         this.damage = damage;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //if Attack Collider, skip
         if (collision.CompareTag("Attack"))
             return;
+        //if Shooter Collider, skip
         if (collision.CompareTag(shooter.tag))
             return;
-
+        //if Entity, Attack
         if (collision.gameObject.GetComponent<Entity>() != null)
         {
             Entity entity = collision.gameObject.GetComponent<Entity>();

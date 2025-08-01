@@ -6,10 +6,15 @@ using static Pattern;
 
 public class PatternActor : MonoBehaviour
 {
+    //Attack Direction
     Vector2 dir;
+    //enemy who shoots this pattern
     [SerializeField] SkillEntry enemy;
+    //Pattern which will be used
+    //<=============== Need To be Fixed : Pattern to PatternList ===============>
     [SerializeField] Pattern pattern;
 
+    //Copy Pattern
     private void Start()
     {
         enemy = GetComponent<SkillEntry>();
@@ -17,6 +22,7 @@ public class PatternActor : MonoBehaviour
         pattern.enemy = enemy;
         pattern.Init();
     }
+    //Active Pattern skill Sequence based on Pattern
     public IEnumerator ActivePattern()
     {
         for (int i = 0; i < pattern.skills.Length; i++)

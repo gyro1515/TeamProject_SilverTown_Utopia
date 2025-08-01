@@ -6,14 +6,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Projectile Skill Data", menuName = "Scriptable Object/Skill Data/ProjectileSkill")]
 public class ProjectileSkill : Skill
 {
+    //Projectile Prefab to copy
     [SerializeField] Projectile projectilePrefab;
-
     //number of projectiile Generated
     [SerializeField] int projectileQuantity = 0;
     //Radius how to shoow projectile
     [SerializeField] float spread = 0.0f;
     //Each Projectile Speed
     [SerializeField] float projectileSpeed = 0.0f;
+    //Projectile Size
     [SerializeField] public Vector2 scale = Vector2.one;
 
     public override void UseSkill(Entity entity, Vector2 dir)

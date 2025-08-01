@@ -7,38 +7,57 @@ public class Pattern : ScriptableObject
 {
     public enum PositionState
     {
-        WorldOrigin = 0,
-        WorldFixed,
-        WorldRandom,
-        PlayerOrigin,
-        PlayerFixed,
-        PlayerRandom,
-        EntityOrigin,
-        EntityFixed,
-        EntityRandom,
-        EntityToPlayerScale,
-        FixPlayerX,
-        FixPlayerY,
-        TakePreviousPosOffset,
-        TakePreviousPosFixed,
-        None
+        WorldOrigin = 0, // World Position 0,0,0
+        WorldFixed, // World Position from positions
+        WorldRandom, // World Postion from random Range
+        PlayerOrigin, // Player Position 0,0,0
+        PlayerFixed, // Player Position + fixed positions offset
+        PlayerRandom, // Player Position + random Range
+        EntityOrigin, // shooter Position 0,0,0
+        EntityFixed, // shooter Position + fixed positions offset
+        EntityRandom, // shooter Position + random Range
+        EntityToPlayerScale, // Spawn Between Entity and Player based on entityToPlayerScale
+        FixPlayerX, // Fix Player position X and apply this X position for later use + positions.Y
+        FixPlayerY, // Fix Player position Y and apply this Y position for later use + positions.X
+        TakePreviousPosOffset, //position is same as positions[index - previousPosIndex]
+        TakePreviousPosFixed, //position is same as positions[previousPosIndex]
+        None //Don't do any operation, Used in EndSkill Or Speciallized override
     }
+    //Shooter enemy
     [SerializeField] public SkillEntry enemy;
+    //Array of Squential skills
     [SerializeField] public Skill[] skills;
+    //Array of each skills active time
     [SerializeField] public float[] activeTime;
+    //Array of each skill's positionStates
     [SerializeField] public PositionState[] positionStates;
+    //Array of each skill's positions
     [SerializeField] public Vector2[] positions;
+    //if Ture, ignore skill cooldown and next skill waits until activeTime
+        //if True, manually set cooldown
+    //if False, wait skill cooldown + activeTime
+        //if False, activeTime can be negative
     [SerializeField] public bool ignoreSkillCooldown = true;
+    //Random range min values
     [SerializeField] public Vector2 randomMin = Vector2.zero;
+    //Random range max values
     [SerializeField] public Vector2 randomMax = Vector2.zero;
+    //offset of Player to Entity -> Used in EntityToPlayerScale
+        //0.0 is Entity Position <-------> 1.0 is Player Position
     [SerializeField] public float entityToPlayerScale = 0.5f;
+    //PreviousPosIndex used in TakePreviousPosOffset and TakePreviousPosFixed
+        //TakePreviousPosOffset - Set this value to offset
+        //TakePreviousPosFixed - Set this value to index you will directly access
     [SerializeField] public int previousPosIndex = 0;
+    //Attack Direction
     Vector2 dir;
-
+    //Saved value for FixPlayerX
     float fixedX = 0.0f;
+    //Saved value for FixPlayerY
     float fixedY = 0.0f;
 
 
+    //If unequal Array Size, Error
     private void Start()
     {
         int count = skills.Length;
@@ -58,7 +77,7 @@ public class Pattern : ScriptableObject
             return;
         }
     }
-
+    //Copy all Skills
     public void Init()
     {
         int count = skills.Length;
@@ -69,7 +88,7 @@ public class Pattern : ScriptableObject
         }
     }
 
-
+    //Set each skill's Positions
     public virtual void SetSkills(int i)
     {
         Vector2 randompos = new Vector2(Random.Range(randomMin.x, randomMax.x), Random.Range(randomMin.y, randomMax.y));

@@ -4,12 +4,21 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Ranged Skill Data", menuName = "Scriptable Object/Skill Data/RangedSkill")]
 public class RangedSkill : Skill
 {
+    //HitCollider to copy
     [SerializeField] HitCollider colliderPrefab;
+    //Copied hit collider
     public HitCollider hitCollider;
+    //warning duration of hitcollider
     [SerializeField] float warningDuration = 0.0f;
+    //attack remain of hitcollider
     [SerializeField] float attackRemain = 0.0f;
+    //attack angle of hitcollider
     [SerializeField] float attackAngle = 0.0f;
+    //Fix Rotation or not
+        //if true, hitCollider won't rotate based of direction
+        //if false, hitCollider will rotate based of direction -> Used for QuadCircle
     [SerializeField] public bool isFixedRotation = true;
+    //HitCollider Size
     [SerializeField] public Vector2 size = Vector2.one;
 
     public override void UseSkill(Entity entity, Vector2 dir)
