@@ -36,6 +36,7 @@ public class MapGenerater : MonoBehaviour
     [Header("Character Setting")]
     [SerializeField] GameObject player;
     [SerializeField] GameObject boss;
+    [SerializeField] List<GameObject> enemys;
 
     [Header("DrawLine Setting")]
     [SerializeField] float time = 4.0f;
@@ -393,7 +394,7 @@ public class MapGenerater : MonoBehaviour
         int maxMoveCnt = -1;
         int bossRoomIdx = -1;
         float maxDist = -1;
-        for (int i = 0; i < finalRooms.Count; i++)
+        for (int i = 1; i < finalRooms.Count; i++)
         {
             float tmpDist = Vector2.Distance(finalRooms[0].center, finalRooms[i].center);
             if (moveCnt[i] > maxMoveCnt || (moveCnt[i] == maxMoveCnt && tmpDist > maxDist))
@@ -408,6 +409,28 @@ public class MapGenerater : MonoBehaviour
         boss.GetComponent<Enemy>().MyRoom.RoomIdx = bossRoomIdx;
         // 보스 방 입구 벽으로 막기
         SetBossRoom(finalRooms[bossRoomIdx], bossWallTile);
+
+        int[] visitedForEnemy = new int[finalRooms.Count];
+        visitedForEnemy[0] = 1;
+        visitedForEnemy[bossRoomIdx] = 1;
+
+        // 나머지 몬스터 방 세팅
+
+        for (int j = 0; j < enemys.Count; j++)
+        {
+            for (int i = 1; i < finalRooms.Count; i++)
+            {
+                if (visitedForEnemy[i] == 1) continue; // 이미 배정된 몬스터가 있다면 다음
+
+                visitedForEnemy[i] = 1;
+                enemys[j].transform.position = finalRooms[i].center;
+                enemys[j].GetComponent<Enemy>().MyRoom.Room = finalRooms[i];
+                enemys[j].GetComponent<Enemy>().MyRoom.RoomIdx = i;
+                // 몬스터 방 입구 벽으로 막기
+                SetBossRoom(finalRooms[i], enemyWallTile);
+                break;
+            }
+        }
 
         // 테스트로 캐릭터 옆으로 이동
         //boss.transform.position = player.transform.position + (Vector3)(Vector2.right * 3);
@@ -437,26 +460,40 @@ public class MapGenerater : MonoBehaviour
         tmpPos.x = (int)pos.x;
         tmpPos.y = (int)pos.y;
         
-        //Debug.Log(tmpPos);
-        foreach(var room in finalRooms)
+        for (int i = 0; i < finalRooms.Count; i++)
         {
             // 판정을 위해 상 하 좌우 n 칸씩 확대
             int roomPadding = 2;
+            RectInt room = finalRooms[i];
             RectInt expanded = new RectInt(room.xMin - roomPadding, room.yMin - roomPadding, room.width + roomPadding * 2, room.height + roomPadding * 2);
             if (expanded.Contains(tmpPos))
             {
+                // 보스 방 체크
                 Enemy testBoss = boss.GetComponent<Enemy>();
-                if (testBoss?.MyRoom.Room.center == room.center) // 보스방이라면 보스 활성화
+                if (testBoss?.MyRoom.RoomIdx == i) // 보스방이라면 보스 활성화
                 {
                     testBoss.BossState = Enemy.EBossState.Active;
                     CloseBossRoom();
+                }
+                // 몬스터 방 체크
+                for (int j = 0; j < enemys.Count; j++)
+                {
+                    Enemy enemy = enemys[j].GetComponent<Enemy>();
+                    if (enemy?.MyRoom.RoomIdx != i) continue;
+
+                    enemy.BossState = Enemy.EBossState.Active;
+                    CloseBossRoom();
+                    break;
                 }
                 return room;
             }
         }
 
-        // 그럴리는 없겠지만 방을 못찾았다면 멀리 있는 값 리턴
-        return new RectInt(666, 666, 0, 0);
+
+
+
+            // 그럴리는 없겠지만 방을 못찾았다면 멀리 있는 값 리턴
+            return new RectInt(666, 666, 0, 0);
     }
     void SetBossRoom(RectInt bossRoom, TileBase wallTile)
     {
@@ -487,10 +524,17 @@ public class MapGenerater : MonoBehaviour
     }
     public void SetBossDeActive()
     {
-        // 모든 보스 비활성화 하기.
+        // 모든 몬스터 비활성화 하기.
         Enemy testBoss = boss.GetComponent<Enemy>();
         if (testBoss == null) return;
         testBoss.BossState = Enemy.EBossState.Deactivate;
+        
+        foreach(var enemy in enemys)
+        {
+            Enemy tmpEnemy = enemy.GetComponent<Enemy>();
+            if (tmpEnemy == null) continue;
+            tmpEnemy.BossState = Enemy.EBossState.Deactivate;
+        }
 
     }
 }
