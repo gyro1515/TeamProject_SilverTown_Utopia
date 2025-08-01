@@ -9,7 +9,7 @@ public class EndSkill : Skill
     public override void UseSkill(Entity entity, Vector2 dir)
     {
         //Free flag of enemy isPatternEnd
-        SkillEntry enemy = entity as SkillEntry;
+        Enemy enemy = entity as Enemy;
         enemy.isPatternEnd = true;
     }
 }
