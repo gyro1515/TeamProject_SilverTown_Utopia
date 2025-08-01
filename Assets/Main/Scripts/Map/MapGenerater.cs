@@ -43,6 +43,8 @@ public class MapGenerater : MonoBehaviour
     [SerializeField] List<GameObject> obstacles = new List<GameObject>();
     List<GameObject> spawnObstacles = new List<GameObject>();
 
+    [SerializeField] private int spawnObstacleCount = 20; // 용규 추가
+
 
     private List<RectInt> candidateRooms = new List<RectInt>();
     private List<RectInt> finalRooms = new List<RectInt>();
@@ -414,8 +416,8 @@ public class MapGenerater : MonoBehaviour
     {
         foreach(var room in finalRooms)
         {
-            // 몇개 설치할 것인가 -> 대충 최대 10개
-            int obsCnt = Random.Range(0, 10);
+            // 몇개 설치할 것인가 -> 대충 최대 20개
+            int obsCnt = Random.Range(0, spawnObstacleCount);
             for (int i = 0; i < obsCnt; i++)
             {
                 // 소환할 위치
