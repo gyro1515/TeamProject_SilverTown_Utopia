@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+//Temporary Skill user
 public class SkillEntry : Entity
 {
     PatternActor patternActor;

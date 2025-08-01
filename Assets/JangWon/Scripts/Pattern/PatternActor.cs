@@ -6,9 +6,15 @@ using static Pattern;
 
 public class PatternActor : MonoBehaviour
 {
+    //Attack Direction
+    Vector2 dir;
+    //enemy who shoots this pattern
     [SerializeField] SkillEntry enemy;
+    //Pattern which will be used
+    //<=============== Need To be Fixed : Pattern to PatternList ===============>
     [SerializeField] Pattern pattern;
 
+    //Copy Pattern
     private void Start()
     {
         enemy = GetComponent<SkillEntry>();
@@ -16,37 +22,31 @@ public class PatternActor : MonoBehaviour
         pattern.enemy = enemy;
         pattern.Init();
     }
+    //Active Pattern skill Sequence based on Pattern
     public IEnumerator ActivePattern()
     {
         for (int i = 0; i < pattern.skills.Length; i++)
         {
-            Vector2 dir;
             dir = enemy.player.transform.position - enemy.transform.position;
-
-
+            dir = dir.normalized;
             pattern.SetSkills(i);
             pattern.skills[i].UseSkill(enemy, dir);
             if (i + 1 == pattern.skills.Length)
                 break;
-            float waitDelay = pattern.activeTime[i + 1] - pattern.activeTime[i];
+            float waitdelay = pattern.activeTime[i + 1] - pattern.activeTime[i];
             if (pattern.ignoreSkillCooldown)
             {
-                if (waitDelay < 0)
-                    waitDelay = 0;
-                yield return new WaitForSeconds(waitDelay);
+                if (waitdelay < 0)
+                    waitdelay = 0;
+                yield return new WaitForSeconds(waitdelay);
             }
             else
             {
-                waitDelay += pattern.skills[i].coolTime;
-                if (waitDelay < 0)
-                    waitDelay = 0;
-                yield return new WaitForSeconds(waitDelay);
+                waitdelay += pattern.skills[i].coolTime;
+                if (waitdelay < 0)
+                    waitdelay = 0;
+                yield return new WaitForSeconds(waitdelay);
             }
-        }
-        if (enemy.isPatternEnd)
-        {
-            enemy.isPatternEnd = true;
-            Debug.Log("Pattern end success");
         }
     }
 }
