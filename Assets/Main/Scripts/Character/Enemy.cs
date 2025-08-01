@@ -44,8 +44,15 @@ public abstract class Enemy : Entity
 
     protected override void SetHp()
     {
-        //float hpScale = 1.0f + (target.killCount * 0.1f);
-        //MaxHp = (int)(MaxHp * hpScale);
+        float hpScale = 1.0f + (target.killCount * 0.1f);
+        MaxHp = (int)(MaxHp * hpScale);
         base.SetHp();
+    }
+
+    protected override void OnDead()
+    {
+        base.OnDead();
+        target.killCount++;
+        Destroy(this.gameObject);
     }
 }

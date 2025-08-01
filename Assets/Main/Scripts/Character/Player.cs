@@ -12,6 +12,7 @@ public class Player : Entity
     [SerializeField] private const float invincibleDelay = 0.25f;
     private float parringStartTime = 0;
     private float damageStartTime = 0;
+    public int killCount = 0;
 
     // Jump
     [Header("점프")]
