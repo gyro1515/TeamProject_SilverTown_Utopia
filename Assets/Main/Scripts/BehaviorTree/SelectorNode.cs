@@ -7,7 +7,7 @@ using static Unity.VisualScripting.Metadata;
 public class SelectorNode : INode
 {
     private List<INode> childrens;
-    // ·¯´×ÀÏ‹š ¹Ù·Î ÇØ´ç ÀÎµ¦½º·Î °¡µµ·Ï Ä³½Ã ±¸Á¶ Àû¿ë
+    // ëŸ¬ë‹ì¼ë–„ ë°”ë¡œ í•´ë‹¹ ì¸ë±ìŠ¤ë¡œ ê°€ë„ë¡ ìºì‹œ êµ¬ì¡° ì ìš©
     private int currentIndex = 0;
 
     public SelectorNode(List<INode> nodes)

@@ -25,7 +25,7 @@ public class WaitNode : INode
 
         if (timer > 0f)
         {
-            Debug.Log("기다리는 중");
+            //Debug.Log("기다리는 중");
             return INode.ENodeState.Running;
         }
 
