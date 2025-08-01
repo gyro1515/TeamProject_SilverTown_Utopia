@@ -6,15 +6,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Projectile Skill Data", menuName = "Scriptable Object/Skill Data/ProjectileSkill")]
 public class ProjectileSkill : Skill
 {
+    //Projectile Prefab to copy
     [SerializeField] Projectile projectilePrefab;
-
     //number of projectiile Generated
     [SerializeField] int projectileQuantity = 0;
     //Radius how to shoow projectile
     [SerializeField] float spread = 0.0f;
     //Each Projectile Speed
     [SerializeField] float projectileSpeed = 0.0f;
-    [SerializeField] Vector2 scale = Vector2.one;
+    //Projectile Size
+    [SerializeField] public Vector2 scale = Vector2.one;
 
     public override void UseSkill(Entity entity, Vector2 dir)
     {
@@ -27,25 +28,20 @@ public class ProjectileSkill : Skill
         else
             startangle = (-spread / 2.0f);
 
-        Projectile firstProjectile = Instantiate(projectilePrefab,
-            isLocal ? shooter.transform.localPosition + PositionCenter : PositionCenter
-            , Quaternion.identity);
-        firstProjectile.transform.localScale = scale;
-        firstProjectile.Init(shooter, RotateVector2(direction * projectileSpeed, startangle), skillDamage);
-        for (int count = 1; count < projectileQuantity; count++)
+        int count = 0;
+        do
         {
-            startangle += (spread / 2.0f) / (projectileQuantity / 2);
-            Projectile projectile = Instantiate(projectilePrefab,
-                isLocal ? shooter.transform.localPosition + PositionCenter : PositionCenter,
-                Quaternion.identity);
+            Projectile projectile = Instantiate(projectilePrefab, positionCenter, Quaternion.identity);
             projectile.transform.localScale = scale;
             projectile.Init(shooter, RotateVector2(direction * projectileSpeed, startangle), skillDamage);
-        }
+            startangle += (spread / 2.0f) / (projectileQuantity / 2);
+            count++;
+        } while (count < projectileQuantity);
     }
 
-    private Vector2 RotateVector2(Vector2 v, float degree)
+    private Vector2 RotateVector2(Vector2 vec, float degree)
     {
-        return Quaternion.Euler(0, 0, degree) * v ;
+        return Quaternion.Euler(0, 0, degree) * vec ;
     }
 
 

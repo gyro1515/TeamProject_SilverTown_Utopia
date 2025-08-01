@@ -12,20 +12,19 @@ public abstract class Skill : ScriptableObject
     protected float _coolTime;
     public float coolTime { get => _coolTime; }
 
-    //damage value of skill
-    [SerializeField] protected int _skillDamage;
-    public int skillDamage { get => _skillDamage; }
+    public int skillDamage;
 
     //direction to attack
     public Vector2 direction;
 
-    [SerializeField] protected bool isLocal = true;
-
-    [SerializeField] public Vector3 PositionCenter = Vector3.zero;
+    //Position where attack will be held
+    [SerializeField] public Vector3 positionCenter = Vector3.zero;
 
     public virtual void UseSkill(Entity entity, Vector2 dir)
     {
         this.shooter = entity;
-        this.direction = dir.normalized;
+        if(shooter.CompareTag("Player"))
+            positionCenter = entity.transform.position + Vector3.down * 0.5f;
+        this.direction = dir;
     }
 }

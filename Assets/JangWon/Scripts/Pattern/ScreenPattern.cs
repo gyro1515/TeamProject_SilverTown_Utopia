@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Pattern Data", menuName = "Scriptable Object/Pattern/ScreenPattern")]
 public class ScreenPattern : Pattern
 {
-    Vector2 MapPivot;
+    Vector2 mapPivot;
     [SerializeField] bool isFullX = true;
     [SerializeField] bool isFullY = true;
 
