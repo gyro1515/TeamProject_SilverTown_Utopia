@@ -783,9 +783,9 @@ GameObject:
   - component: {fileID: 1132871198}
   - component: {fileID: 1132871197}
   - component: {fileID: 1132871196}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BossWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1076,9 +1076,9 @@ GameObject:
   - component: {fileID: 1276648847}
   - component: {fileID: 1276648846}
   - component: {fileID: 1276648845}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1452,6 +1452,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2953534751814109578, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3751168330861033206, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9141937517711360191, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1473,6 +1485,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 913448771}
+    - target: {fileID: 4082295972029532856, guid: 76f19b79ffa65b54c8bdb430f52a82fe, type: 3}
+      propertyPath: bodyDamageTime
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 8219168924295596478, guid: 76f19b79ffa65b54c8bdb430f52a82fe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
