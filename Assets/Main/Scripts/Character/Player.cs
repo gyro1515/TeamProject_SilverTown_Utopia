@@ -7,9 +7,11 @@ public class Player : Entity
 {
     // Parring
     [Header("패링")]
+    [SerializeField] private const float damageDelay = 1.0f;
     [SerializeField] private const float parringDelay = 1.0f;
     [SerializeField] private const float invincibleDelay = 0.25f;
-    [SerializeField] private float parringStartTime = 0;
+    private float parringStartTime = 0;
+    private float damageStartTime = 0;
 
     // Jump
     [Header("점프")]
@@ -25,6 +27,7 @@ public class Player : Entity
         baseAttack = Instantiate(baseAttack);
 
         parringStartTime -= parringDelay;
+        damageStartTime -= damageDelay;
     }
 
     /*protected override void Start()// 사용 안한다면 마지막에 지우기
@@ -63,16 +66,20 @@ public class Player : Entity
         // 패링이 된다면 데미지를 받지 않도록
         if (Time.fixedTime - parringStartTime <= invincibleDelay)
         {
-            Debug.Log("Parring success");
+            damageStartTime = Time.fixedTime;
             return;
         }
         //점프로 공격 피하기 가능하다면, 피하기
         if (isJumping && isJumpAvoidable)
         {
-            Debug.Log("Jump Avoid");
+            return;
+        }
+        if (Time.fixedTime - damageStartTime <= damageDelay)
+        {
             return;
         }
 
+        damageStartTime = Time.fixedTime;
         base.TakeDamage(damage);
     }
     private void BaseAttack(Vector2 mousepos)

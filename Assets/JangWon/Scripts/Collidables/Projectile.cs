@@ -33,14 +33,10 @@ public class Projectile : MonoBehaviour
         projectileRigidbody.velocity = force;
         this.damage = damage;
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //if Attack Collider, skip
-        if (collision.CompareTag("Attack"))
-            return;
         //if Shooter Collider, skip
-        if (collision.CompareTag(shooter.tag))
+        if (collision.gameObject.CompareTag(shooter.tag))
             return;
         //if Entity, Attack
         if (collision.gameObject.GetComponent<Entity>() != null)

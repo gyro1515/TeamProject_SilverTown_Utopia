@@ -24,16 +24,18 @@ public class HitCollider : MonoBehaviour
     //Checker of Durations
     float start = 0.0f;
     //Duration of Warning
-    float endDuration = 0.0f;
+    float warningDuration = 0.0f;
     //Duration of attack collider enable -> Time where damage will be applied
     float attackRemain = 0.0f;
     //Warning Size Increment gap for each FixedDeltaTime
     Vector3 incremental = Vector3.zero;
     //Damage of hitCollider itself
     int damage = 0;
+    //For Sleeping rigidbody mode
+    List<Rigidbody2D> rigidbody2Ds = new List<Rigidbody2D>();
 
 
-    public void Init(Entity entity, Vector2 pos, float end, float remain, float attackAngle, int damage)
+    public void Init(Entity entity, Vector2 pos, float warningEnd, float remain, float attackAngle, int damage)
     {
         //During Warning, disable Collider
         hitCollider.enabled = false;
@@ -41,16 +43,16 @@ public class HitCollider : MonoBehaviour
         shooter = entity;
         transform.localPosition = pos;
         transform.rotation = Quaternion.Euler(xAngle, 0.0f, attackAngle);
-        endDuration = end;
+        warningDuration = warningEnd;
         attackRemain = remain;
         //Set incremental based on endDuration
-        if (endDuration != 0.0f)
+        if (warningDuration != 0.0f)
         {
             Vector3 originalScale = warningZoneSprite.transform.localScale;
             incremental = new Vector3(
-                (1 - originalScale.x) * Time.fixedDeltaTime / (endDuration),
-                (1 - originalScale.y) * Time.fixedDeltaTime / (endDuration),
-                (1 - originalScale.z) * Time.fixedDeltaTime / (endDuration)
+                (1 - originalScale.x) * Time.fixedDeltaTime / (warningDuration),
+                (1 - originalScale.y) * Time.fixedDeltaTime / (warningDuration),
+                (1 - originalScale.z) * Time.fixedDeltaTime / (warningDuration)
                 );
         }
         this.damage = damage;
@@ -61,14 +63,14 @@ public class HitCollider : MonoBehaviour
     //Show warning zone
     public IEnumerator showWarning()
     {
-        while (endDuration != 0.0f && endDuration > start)
+        while (warningDuration != 0.0f && warningDuration > start)
         {
             warningZoneSprite.transform.localScale += incremental;
             start += Time.deltaTime;
             yield return new WaitForFixedUpdate();
         }
 
-        if ((endDuration == 0.0f) || (start >= endDuration))
+        if ((warningDuration == 0.0f) || (start >= warningDuration))
         {
             warningZoneSprite.transform.localScale = Vector3.one;
             if (visualizeFloor)
@@ -94,20 +96,29 @@ public class HitCollider : MonoBehaviour
         hitCollider.enabled = true;
         Destroy(gameObject, attackRemain + 0.1f);
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        //if Attack Collider, skip
-        if (collision.gameObject.CompareTag("Attack"))
-            return;
         //if Shooter Collider, skip
         if (collision.gameObject.CompareTag(shooter.tag))
             return;
         //if Entity, Attack
         if (collision.gameObject.GetComponent<Entity>() != null)
         {
+            if (collision.gameObject.GetComponent<Rigidbody2D>().sleepMode != RigidbodySleepMode2D.NeverSleep)
+            {
+                rigidbody2Ds.Add(collision.gameObject.GetComponent<Rigidbody2D>());
+                collision.gameObject.GetComponent<Rigidbody2D>().sleepMode = RigidbodySleepMode2D.NeverSleep;
+            }
             Entity entity = collision.gameObject.GetComponent<Entity>();
-            shooter.ApplyDamage(entity, damage, isJumpAvoidable);
+            shooter.ApplyDamage(entity, damage,isJumpAvoidable);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        foreach (Rigidbody2D rigidbody in rigidbody2Ds)
+        {
+            rigidbody.sleepMode = RigidbodySleepMode2D.StartAwake;
         }
     }
 }
