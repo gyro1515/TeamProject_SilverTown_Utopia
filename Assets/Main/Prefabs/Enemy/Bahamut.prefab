@@ -9,11 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8219168924295596478}
+  - component: {fileID: 4082295972029532856}
   - component: {fileID: 3495806721669898294}
-  - component: {fileID: 7163758285074307526}
-  m_Layer: 0
+  - component: {fileID: 8796133208418934595}
+  m_Layer: 8
   m_Name: Bahamut
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,6 +35,28 @@ Transform:
   - {fileID: 7563636265846618340}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4082295972029532856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268066844789006877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f136dffcfa7a52e4f886e9968f9ee990, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHp: 0
+  MaxHp: 0
+  attackDamage: 0
+  moveSpeed: 3
+  target: {fileID: 0}
+  attackRange: 4
+  chaseRange: 10
+  dashMultiple: 3
+  bodyDamage: 1
+  bodyDamageTime: 0.1
 --- !u!50 &3495806721669898294
 Rigidbody2D:
   serializedVersion: 4
@@ -46,38 +69,56 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 192
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 55
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7163758285074307526
-MonoBehaviour:
+--- !u!70 &8796133208418934595
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 268066844789006877}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a095abee81aff64289f8d50097129ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monSpeed: 8
-  target: {fileID: 0}
-  attackRange: 3
-  chaseRange: 10
-  attackDuration: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 439
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 3.3, y: 5}
+  m_Direction: 0
 --- !u!1 &4177502656284844177
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,7 +130,7 @@ GameObject:
   - component: {fileID: 7563636265846618340}
   - component: {fileID: 6252045033765590260}
   - component: {fileID: 1012148616317476208}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MainSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -5,7 +5,7 @@ using UnityEngine;
 public class SequenceNode : INode
 {
     private List<INode> childrens;
-    // ·¯´×ÀÏ‹š ¹Ù·Î ÇØ´ç ÀÎµ¦½º·Î °¡µµ·Ï Ä³½Ã ±¸Á¶ Àû¿ë
+    // ëŸ¬ë‹ì¼ë–„ ë°”ë¡œ í•´ë‹¹ ì¸ë±ìŠ¤ë¡œ ê°€ë„ë¡ ìºì‹œ êµ¬ì¡° ì ìš©
     private int currentIndex = 0;
 
     public SequenceNode(List<INode> childs)
@@ -27,19 +27,19 @@ public class SequenceNode : INode
             switch (result)
             {
                 case INode.ENodeState.Success:
-                    currentIndex++; // ´ÙÀ½ ÀÚ½ÄÀ¸·Î
+                    currentIndex++; // ë‹¤ìŒ ìì‹ìœ¼ë¡œ
                     continue;
                 case INode.ENodeState.Running:
-                    return INode.ENodeState.Running; // ÇöÀç ÀÚ½Ä¿¡¼­ ¸ØÃã
+                    return INode.ENodeState.Running; // í˜„ì¬ ìì‹ì—ì„œ ë©ˆì¶¤
 
                 case INode.ENodeState.Failure:
-                    currentIndex = 0; // ½ÇÆĞ ½Ã ¸®¼Â
+                    currentIndex = 0; // ì‹¤íŒ¨ ì‹œ ë¦¬ì…‹
                     return INode.ENodeState.Failure;
             }
         }
 
-        // ¸ğµç ÀÚ½Ä ¼º°ø ¡æ ½ÃÄö½º ¼º°ø
-        currentIndex = 0; // Á¾·á ÈÄ ¸®¼Â
+        // ëª¨ë“  ìì‹ ì„±ê³µ â†’ ì‹œí€€ìŠ¤ ì„±ê³µ
+        currentIndex = 0; // ì¢…ë£Œ í›„ ë¦¬ì…‹
         return INode.ENodeState.Success;
     }
 

@@ -1,11 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static TestBoss;
 
 public class TestBoss : MonoBehaviour
 {
+    public enum EBossState
+    {
+        Active, Deactivate, PowerOff
+    }
+    EBossState eBossState = EBossState.Deactivate;
+    public EBossState BossState { set { eBossState = value; } get { return eBossState; } }
     Rigidbody2D _rig2d;
     Vector2 moveDir = Vector2.zero;
+    Vector2 MoveDir { set { moveDir = value; } }
     public float monSpeed = 8.0f;
     float speed = 8.0f;
 
@@ -18,18 +26,26 @@ public class TestBoss : MonoBehaviour
     float attackTimer = 0f;
     public float attackDuration = 1.0f; // 공격 모션 시간
 
+    // 보스가 속해 있는 방 정보, 테스트로 퍼블릭
+    public RectInt bossRoom;
+
     private void Awake()
     {
-        root = SetBehaviorTree();
+        //root = SetBehaviorTree();
+        root = SetBehaviorTree2();
         _rig2d = GetComponent<Rigidbody2D>();
         speed = monSpeed;
     }
     private void Update()
     {
+        if (eBossState == EBossState.PowerOff) return; // 비활성화시 트리 실행 x
+        Debug.Log("Update");
         root.Evaluate(); // 트리 검사
     }
     private void FixedUpdate()
     {
+        if (eBossState == EBossState.PowerOff) return; // 비활성화시 트리 실행 x
+        Debug.Log("FixedUpdate");
         _rig2d.velocity = moveDir * speed;
 
     }
@@ -52,6 +68,19 @@ public class TestBoss : MonoBehaviour
         // 예시: 1 -> 2 -> 3 성공 -> 4 성공 -> 2 성공 -> Selector는 첫 번째 자식이 Success였으므로 트리 전체는 Success로 종료
         //       1 -> 2 -> 3 성공 -> 4 러닝 -> 2 러닝 -> Selector도 Running 상태로 종료 (다음 프레임에서 이어서 평가)
         //       1 -> 2 -> 3 실패 -> 5 성공 -> Selector는 두 번째 자식(chase)이 성공했으므로 트리 전체는 Success로 종료
+
+        return selector;
+    }
+    INode SetBehaviorTree2()
+    {
+        ActionNode isActive = new ActionNode(IsActive); // 액션 노드는 함수 바인딩
+        ActionNode moveToCenter = new ActionNode(MoveToCenter);
+        ActionNode canAttack = new ActionNode(CanAttack); // 액션 노드는 함수 바인딩
+        ActionNode attack = new ActionNode(Attack); // 액션 노드는 함수 바인딩
+        ActionNode chase = new ActionNode(Chase);
+        SequenceNode attackSequence = new SequenceNode(new List<INode>() { canAttack, attack });
+        SequenceNode activeSequence = new SequenceNode(new List<INode>() { isActive, moveToCenter });
+        SelectorNode selector = new SelectorNode(new List<INode>() { activeSequence, attackSequence, chase }); // 루트에 해당
 
         return selector;
     }
@@ -89,8 +118,10 @@ public class TestBoss : MonoBehaviour
             //Debug.Log("ChaseFailure");
             moveDir = Vector2.zero;
             speed = monSpeed;
-            //return INode.ENodeState.Failure;
-            return INode.ENodeState.Running; // 범위 밖이라고 판단되면 계속 Chase()부분만 실행가는 하도록
+            return INode.ENodeState.Failure; // 이 다음에 행동 노드가 있다면 다른 걸 해야할 수도 있다. 지금은 상관 없다.
+
+            // SetBehaviorTree()에서는 러닝으로 해도 됨
+            //return INode.ENodeState.Running; // 범위 밖이라고 판단되면 계속 Chase()부분만 실행가는 하도록
             // 쫓아가기 범위 밖이면 애초에 공격 범위 생각할 필요 없음
         }
 
@@ -136,6 +167,43 @@ public class TestBoss : MonoBehaviour
         // 공격 종료
         //Debug.Log("공격 종료");
         isAttacking = false;
+        return INode.ENodeState.Success;
+    }
+    INode.ENodeState IsActive()
+    {
+        if (BossState == EBossState.Deactivate)
+        {
+            return INode.ENodeState.Success;
+        }
+        else // if (BossState == EBossState.Active)
+        {
+            return INode.ENodeState.Failure;
+        }
+
+    }
+    INode.ENodeState MoveToCenter()
+    {
+        //Debug.Log("MoveToCenter");
+        moveDir = Vector2.zero;
+        speed = monSpeed;
+        if ((Vector2)transform.position != bossRoom.center)
+        {
+            // 아직 가운데에 도달 안했다면 러닝
+            Vector2 tmpDir = bossRoom.center - (Vector2)transform.position;
+            // 일정 거리 안이라면 그냥 가운데로 가게끔
+            if(tmpDir.magnitude > 0.1f)
+            {
+                transform.position += (Vector3)(tmpDir.normalized * speed * Time.deltaTime);
+            }
+            else
+            {
+                transform.position = bossRoom.center;
+            }
+            //return INode.ENodeState.Running; // 러닝으로 하면 돌아가는 도중 맵 입장시 보스 활성화 안됨
+            return INode.ENodeState.Success;
+        }
+        //Debug.Log("MoveToCenterSuccess");
+        eBossState = EBossState.PowerOff;
         return INode.ENodeState.Success;
     }
 }

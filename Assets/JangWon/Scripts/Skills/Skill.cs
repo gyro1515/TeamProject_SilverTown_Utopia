@@ -1,0 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+public abstract class Skill : ScriptableObject
+{
+    //Entity who cast skill
+    public Entity shooter;
+
+    //Delay of the skill itself
+    protected float _coolTime;
+    public float coolTime { get => _coolTime; }
+
+    public int skillDamage;
+
+    //direction to attack
+    public Vector2 direction;
+
+    //Position where attack will be held
+    [SerializeField] public Vector3 positionCenter = Vector3.zero;
+
+    public virtual void UseSkill(Entity entity, Vector2 dir)
+    {
+        this.shooter = entity;
+        if(shooter.CompareTag("Player"))
+            positionCenter = entity.transform.position + Vector3.down * 0.5f;
+        this.direction = dir;
+    }
+}
