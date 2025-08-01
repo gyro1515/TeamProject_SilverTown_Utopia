@@ -5,6 +5,12 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Bahamut : Enemy
 {
+    protected override void SetHp()
+    {
+        currentHp = MaxHp;
+    }
+
+
     protected override void Awake()
     {
         base.Awake();

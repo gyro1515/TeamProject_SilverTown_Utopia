@@ -7,7 +7,7 @@ public abstract class Entity : MonoBehaviour
     [Header("캐릭터 능력치")]
     [SerializeField] protected int currentHp;
     [SerializeField] protected int MaxHp;
-    [SerializeField] protected int attackDamage;
+    [SerializeField] public int attackDamage { get; protected set; }
     [SerializeField] float moveSpeed = 5f;
 
     public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
@@ -29,7 +29,7 @@ public abstract class Entity : MonoBehaviour
     }
     protected virtual void Start() // 사용 안한다면 마지막에 지우기
     {
-        currentHp = MaxHp;
+        SetHp();
     }
     protected virtual void Update()
     {
@@ -77,6 +77,11 @@ public abstract class Entity : MonoBehaviour
     protected virtual void OnDead()
     {
         isDead = true;
+    }
+
+    protected virtual void SetHp()
+    {
+        currentHp = MaxHp;
     }
 
 }
