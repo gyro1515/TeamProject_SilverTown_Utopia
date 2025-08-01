@@ -6,19 +6,19 @@ using UnityEngine;
 public class SkillEntry : Entity
 {
     PatternActor patternActor;
-    public PlayerController player;
+    public Player player;
     public bool isPatternEnd = true;
 
-    private void Start()
+    protected override void Start()
     {
         patternActor = GetComponent<PatternActor>();
     }
 
 
     //Temporary shooting test
-    private void Update()
+    protected override void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isPatternEnd)
+        if (Input.GetKeyDown(KeyCode.Q) && isPatternEnd)
         {
             isPatternEnd = false;
             StartCoroutine(patternActor.ActivePattern());

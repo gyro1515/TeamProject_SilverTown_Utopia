@@ -20,6 +20,7 @@ public class RangedSkill : Skill
     [SerializeField] public bool isFixedRotation = true;
     //HitCollider Size
     [SerializeField] public Vector2 size = Vector2.one;
+    
 
     public override void UseSkill(Entity entity, Vector2 dir)
     {

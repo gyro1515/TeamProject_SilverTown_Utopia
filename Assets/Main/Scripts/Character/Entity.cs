@@ -40,14 +40,14 @@ public abstract class Entity : MonoBehaviour
         Move();
     }
 
-    protected virtual void TakeDamage(int damage) 
+    protected virtual void TakeDamage(int damage, bool isJumpAvoidable = false) 
     {
         Debug.Log("Entity " + this.gameObject.name + " Took " +damage.ToString() + "Damage");
     }
 
-    public void ApplyDamage(Entity e, int damage = 0) 
+    public void ApplyDamage(Entity e, int damage = 0, bool isJumpAvoidable = false) 
     {
-        e.TakeDamage(damage);
+        e.TakeDamage(damage, isJumpAvoidable);
     }
 
     protected void Move()
