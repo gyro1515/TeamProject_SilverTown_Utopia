@@ -32,4 +32,11 @@ public class RangedSkill : Skill
             isFixedRotation ? attackAngle : Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + attackAngle,
             skillDamage);
     }
+
+    public void UpgradeSize(float sizescale)
+    {
+        if (sizescale < 0)
+            return;
+        size = size * sizescale;
+    }
 }

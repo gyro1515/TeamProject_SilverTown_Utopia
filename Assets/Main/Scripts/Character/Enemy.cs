@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Enemy : Entity
 {
     [Header("보스 세팅")]
-    [SerializeField] protected GameObject target;
+    [SerializeField] protected Player target;
     [SerializeField] protected float attackRange = 3.0f;
     [SerializeField] protected float chaseRange = 10.0f;
     protected float baseSpeed; // 몬스터는 이동속도가 변하기 때문에, 베이스 이동속도 따로 추가
@@ -26,6 +26,7 @@ public abstract class Enemy : Entity
         baseSpeed = MoveSpeed; // 처음 인스펙터 창에서 세팅한 값으로 설정, 속도 변환에 사용
         myRoom = new BossRoom();
     }
+
     protected override void Update()
     {
         if (BossState == EBossState.PowerOff) return; // 비활성화시 트리 실행 x
@@ -34,10 +35,17 @@ public abstract class Enemy : Entity
         // 트리 검사하고 이동 확정된 다음 부모 실행
         base.Update();
     }
-    protected virtual void Init(GameObject _target)
+    protected virtual void Init(Player _target)
     {
         target = _target;
     }
     protected abstract void SetDirection();
     protected abstract INode SetBehaviorTree();
+
+    protected override void SetHp()
+    {
+        //float hpScale = 1.0f + (target.killCount * 0.1f);
+        //MaxHp = (int)(MaxHp * hpScale);
+        base.SetHp();
+    }
 }

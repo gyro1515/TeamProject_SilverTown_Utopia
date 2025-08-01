@@ -7,7 +7,7 @@ public abstract class Entity : MonoBehaviour
     [Header("캐릭터 능력치")]
     [SerializeField] protected int currentHp;
     [SerializeField] protected int MaxHp;
-    [SerializeField] protected int attackDamage;
+    [SerializeField] public int attackDamage { get; protected set; }
     [SerializeField] float moveSpeed = 5f;
 
     public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
@@ -29,7 +29,7 @@ public abstract class Entity : MonoBehaviour
     }
     protected virtual void Start() // 사용 안한다면 마지막에 지우기
     {
-
+        SetHp();
     }
     protected virtual void Update()
     {
@@ -43,6 +43,12 @@ public abstract class Entity : MonoBehaviour
     protected virtual void TakeDamage(int damage, bool isJumpAvoidable = false) 
     {
         Debug.Log("Entity " + this.gameObject.name + " Took " +damage.ToString() + "Damage");
+        currentHp -= damage;
+        Mathf.Clamp(currentHp, 0, MaxHp);
+        if (currentHp == 0)
+        {
+            Invoke("OnDead", 0);
+        }
     }
 
     public void ApplyDamage(Entity e, int damage = 0, bool isJumpAvoidable = false) 
@@ -67,4 +73,15 @@ public abstract class Entity : MonoBehaviour
             animator.SetFloat("YInput", direction.y);
         }
     }
+
+    protected virtual void OnDead()
+    {
+        isDead = true;
+    }
+
+    protected virtual void SetHp()
+    {
+        currentHp = MaxHp;
+    }
+
 }
