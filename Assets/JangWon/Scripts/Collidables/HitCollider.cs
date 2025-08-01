@@ -84,7 +84,7 @@ public class HitCollider : MonoBehaviour
                 outlineSprite.color = new Color(255, 255, 255, 0);
             }
 
-            SkillEntry enemy = shooter.GetComponent<SkillEntry>();
+            Enemy enemy = shooter.GetComponent<Enemy>();
             //Enable Collider and Start applying damage
             ApplyDamage();
             

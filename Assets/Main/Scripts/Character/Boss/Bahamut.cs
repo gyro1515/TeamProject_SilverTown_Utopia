@@ -243,12 +243,18 @@ public class Bahamut : Enemy
     INode.ENodeState Attack1()
     {
         // 여기서 스킬(패턴) 사용!
+        if (this.actor.patternList.Count <= 0 || this.actor.patternList[0] == null)
+        {
+            Debug.Log("스킬 패턴1이 없습니다.");
+            return INode.ENodeState.Failure;
+        }
         // 스킬 쿨타임 여부
         bool canUseSkill = UnityEngine.Random.Range(0, 2) == 0 ? true : false;
         if (canUseSkill) // 쿨타임이 다 돌았다면
         {
             Debug.Log("스킬 패턴1 사용!!");
             this.isPatternEnd = false;
+            actor.StartCoroutine(actor.ActivePattern(0));
             return INode.ENodeState.Success;
         }
         else
@@ -274,12 +280,19 @@ public class Bahamut : Enemy
     INode.ENodeState Attack2()
     {
         // 여기서 스킬(패턴) 사용!
+        if (this.actor.patternList.Count <= 1 || this.actor.patternList[1] == null)
+        {
+            Debug.Log("스킬 패턴2이 없습니다.");
+            return INode.ENodeState.Failure;
+        }
+        // 여기서 스킬(패턴) 사용!
         // 스킬 쿨타임 여부
         bool canUseSkill = UnityEngine.Random.Range(0, 2) == 0 ? true : false;
         if (canUseSkill) // 쿨타임이 다 돌았다면
         {
             Debug.Log("스킬 패턴2 사용!!");
             this.isPatternEnd = false;
+            actor.StartCoroutine(actor.ActivePattern(1));
             return INode.ENodeState.Success;
         }
         else
@@ -290,12 +303,20 @@ public class Bahamut : Enemy
     }
     INode.ENodeState Attack3()
     {
+
+        // 여기서 스킬(패턴) 사용!
+        if (this.actor.patternList.Count <= 2 || this.actor.patternList[2] == null)
+        {
+            Debug.Log("스킬 패턴3이 없습니다.");
+            return INode.ENodeState.Failure;
+        }
         // 스킬 쿨타임 여부
         bool canUseSkill = UnityEngine.Random.Range(0, 2) == 0 ? true : false;
         if (canUseSkill) // 쿨타임이 다 돌았다면
         {
             Debug.Log("스킬 패턴3 사용!!");
             this.isPatternEnd = false;
+            actor.StartCoroutine(actor.ActivePattern(2));
             return INode.ENodeState.Success;
         }
         else
@@ -306,12 +327,20 @@ public class Bahamut : Enemy
     }
     INode.ENodeState Attack4()
     {
+
+        // 여기서 스킬(패턴) 사용!
+        if (this.actor.patternList.Count <= 3 || this.actor.patternList [3] == null)
+        {
+            Debug.Log("스킬 패턴4이 없습니다.");
+            return INode.ENodeState.Failure;
+        }
         // 스킬 쿨타임 여부
         bool canUseSkill = UnityEngine.Random.Range(0, 2) == 0 ? true : false;
         if (canUseSkill) // 쿨타임이 다 돌았다면
         {
             Debug.Log("스킬 패턴4 사용!!");
             this.isPatternEnd = false;
+            actor.StartCoroutine(actor.ActivePattern(3));
             return INode.ENodeState.Success;
         }
         else

@@ -10,7 +10,7 @@ public class ChargeWarning : MonoBehaviour
     //Sprite of OutLine
     [SerializeField] SpriteRenderer outlineSprite;
     //Entity who use this skill
-    [SerializeField] SkillEntry shooter;
+    [SerializeField] Enemy shooter;
     //Starting position of charge (usually entity position)
     [SerializeField] Vector2 startPos;
     //Ending position of charge (usually current player position at active)
@@ -36,7 +36,7 @@ public class ChargeWarning : MonoBehaviour
         //Set Flag to prevent multiple charging
         ChargeSkill.isChargning = true;
         //Initial setup
-        shooter = entity as SkillEntry;
+        shooter = entity as Enemy;
         startPos = shooter.transform.position;
         endPos = targetPos;
 
