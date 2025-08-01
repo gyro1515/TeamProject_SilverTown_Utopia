@@ -30,6 +30,8 @@ public class MapGenerater : MonoBehaviour
     [SerializeField] Tilemap roadTriger;
     [SerializeField] TileBase floorTile;
     [SerializeField] TileBase wallTile;
+    [SerializeField] TileBase bossWallTile; // 적과 보스 타일 구분용
+    [SerializeField] TileBase enemyWallTile; // 적과 보스 타일 구분용
 
     [Header("Character Setting")]
     [SerializeField] GameObject player;
@@ -403,7 +405,7 @@ public class MapGenerater : MonoBehaviour
         boss.GetComponent<Enemy>().MyRoom.Room = finalRooms[bossRoomIdx];
         boss.GetComponent<Enemy>().MyRoom.RoomIdx = bossRoomIdx;
         // 보스 방 입구 벽으로 막기
-        SetBossRoom(finalRooms[bossRoomIdx]);
+        SetBossRoom(finalRooms[bossRoomIdx], bossWallTile);
 
         // 테스트로 캐릭터 옆으로 이동
         //boss.transform.position = player.transform.position + (Vector3)(Vector2.right * 3);
@@ -445,6 +447,7 @@ public class MapGenerater : MonoBehaviour
                 if (testBoss?.MyRoom.Room.center == room.center) // 보스방이라면 보스 활성화
                 {
                     testBoss.BossState = Enemy.EBossState.Active;
+                    CloseBossRoom();
                 }
                 return room;
             }
@@ -453,7 +456,7 @@ public class MapGenerater : MonoBehaviour
         // 그럴리는 없겠지만 방을 못찾았다면 멀리 있는 값 리턴
         return new RectInt(666, 666, 0, 0);
     }
-    void SetBossRoom(RectInt bossRoom)
+    void SetBossRoom(RectInt bossRoom, TileBase wallTile)
     {
         if (bossWallMap == null) return;
 
@@ -469,12 +472,16 @@ public class MapGenerater : MonoBehaviour
             bossWallMap.SetTile(new Vector3Int(bossRoom.max.x, j, 0), wallTile);
 
         }
-
     }
-    
+
+    // 통합해서 SetBossRoomDoor(bool active) 로??
     void OpenBossRoom()
     {
         bossWallMap.gameObject.SetActive(false);
+    }
+    void CloseBossRoom()
+    {
+        bossWallMap.gameObject.SetActive(true);
     }
     public void SetBossDeActive()
     {

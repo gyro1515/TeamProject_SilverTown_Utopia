@@ -838,7 +838,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -1040,6 +1040,8 @@ MonoBehaviour:
   roadTriger: {fileID: 1003597177}
   floorTile: {fileID: 11400000, guid: b87b591115c398a47a241cc111a78b86, type: 2}
   wallTile: {fileID: 11400000, guid: c6e133240594cc44fbf14553e96dd8d8, type: 2}
+  bossWallTile: {fileID: 11400000, guid: 95987a0a0ad4247439d3e75d908af423, type: 2}
+  enemyWallTile: {fileID: 11400000, guid: b0392f003a4f1164c97863d7302bfbaa, type: 2}
   player: {fileID: 913448771}
   boss: {fileID: 1591525815}
   time: 3

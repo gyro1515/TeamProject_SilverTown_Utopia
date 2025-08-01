@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.EventSystems;
@@ -18,6 +19,7 @@ public class Bahamut : Enemy
     protected CapsuleCollider2D trigerCol; // 몸박용 트리거 콜라이더 설정
 
     private LayerMask wallLayer; // 벽 감지용
+    private float rayDist = -1f; // 벽 감지 레이캐스트용 거리
     // 대시용 bool 변수
     bool bIsDash = false;
     protected override void Awake()
@@ -45,6 +47,11 @@ public class Bahamut : Enemy
 
         // 레이캐스트 벽 감지용
         wallLayer = LayerMask.GetMask("Wall");
+        // 콜라이더 크기에 따른 레이캐스트 거리 구하기
+        float halfWidth = bodyCol.size.x / 2f;
+        float halfHeight = bodyCol.size.y / 2f;
+        rayDist = Mathf.Sqrt(halfWidth * halfWidth + halfHeight * halfHeight);
+        rayDist = Mathf.Ceil(rayDist); // 소수점 올림하여 거리 넉넉하게 잡기
     }
     protected override void Update()
     {
@@ -60,22 +67,22 @@ public class Bahamut : Enemy
 
         // 벽에 부딪혔을 때 법선 구하기
         //Vector2 wallNormal = collision.contacts[0].normal;
-
-        // 위 방식으로 구하면 겹칠때 에러 발생
+        // 위 방식으로 구하면 위아래로 겹칠때 에러 발생
+        
         // 레이캐스트로 벽 탐지
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, moveDirection, 3.0f, wallLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, moveDirection, rayDist, wallLayer); // 캡슐 크기에 따라 레이캐스트 거리 달라져야함
         Vector2 wallNormal = hit.normal;
 
         // 만약 법선과 moveDirection의 방향이 180도에 가깝다면 대시 중지
         float angle = Vector2.Angle(wallNormal, moveDirection);
         if (angle > 170f)
         {
-            Debug.Log($" 멈춤 각도: {angle}, 법선 백터: {wallNormal}");
+            Debug.Log($" 멈춤 각도: {angle}, 법선 백터: {wallNormal}, 레이 거리: {rayDist}");
 
             prePlayerPos = transform.position;
             return;
         }
-        else Debug.Log($" 진행 각도: {angle}, 법선 백터: {wallNormal}");
+        else Debug.Log($" 진행 각도: {angle}, 법선 백터: {wallNormal}, 레이 거리: {rayDist}");
 
         // 기존 대시 벡터에서 수직 성분 제거 → 벽을 따라 미끄러지는 방향 계산
         Vector2 slideDirection = moveDirection - Vector2.Dot(moveDirection, wallNormal) * wallNormal;
@@ -227,7 +234,7 @@ public class Bahamut : Enemy
     {
         // 여기서 스킬(패턴) 사용!
         // 스킬 쿨타임 여부
-        bool canUseSkill = Random.Range(0, 2) == 0 ? true : false;
+        bool canUseSkill = UnityEngine.Random.Range(0, 2) == 0 ? true : false;
         if (canUseSkill) // 쿨타임이 다 돌았다면
         {
             Debug.Log("스킬 패턴1 사용!!");
@@ -257,7 +264,7 @@ public class Bahamut : Enemy
     {
         // 여기서 스킬(패턴) 사용!
         // 스킬 쿨타임 여부
-        bool canUseSkill = Random.Range(0, 2) == 0 ? true : false;
+        bool canUseSkill = UnityEngine.Random.Range(0, 2) == 0 ? true : false;
         if (canUseSkill) // 쿨타임이 다 돌았다면
         {
             Debug.Log("스킬 패턴2 사용!!");
@@ -272,7 +279,7 @@ public class Bahamut : Enemy
     INode.ENodeState Attack3()
     {
         // 스킬 쿨타임 여부
-        bool canUseSkill = Random.Range(0, 2) == 0 ? true : false;
+        bool canUseSkill = UnityEngine.Random.Range(0, 2) == 0 ? true : false;
         if (canUseSkill) // 쿨타임이 다 돌았다면
         {
             Debug.Log("스킬 패턴3 사용!!");
@@ -287,7 +294,7 @@ public class Bahamut : Enemy
     INode.ENodeState Attack4()
     {
         // 스킬 쿨타임 여부
-        bool canUseSkill = Random.Range(0, 2) == 0 ? true : false;
+        bool canUseSkill = UnityEngine.Random.Range(0, 2) == 0 ? true : false;
         if (canUseSkill) // 쿨타임이 다 돌았다면
         {
             Debug.Log("스킬 패턴4 사용!!");
