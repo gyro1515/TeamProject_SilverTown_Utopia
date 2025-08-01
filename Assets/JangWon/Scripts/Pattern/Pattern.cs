@@ -24,7 +24,7 @@ public class Pattern : ScriptableObject
         None //Don't do any operation, Used in EndSkill Or Speciallized override
     }
     //Shooter enemy
-    [SerializeField] public SkillEntry enemy;
+    [SerializeField] public Enemy enemy;
     //Array of Squential skills
     [SerializeField] public Skill[] skills;
     //Array of each skills active time
@@ -102,27 +102,27 @@ public class Pattern : ScriptableObject
             case PositionState.WorldRandom:
                 skills[i].positionCenter = randompos; break;
             case PositionState.PlayerOrigin:
-                skills[i].positionCenter = enemy.player.transform.position; break;
+                skills[i].positionCenter = enemy.target.transform.position; break;
             case PositionState.PlayerFixed:
-                skills[i].positionCenter = (Vector2)enemy.player.transform.position + positions[i]; break;
+                skills[i].positionCenter = (Vector2)enemy.target.transform.position + positions[i]; break;
             case PositionState.PlayerRandom:
-                skills[i].positionCenter = (Vector2)enemy.player.transform.position + randompos; break;
+                skills[i].positionCenter = (Vector2)enemy.target.transform.position + randompos; break;
             case PositionState.EntityOrigin:
                 skills[i].positionCenter = (Vector2)enemy.transform.position; break;
             case PositionState.EntityFixed:
                 skills[i].positionCenter = (Vector2)enemy.transform.position + positions[i]; break;
             case PositionState.EntityRandom:
-                skills[i].positionCenter = (Vector2)enemy.player.transform.position + randompos; break;
+                skills[i].positionCenter = (Vector2)enemy.target.transform.position + randompos; break;
             case PositionState.EntityToPlayerScale:
-                Vector2 midPoint = Vector2.Lerp(enemy.transform.position, enemy.player.transform.position, entityToPlayerScale);
+                Vector2 midPoint = Vector2.Lerp(enemy.transform.position, enemy.target.transform.position, entityToPlayerScale);
                 skills[i].positionCenter = midPoint; break;
             case PositionState.FixPlayerX:
                 if (i == 0)
-                    fixedX = enemy.player.transform.position.x;
+                    fixedX = enemy.target.transform.position.x;
                 skills[i].positionCenter = new Vector2(fixedX, 0) + positions[i]; break;
             case PositionState.FixPlayerY:
                 if (i == 0)
-                    fixedY = enemy.player.transform.position.y;
+                    fixedY = enemy.target.transform.position.y;
                 skills[i].positionCenter = new Vector2(0, fixedY) + positions[i]; break;
             case PositionState.TakePreviousPosOffset:
                 if (i < previousPosIndex)

@@ -5,12 +5,13 @@ using UnityEngine;
 public abstract class Enemy : Entity
 {
     [Header("보스 세팅")]
-    [SerializeField] protected Player target;
+    [SerializeField] public Player target;
     [SerializeField] protected float attackRange = 3.0f;
     [SerializeField] protected float chaseRange = 10.0f;
     [SerializeField] protected float bodyDamage = 1.0f; // 몸박 데미지
     [SerializeField] protected float bodyDamageTime = 0.1f; // 몸박 데미지 간격
     [SerializeField] protected float dashMultiple = 3.0f; // 대시 스피드 배율(플레이어 * dashMultiple = 대시 스피드)
+    [SerializeField] protected PatternActor actor;
     protected float baseSpeed; // 몬스터는 이동속도가 변하기 때문에, 베이스 이동속도 따로 추가
     public enum EBossState // 보스 방 진입시 활성화, 탈출 시 비활성화(맵 중앙으로 돌아가기), 중앙으로 돌아가면 작동 안하도록(업데이트x)
     {
@@ -36,6 +37,8 @@ public abstract class Enemy : Entity
 
     // 대시용 bool 변수
     protected bool bIsDash = false;
+    public bool isPatternEnd = true;
+
     protected override void Awake()
     {
         base.Awake();
@@ -68,6 +71,12 @@ public abstract class Enemy : Entity
         rayDist = Mathf.Sqrt(halfWidth * halfWidth + halfHeight * halfHeight);
         rayDist = Mathf.Ceil(rayDist); // 소수점 올림하여 거리 넉넉하게 잡기
 
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        actor = Instantiate(actor, this.transform);
     }
 
     protected override void Update()

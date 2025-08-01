@@ -20,6 +20,8 @@ public class Player : Entity
 
     //Attack
     [SerializeField] Skill baseAttack = null;
+    [SerializeField] private const float attackDelay = 1.0f;
+    private float attackTime = 0.0f;
 
     // 방향용 Cam
     Camera cam;
@@ -33,6 +35,7 @@ public class Player : Entity
 
         parringStartTime -= parringDelay;
         damageStartTime -= damageDelay;
+        attackTime -= attackDelay;
         cam = Camera.main;
     }
 
@@ -91,7 +94,6 @@ public class Player : Entity
     }
     private void BaseAttack(Vector2 mousepos)
     {
-        
         if (baseAttack == null)
         {
             Debug.Log("Player BaseAttack is null");
@@ -116,8 +118,6 @@ public class Player : Entity
         lookDirection = (worldPos - (Vector2)transform.position);
         lookDirection = lookDirection.normalized;
         length = (worldPos - (Vector2)transform.position).magnitude;
-
-
     }
     void OnJump(InputValue inputValue)
     {
@@ -144,10 +144,17 @@ public class Player : Entity
         // inputValue.isPressed를 안하면 키 다운, 키 업 두 번 호출 됨
 
         // 현재 좌클릭
-        if (!inputValue.isPressed) return;
+
         // 3초 지속
         Debug.DrawLine(transform.position, transform.position + (Vector3)lookDirection * length, Color.blue, 3.0f);
-        Debug.Log($"Right기준 각도 : {Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg}");
+    }
+
+    void OnBaseAttack(InputValue inputValue)
+    {
+        if (!inputValue.isPressed) return;
+        if (Time.fixedTime - attackTime < attackDelay)
+            return;
+        baseAttack.UseSkill(this, lookDirection);
     }
 
 

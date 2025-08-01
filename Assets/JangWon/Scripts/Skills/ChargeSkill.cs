@@ -19,12 +19,12 @@ public class ChargeSkill : Skill
         if (isChargning)
             return;
         //Set and Active Charge
-        SkillEntry enemy = entity as SkillEntry;
+        Enemy enemy = entity as Enemy;
         base.UseSkill(entity, dir);
         _coolTime = warningDuration + chargeDuration;
         ChargeWarning warning = Instantiate(warningPrefab);
         warning.transform.localPosition = positionCenter;
-        warning.Init(entity, enemy.player.transform.position, warningDuration, chargeDuration, skillDamage);
+        warning.Init(entity, enemy.target.transform.position, warningDuration, chargeDuration, skillDamage);
     }
 
 }
