@@ -23,6 +23,8 @@ public abstract class Skill : ScriptableObject
     public virtual void UseSkill(Entity entity, Vector2 dir)
     {
         this.shooter = entity;
+        if(shooter.CompareTag("Player"))
+            positionCenter = entity.transform.position + Vector3.down * 0.5f;
         this.direction = dir;
     }
 }

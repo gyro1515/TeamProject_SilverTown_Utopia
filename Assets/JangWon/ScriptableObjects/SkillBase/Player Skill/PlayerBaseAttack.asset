@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: PlayerBaseAttack
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
-  _skillDamage: 5
+  skillDamage: 5
   direction: {x: 0, y: 0}
-  PositionCenter: {x: 0, y: -0.5, z: 0}
+  positionCenter: {x: 0, y: 0, z: 0}
   colliderPrefab: {fileID: 3617344549384259999, guid: 1f591c1b6b784174a975c7fa791c2e3d, type: 3}
-  collider: {fileID: 0}
+  hitCollider: {fileID: 0}
   warningDuration: 0.1
   attackRemain: 0
   attackAngle: -135
