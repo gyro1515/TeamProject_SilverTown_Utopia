@@ -20,6 +20,10 @@ public class Player : Entity
     //Attack
     [SerializeField] Skill baseAttack = null;
 
+    // 방향용 Cam
+    Camera cam;
+    Vector2 lookDirection;
+    float length = 0f;
     protected override void Awake()
     {
         base.Awake();
@@ -28,6 +32,7 @@ public class Player : Entity
 
         parringStartTime -= parringDelay;
         damageStartTime -= damageDelay;
+        cam = Camera.main;
     }
 
     /*protected override void Start()// 사용 안한다면 마지막에 지우기
@@ -46,6 +51,7 @@ public class Player : Entity
         // 방향을 정하고 애니메이션이 실행되도록
         base.Update();
 
+        
     }
 
     /*protected override void FixedUpdate()
@@ -84,6 +90,7 @@ public class Player : Entity
     }
     private void BaseAttack(Vector2 mousepos)
     {
+        
         if (baseAttack == null)
         {
             Debug.Log("Player BaseAttack is null");
@@ -100,6 +107,16 @@ public class Player : Entity
     {
         moveDirection = inputValue.Get<Vector2>();
         moveDirection = moveDirection.normalized; // 아마 자동 노멀라이즈
+    }
+    void OnLook(InputValue inputValue)
+    {
+        Vector2 mousePosition = inputValue.Get<Vector2>();
+        Vector2 worldPos = cam.ScreenToWorldPoint(mousePosition);
+        lookDirection = (worldPos - (Vector2)transform.position);
+        lookDirection = lookDirection.normalized;
+        length = (worldPos - (Vector2)transform.position).magnitude;
+
+
     }
     void OnJump(InputValue inputValue)
     {
@@ -124,8 +141,12 @@ public class Player : Entity
     void OnSkill1(InputValue inputValue)
     {
         // inputValue.isPressed를 안하면 키 다운, 키 업 두 번 호출 됨
-        if (!inputValue.isPressed) return;
 
+        // 현재 좌클릭
+        if (!inputValue.isPressed) return;
+        // 3초 지속
+        Debug.DrawLine(transform.position, transform.position + (Vector3)lookDirection * length, Color.blue, 3.0f);
+        Debug.Log($"Right기준 각도 : {Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg}");
     }
 
 

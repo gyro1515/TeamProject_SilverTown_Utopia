@@ -783,9 +783,9 @@ GameObject:
   - component: {fileID: 1132871198}
   - component: {fileID: 1132871197}
   - component: {fileID: 1132871196}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BossWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -838,7 +838,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -1040,6 +1040,8 @@ MonoBehaviour:
   roadTriger: {fileID: 1003597177}
   floorTile: {fileID: 11400000, guid: b87b591115c398a47a241cc111a78b86, type: 2}
   wallTile: {fileID: 11400000, guid: c6e133240594cc44fbf14553e96dd8d8, type: 2}
+  bossWallTile: {fileID: 11400000, guid: 95987a0a0ad4247439d3e75d908af423, type: 2}
+  enemyWallTile: {fileID: 11400000, guid: b0392f003a4f1164c97863d7302bfbaa, type: 2}
   player: {fileID: 913448771}
   boss: {fileID: 1591525815}
   time: 3
@@ -1076,9 +1078,9 @@ GameObject:
   - component: {fileID: 1276648847}
   - component: {fileID: 1276648846}
   - component: {fileID: 1276648845}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1451,6 +1453,18 @@ PrefabInstance:
     - target: {fileID: 2953534751814109578, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2953534751814109578, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3751168330861033206, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9141937517711360191, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
