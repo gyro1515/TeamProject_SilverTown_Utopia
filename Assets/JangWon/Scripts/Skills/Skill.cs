@@ -12,15 +12,13 @@ public abstract class Skill : ScriptableObject
     protected float _coolTime;
     public float coolTime { get => _coolTime; }
 
-    //damage value of skill
-    [SerializeField] protected int _skillDamage;
-    public int skillDamage { get => _skillDamage; }
+    public int skillDamage;
 
     //direction to attack
     public Vector2 direction;
 
     //Position where attack will be held
-    [SerializeField] public Vector3 PositionCenter = Vector3.zero;
+    [SerializeField] public Vector3 positionCenter = Vector3.zero;
 
     public virtual void UseSkill(Entity entity, Vector2 dir)
     {

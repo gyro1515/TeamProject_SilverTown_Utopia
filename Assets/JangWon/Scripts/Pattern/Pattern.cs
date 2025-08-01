@@ -19,6 +19,8 @@ public class Pattern : ScriptableObject
         EntityToPlayerScale,
         FixPlayerX,
         FixPlayerY,
+        TakePreviousPosOffset,
+        TakePreviousPosFixed,
         None
     }
     [SerializeField] public SkillEntry enemy;
@@ -30,6 +32,7 @@ public class Pattern : ScriptableObject
     [SerializeField] public Vector2 randomMin = Vector2.zero;
     [SerializeField] public Vector2 randomMax = Vector2.zero;
     [SerializeField] public float entityToPlayerScale = 0.5f;
+    [SerializeField] public int previousPosIndex = 0;
     Vector2 dir;
 
     float fixedX = 0.0f;
@@ -74,34 +77,48 @@ public class Pattern : ScriptableObject
         switch (positionStates[i])
         {
             case PositionState.WorldOrigin:
-                skills[i].PositionCenter = Vector3.zero; break;
+                skills[i].positionCenter = Vector3.zero; break;
             case PositionState.WorldFixed:
-                skills[i].PositionCenter = positions[i]; break;
+                skills[i].positionCenter = positions[i]; break;
             case PositionState.WorldRandom:
-                skills[i].PositionCenter = randompos; break;
+                skills[i].positionCenter = randompos; break;
             case PositionState.PlayerOrigin:
-                skills[i].PositionCenter = enemy.player.transform.position; break;
+                skills[i].positionCenter = enemy.player.transform.position; break;
             case PositionState.PlayerFixed:
-                skills[i].PositionCenter = (Vector2)enemy.player.transform.position + positions[i]; break;
+                skills[i].positionCenter = (Vector2)enemy.player.transform.position + positions[i]; break;
             case PositionState.PlayerRandom:
-                skills[i].PositionCenter = (Vector2)enemy.player.transform.position + randompos; break;
+                skills[i].positionCenter = (Vector2)enemy.player.transform.position + randompos; break;
             case PositionState.EntityOrigin:
-                skills[i].PositionCenter = (Vector2)enemy.transform.position; break;
+                skills[i].positionCenter = (Vector2)enemy.transform.position; break;
             case PositionState.EntityFixed:
-                skills[i].PositionCenter = (Vector2)enemy.transform.position + positions[i]; break;
+                skills[i].positionCenter = (Vector2)enemy.transform.position + positions[i]; break;
             case PositionState.EntityRandom:
-                skills[i].PositionCenter = (Vector2)enemy.player.transform.position + randompos; break;
+                skills[i].positionCenter = (Vector2)enemy.player.transform.position + randompos; break;
             case PositionState.EntityToPlayerScale:
                 Vector2 midPoint = Vector2.Lerp(enemy.transform.position, enemy.player.transform.position, entityToPlayerScale);
-                skills[i].PositionCenter = midPoint; break;
+                skills[i].positionCenter = midPoint; break;
             case PositionState.FixPlayerX:
                 if (i == 0)
                     fixedX = enemy.player.transform.position.x;
-                skills[i].PositionCenter = new Vector2(fixedX, 0) + positions[i]; break;
+                skills[i].positionCenter = new Vector2(fixedX, 0) + positions[i]; break;
             case PositionState.FixPlayerY:
                 if (i == 0)
                     fixedY = enemy.player.transform.position.y;
-                skills[i].PositionCenter = new Vector2(0, fixedY) + positions[i]; break;
+                skills[i].positionCenter = new Vector2(0, fixedY) + positions[i]; break;
+            case PositionState.TakePreviousPosOffset:
+                if (i < previousPosIndex)
+                {
+                    Debug.Log("Index out of range : Previous Index Offset");
+                    return;
+                }
+                skills[i].positionCenter = skills[i - previousPosIndex].positionCenter; break;
+            case PositionState.TakePreviousPosFixed:
+                if (i <= previousPosIndex)
+                {
+                    Debug.Log("Index out of range : Previous Index Offset");
+                    return;
+                }
+                skills[i].positionCenter = skills[previousPosIndex].positionCenter; break;
         }
     }
 

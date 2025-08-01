@@ -5,14 +5,14 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     //projectile RigidBody
-    Rigidbody2D _rigidbody2D;
+    Rigidbody2D projectileRigidbody;
     //Who shoot projectile
     Entity shooter;
     //projectile damage
     int damage = 0;
     private void Awake()
     {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
+        projectileRigidbody = GetComponent<Rigidbody2D>();
     }
 
     //temporary destroy
@@ -23,12 +23,12 @@ public class Projectile : MonoBehaviour
     public void Init(Entity entity, Vector2 force, int damage)
     {
         shooter = entity;
-        if (_rigidbody2D == null)
+        if (projectileRigidbody == null)
         {
             Debug.Log("RigidBody not exists in projectile");
             return;
         }
-        _rigidbody2D.velocity = force;
+        projectileRigidbody.velocity = force;
         this.damage = damage;
     }
 

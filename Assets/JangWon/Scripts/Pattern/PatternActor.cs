@@ -27,25 +27,20 @@ public class PatternActor : MonoBehaviour
             pattern.skills[i].UseSkill(enemy, dir);
             if (i + 1 == pattern.skills.Length)
                 break;
-            float waitDelay = pattern.activeTime[i + 1] - pattern.activeTime[i];
+            float waitdelay = pattern.activeTime[i + 1] - pattern.activeTime[i];
             if (pattern.ignoreSkillCooldown)
             {
-                if (waitDelay < 0)
-                    waitDelay = 0;
-                yield return new WaitForSeconds(waitDelay);
+                if (waitdelay < 0)
+                    waitdelay = 0;
+                yield return new WaitForSeconds(waitdelay);
             }
             else
             {
-                waitDelay += pattern.skills[i].coolTime;
-                if (waitDelay < 0)
-                    waitDelay = 0;
-                yield return new WaitForSeconds(waitDelay);
+                waitdelay += pattern.skills[i].coolTime;
+                if (waitdelay < 0)
+                    waitdelay = 0;
+                yield return new WaitForSeconds(waitdelay);
             }
-        }
-        if (enemy.isPatternEnd)
-        {
-            enemy.isPatternEnd = true;
-            Debug.Log("Pattern end success");
         }
     }
 }

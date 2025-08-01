@@ -6,8 +6,8 @@ public class ChargeSkill : Skill
 {
     public static bool isChargning = false;
     [SerializeField] ChargeWarning warningPrefab;
-    [SerializeField] float WarningDuration = 0.0f;
-    [SerializeField] float ChargeDuration = 0.0f;
+    [SerializeField] float warningDuration = 0.0f;
+    [SerializeField] float chargeDuration = 0.0f;
 
     public override void UseSkill(Entity entity, Vector2 dir)
     {
@@ -15,10 +15,10 @@ public class ChargeSkill : Skill
             return;
         SkillEntry enemy = entity as SkillEntry;
         base.UseSkill(entity, dir);
-        _coolTime = WarningDuration + ChargeDuration;
+        _coolTime = warningDuration + chargeDuration;
         ChargeWarning warning = Instantiate(warningPrefab);
-        warning.transform.localPosition = PositionCenter;
-        warning.Init(entity, enemy.player.transform.position, WarningDuration, ChargeDuration, skillDamage);
+        warning.transform.localPosition = positionCenter;
+        warning.Init(entity, enemy.player.transform.position, warningDuration, chargeDuration, skillDamage);
     }
 
 }

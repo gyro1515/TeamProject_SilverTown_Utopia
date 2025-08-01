@@ -5,7 +5,7 @@ using UnityEngine;
 public class RangedSkill : Skill
 {
     [SerializeField] HitCollider colliderPrefab;
-    public HitCollider collider;
+    public HitCollider hitCollider;
     [SerializeField] float warningDuration = 0.0f;
     [SerializeField] float attackRemain = 0.0f;
     [SerializeField] float attackAngle = 0.0f;
@@ -16,9 +16,9 @@ public class RangedSkill : Skill
     {
         base.UseSkill(entity, dir);
         _coolTime = warningDuration;
-        collider = Instantiate(colliderPrefab);
-        collider.transform.localScale = size;
-        collider.Init(shooter, PositionCenter,warningDuration, attackRemain,
+        hitCollider = Instantiate(colliderPrefab);
+        hitCollider.transform.localScale = size;
+        hitCollider.Init(shooter, positionCenter,warningDuration, attackRemain,
             isFixedRotation ? attackAngle : Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + attackAngle,
             skillDamage);
     }

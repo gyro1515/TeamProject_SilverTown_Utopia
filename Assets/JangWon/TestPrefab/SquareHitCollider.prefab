@@ -100,9 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449df80af76e9b94e810b299ff222e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collider: {fileID: 1130454020744266073}
+  hitCollider: {fileID: 1130454020744266073}
   warningZoneSprite: {fileID: 7165879538314558774}
-  OutlineSprite: {fileID: 4934801133052725983}
+  outlineSprite: {fileID: 4934801133052725983}
   xAngle: 45
   visualizeFloor: 0
 --- !u!60 &1130454020744266073

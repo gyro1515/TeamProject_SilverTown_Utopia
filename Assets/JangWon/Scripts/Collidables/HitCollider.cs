@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class HitCollider : MonoBehaviour
 {
-    [SerializeField] Collider2D _collider;
+    [SerializeField] Collider2D hitCollider;
     [SerializeField] SpriteRenderer warningZoneSprite;
-    [SerializeField] SpriteRenderer OutlineSprite;
+    [SerializeField] SpriteRenderer outlineSprite;
     [SerializeField] float xAngle = 0.0f;
     [SerializeField] bool visualizeFloor = false;
 
@@ -18,9 +18,10 @@ public class HitCollider : MonoBehaviour
     Vector3 incremental = Vector3.zero;
     int damage = 0;
 
+
     public void Init(Entity entity, Vector2 pos, float end, float remain, float attackAngle, int damage)
     {
-        _collider.enabled = false;
+        hitCollider.enabled = false;
         shooter = entity;
         transform.localPosition = pos;
         transform.rotation = Quaternion.Euler(xAngle, 0.0f, attackAngle);
@@ -55,12 +56,12 @@ public class HitCollider : MonoBehaviour
             if (visualizeFloor)
             {
                 warningZoneSprite.color = new Color(255, 0, 255, 255);
-                OutlineSprite.color = new Color(255, 255, 255, 255);
+                outlineSprite.color = new Color(255, 255, 255, 255);
             }
             else
             {
                 warningZoneSprite.color = new Color(255, 0, 0, 0);
-                OutlineSprite.color = new Color(255, 255, 255, 0);
+                outlineSprite.color = new Color(255, 255, 255, 0);
             }
 
             SkillEntry enemy = shooter.GetComponent<SkillEntry>();
@@ -72,7 +73,7 @@ public class HitCollider : MonoBehaviour
 
     void ApplyDamage()
     {
-        _collider.enabled = true;
+        hitCollider.enabled = true;
         Destroy(gameObject, attackRemain + 0.1f);
     }
 
@@ -82,7 +83,6 @@ public class HitCollider : MonoBehaviour
             return;
         if (collision.gameObject.CompareTag(shooter.tag))
             return;
-        //if entity, give damage
         if (collision.gameObject.GetComponent<Entity>() != null)
         {
             Entity entity = collision.gameObject.GetComponent<Entity>();

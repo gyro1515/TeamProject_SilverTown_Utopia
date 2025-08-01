@@ -27,21 +27,20 @@ public class ProjectileSkill : Skill
         else
             startangle = (-spread / 2.0f);
 
-        Projectile firstProjectile = Instantiate(projectilePrefab, PositionCenter, Quaternion.identity);
-        firstProjectile.transform.localScale = scale;
-        firstProjectile.Init(shooter, RotateVector2(direction * projectileSpeed, startangle), skillDamage);
-        for (int count = 1; count < projectileQuantity; count++)
+        int count = 0;
+        do
         {
-            startangle += (spread / 2.0f) / (projectileQuantity / 2);
-            Projectile projectile = Instantiate(projectilePrefab, PositionCenter, Quaternion.identity);
+            Projectile projectile = Instantiate(projectilePrefab, positionCenter, Quaternion.identity);
             projectile.transform.localScale = scale;
             projectile.Init(shooter, RotateVector2(direction * projectileSpeed, startangle), skillDamage);
-        }
+            startangle += (spread / 2.0f) / (projectileQuantity / 2);
+            count++;
+        } while (count < projectileQuantity);
     }
 
-    private Vector2 RotateVector2(Vector2 v, float degree)
+    private Vector2 RotateVector2(Vector2 vec, float degree)
     {
-        return Quaternion.Euler(0, 0, degree) * v ;
+        return Quaternion.Euler(0, 0, degree) * vec ;
     }
 
 
