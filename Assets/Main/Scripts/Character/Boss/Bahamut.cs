@@ -222,9 +222,13 @@ public class Bahamut : Enemy
         // 공격 범위 내 혹은 공격 중이라면 성공 판정
         //if (Vector3.Distance(target.transform.position, transform.position) <= attackRange || isAttacking)
 
+        // isPatternEnd 확인
+        if(!this.isPatternEnd)
+            return INode.ENodeState.Failure;
 
         // 공격 범위 내이면서 패턴 사용 가능 상태라면 성공판정
-        if (Vector3.Distance(target.transform.position, transform.position) <= attackRange) // && SkillEntryd의 isPatternEnd도 같이 확인
+
+        if (Vector3.Distance(target.transform.position, transform.position) <= attackRange)
         {
             //Debug.Log("CanAttackSuccess");
             moveDirection = Vector2.zero;
@@ -244,6 +248,7 @@ public class Bahamut : Enemy
         if (canUseSkill) // 쿨타임이 다 돌았다면
         {
             Debug.Log("스킬 패턴1 사용!!");
+            this.isPatternEnd = false;
             return INode.ENodeState.Success;
         }
         else
@@ -274,6 +279,7 @@ public class Bahamut : Enemy
         if (canUseSkill) // 쿨타임이 다 돌았다면
         {
             Debug.Log("스킬 패턴2 사용!!");
+            this.isPatternEnd = false;
             return INode.ENodeState.Success;
         }
         else
@@ -289,6 +295,7 @@ public class Bahamut : Enemy
         if (canUseSkill) // 쿨타임이 다 돌았다면
         {
             Debug.Log("스킬 패턴3 사용!!");
+            this.isPatternEnd = false;
             return INode.ENodeState.Success;
         }
         else
@@ -304,6 +311,7 @@ public class Bahamut : Enemy
         if (canUseSkill) // 쿨타임이 다 돌았다면
         {
             Debug.Log("스킬 패턴4 사용!!");
+            this.isPatternEnd = false;
             return INode.ENodeState.Success;
         }
         else

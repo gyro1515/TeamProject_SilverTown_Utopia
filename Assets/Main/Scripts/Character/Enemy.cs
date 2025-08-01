@@ -20,6 +20,8 @@ public abstract class Enemy : Entity
     protected INode behaviorTreeRoot; // 비헤이비어 트리 루트
     //protected bool isAttacking; // 공격 중인지 여부, 비헤이비어 트리로 구현하기
 
+    protected bool isPatternEnd = true;
+
     protected override void Awake()
     {
         base.Awake();
