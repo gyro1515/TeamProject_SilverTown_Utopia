@@ -16,11 +16,33 @@ public class Bahamut : Enemy
         ActionNode isActive = new ActionNode(IsActive); // 액션 노드는 함수 바인딩
         ActionNode moveToCenter = new ActionNode(MoveToCenter);
         ActionNode canAttack = new ActionNode(CanAttack); // 액션 노드는 함수 바인딩
-        ActionNode attack = new ActionNode(Attack); // 액션 노드는 함수 바인딩
-        CooldownNode attackCoolTime = new CooldownNode(attack, 3.0f); // 액션 노드와 해당 액션 노드의 쿨타임 설정
-        WaitNode attackTime = new WaitNode(2.0f); // 공격 지속 시간에 해당, 공격하고 일정 시간 비헤이비어 트리 상태 유지
+        // 아래는 노션의 패턴 순서랑 다릅니다. 비헤이비어 트리 특성상 첫번째로 체크하는 패턴이 가장 강해야 할겁니다.
+        // -> 패턴 사용 가능 여부 체크를 1 -> 2 -> 3 -> 4 순으로 하기 때문에 1, 2, 3, 4 쿨타임이 다 돌아와도 1부터 사용합니다.
+        // 패턴 1: 아마 가장 강한 스킬을 넣어야하지 않을까 싶습니다.
+        ActionNode attack1 = new ActionNode(Attack1); // 액션 노드는 함수 바인딩
+        CooldownNode attack1CoolTime = new CooldownNode(attack1, 10.0f); // 액션 노드와 해당 액션 노드의 쿨타임 설정
+        WaitNode attack1Time = new WaitNode(3.0f); // 공격 지속 시간에 해당, 공격하고 일정 시간 비헤이비어 트리 상태 유지
+        SequenceNode attack1Sequence = new SequenceNode(new List<INode>() { attack1CoolTime, attack1Time }); // 공격이 끝나야 성공처리
+        // 패턴 2
+        ActionNode attack2 = new ActionNode(Attack2); 
+        CooldownNode attack2CoolTime = new CooldownNode(attack1, 7.0f); 
+        WaitNode attack2Time = new WaitNode(2.0f); 
+        SequenceNode attack2Sequence = new SequenceNode(new List<INode>() { attack1CoolTime, attack1Time });
+        // 패턴 3
+        ActionNode attack3 = new ActionNode(Attack3); 
+        CooldownNode attack3CoolTime = new CooldownNode(attack1, 5.0f); 
+        WaitNode attack3Time = new WaitNode(2.0f); 
+        SequenceNode attack3Sequence = new SequenceNode(new List<INode>() { attack1CoolTime, attack1Time }); 
+        // 패턴 4
+        ActionNode attack4 = new ActionNode(Attack4); 
+        CooldownNode attack4CoolTime = new CooldownNode(attack1, 3.0f);
+        WaitNode attack4Time = new WaitNode(2.0f); 
+        SequenceNode attack4Sequence = new SequenceNode(new List<INode>() { attack1CoolTime, attack1Time }); // 공격이 끝나야 성공처리
+
+        // 패턴 셀렉터, 패턴 중 사용 가능한 패턴부터 사용.
+        SelectorNode patternSelector = new SelectorNode(new List<INode>() { attack1Sequence, attack2Sequence, attack3Sequence, attack4Sequence });
         ActionNode chase = new ActionNode(Chase);
-        SequenceNode attackSequence = new SequenceNode(new List<INode>() { canAttack, attackCoolTime, attackTime });
+        SequenceNode attackSequence = new SequenceNode(new List<INode>() { canAttack, patternSelector });
         SequenceNode activeSequence = new SequenceNode(new List<INode>() { isActive, moveToCenter });
         SelectorNode selector = new SelectorNode(new List<INode>() { activeSequence, attackSequence, chase }); // 루트에 해당
 
@@ -91,10 +113,10 @@ public class Bahamut : Enemy
 
         return INode.ENodeState.Failure;
     }
-    INode.ENodeState Attack()
+    INode.ENodeState Attack1()
     {
         // 여기서 스킬(패턴) 사용!
-        Debug.Log("스킬 패턴 사용!!");
+        Debug.Log("스킬 패턴1 사용!!");
 
         /*if (!isAttacking) // 공격 중이 아니라면 
         {
@@ -110,6 +132,44 @@ public class Bahamut : Enemy
         }
         isAttacking = false;*/
         return INode.ENodeState.Success;
+    }
+    INode.ENodeState Attack2()
+    {
+        // 여기서 스킬(패턴) 사용!
+        Debug.Log("스킬 패턴2 사용!!");
+
+        return INode.ENodeState.Success;
+    }
+    INode.ENodeState Attack3()
+    {
+        // 여기서 스킬(패턴) 사용!
+        Debug.Log("스킬 패턴3 사용!!");
+
+        return INode.ENodeState.Success;
+    }
+    INode.ENodeState Attack4()
+    {
+        // 여기서 스킬(패턴) 사용!
+        Debug.Log("스킬 패턴4 사용!!");
+
+        return INode.ENodeState.Success;
+    }
+    INode.ENodeState Attack5() // 만약 랜덤이라면 아래 형식을 따르면 될겁니다.
+    {
+        // 랜덤으로 스킬 고르기
+        bool canUseSkill = Random.Range(0, 2) == 0 ? true : false;
+        if(canUseSkill) // 사용 가능한 스킬이라면
+        {
+            Debug.Log("사용 가능한 스킬 사용!!");
+            return INode.ENodeState.Success;
+        }
+        else
+        {
+            Debug.Log("해당 스킬은 쿨타임입니다.");
+            return INode.ENodeState.Success;
+        }
+        
+
     }
     INode.ENodeState IsActive()
     {
