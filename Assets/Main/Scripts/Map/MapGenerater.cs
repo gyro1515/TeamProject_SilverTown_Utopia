@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
@@ -400,7 +400,8 @@ public class MapGenerater : MonoBehaviour
             }
         }
         boss.transform.position = finalRooms[bossRoomIdx].center;
-        boss.GetComponent<TestBoss>().bossRoom = finalRooms[bossRoomIdx];
+        boss.GetComponent<Enemy>().MyRoom.Room = finalRooms[bossRoomIdx];
+        boss.GetComponent<Enemy>().MyRoom.RoomIdx = bossRoomIdx;
         // 보스 방 입구 벽으로 막기
         SetBossRoom(finalRooms[bossRoomIdx]);
 
@@ -440,10 +441,10 @@ public class MapGenerater : MonoBehaviour
             RectInt expanded = new RectInt(room.xMin - roomPadding, room.yMin - roomPadding, room.width + roomPadding * 2, room.height + roomPadding * 2);
             if (expanded.Contains(tmpPos))
             {
-                TestBoss testBoss = boss.GetComponent<TestBoss>();
-                if (testBoss?.bossRoom.center == room.center) // 보스방이라면 보스 활성화
+                Enemy testBoss = boss.GetComponent<Enemy>();
+                if (testBoss?.MyRoom.Room.center == room.center) // 보스방이라면 보스 활성화
                 {
-                    testBoss.BossState = TestBoss.EBossState.Active;
+                    testBoss.BossState = Enemy.EBossState.Active;
                 }
                 return room;
             }
@@ -478,9 +479,9 @@ public class MapGenerater : MonoBehaviour
     public void SetBossDeActive()
     {
         // 모든 보스 비활성화 하기.
-        TestBoss testBoss = boss.GetComponent<TestBoss>();
+        Enemy testBoss = boss.GetComponent<Enemy>();
         if (testBoss == null) return;
-        testBoss.BossState = TestBoss.EBossState.Deactivate;
+        testBoss.BossState = Enemy.EBossState.Deactivate;
 
     }
 }

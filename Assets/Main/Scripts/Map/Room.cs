@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// ÀÌ ºÎºĞÀ» º¸½º¿¡¼­ ±¸ÇöÇØ¾ß ÇÒÁöµµ...?
+// ì´ ë¶€ë¶„ì„ ë³´ìŠ¤ì—ì„œ êµ¬í˜„í•´ì•¼ í• ì§€ë„...?
 public class BossRoom
 {
     RectInt room;
@@ -10,6 +10,7 @@ public class BossRoom
     int roomIdx = -1;
     public int RoomIdx { get { return roomIdx; } set { roomIdx = value; } }
 
+    public BossRoom() { }
     public BossRoom(RectInt _room, int _roomIdx)
     {
         Room = _room;

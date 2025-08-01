@@ -18,12 +18,12 @@ public class RoadTriger : MonoBehaviour
     {
         if (!collision.CompareTag("Player")) return;
 
-        // º¹µµ ÁøÀÔ
-        //Debug.Log("º¹µµ ÁøÀÔ");
+        // ë³µë„ ì§„ì…
+        //Debug.Log("ë³µë„ ì§„ì…");
         bIsOnRoad = true;
         if(testCam == null) testCam = FindObjectOfType<TestCam>();
 
-        // º¸½º ÀüºÎ ºñÈ°¼ºÈ­
+        // ë³´ìŠ¤ ì „ë¶€ ë¹„í™œì„±í™”
         mapGenerater.SetBossDeActive();
 
         testCam.CamState = TestCam.ECameraState.ChageToRoad;
@@ -31,12 +31,12 @@ public class RoadTriger : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (!bIsOnRoad) return;
-        // ¸ÕÀú Äİ¸®ÀüÀÌ ÇÃ·¹ÀÌ¾îÀÎÁö Ã¼Å©
+        // ë¨¼ì € ì½œë¦¬ì „ì´ í”Œë ˆì´ì–´ì¸ì§€ ì²´í¬
         if (!collision.CompareTag("Player")) return;
 
-        // ÀÌµ¿ÇÑ ¸Ê °¡Á®¿À±â
+        // ì´ë™í•œ ë§µ ê°€ì ¸ì˜¤ê¸°(ë§µ ê°€ì ¸ì˜¤ë©´ì„œ í•´ë‹¹ ë§µì— ìˆëŠ” ë³´ìŠ¤ í™œì„±í™”)
         RectInt tmp = mapGenerater.GetRoomByPos(collision.transform.position);
-        // Ä«¸Ş¶ó Á¦ÇÑÀ» ÀÌµ¿ÇÑ ¸Ê¿¡ ¸ÂÃß±â
+        // ì¹´ë©”ë¼ ì œí•œì„ ì´ë™í•œ ë§µì— ë§ì¶”ê¸°
         if (testCam == null) testCam = FindObjectOfType<TestCam>();
         testCam.SetMap(tmp);
 

@@ -1,6 +1,7 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : Entity
 {
@@ -16,7 +17,9 @@ public class Player : Entity
     protected override void Awake()
     {
         base.Awake();
+        if(baseAttack != null)
         baseAttack = Instantiate(baseAttack);
+
         parringStartTime -= parringDelay;
     }
 
@@ -79,5 +82,30 @@ public class Player : Entity
             baseAttack.UseSkill(this as Entity, Vector2.zero);
         else
             baseAttack.UseSkill(this as Entity, mousepos.normalized);
+    }
+
+    // 아래는 Player Input Component에서 불러와줌
+    void OnMove(InputValue inputValue)
+    {
+        moveDirection = inputValue.Get<Vector2>();
+        moveDirection = moveDirection.normalized; // 아마 자동 노멀라이즈
+    }
+    void OnJump(InputValue inputValue)
+    {
+        // inputValue.isPressed를 안하면 키 다운, 키 업 두 번 호출 됨
+        if (!inputValue.isPressed) return;
+
+    }
+    void OnWire(InputValue inputValue)
+    {
+        // inputValue.isPressed를 안하면 키 다운, 키 업 두 번 호출 됨
+        if (!inputValue.isPressed) return;
+
+    }
+    void OnSkill1(InputValue inputValue)
+    {
+        // inputValue.isPressed를 안하면 키 다운, 키 업 두 번 호출 됨
+        if (!inputValue.isPressed) return;
+
     }
 }
