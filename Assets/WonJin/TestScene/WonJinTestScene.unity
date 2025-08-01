@@ -1485,10 +1485,6 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 913448771}
-    - target: {fileID: 4082295972029532856, guid: 76f19b79ffa65b54c8bdb430f52a82fe, type: 3}
-      propertyPath: bodyDamageTime
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 8219168924295596478, guid: 76f19b79ffa65b54c8bdb430f52a82fe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

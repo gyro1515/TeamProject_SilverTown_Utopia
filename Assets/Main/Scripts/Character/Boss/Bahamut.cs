@@ -16,7 +16,10 @@ public class Bahamut : Enemy
 
     protected CapsuleCollider2D bodyCol; // 기존 콜라이더
     protected CapsuleCollider2D trigerCol; // 몸박용 트리거 콜라이더 설정
-    
+
+    private LayerMask wallLayer; // 벽 감지용
+    // 대시용 bool 변수
+    bool bIsDash = false;
     protected override void Awake()
     {
         base.Awake();
@@ -39,6 +42,9 @@ public class Bahamut : Enemy
         trigerCol.excludeLayers = exclude; // 제외
 
         bodyDamageTimer = bodyDamageTime; // 몸박당하자 마자 데미지 주기
+
+        // 레이캐스트 벽 감지용
+        wallLayer = LayerMask.GetMask("Wall");
     }
     protected override void Update()
     {
@@ -48,17 +54,28 @@ public class Bahamut : Enemy
         
     }
     // 우선 바하뮤트만 충돌 설정
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
+        if (!bIsDash) return; // 대시 중일때만 판단
+
         // 벽에 부딪혔을 때 법선 구하기
-        Vector2 wallNormal = collision.contacts[0].normal;
+        //Vector2 wallNormal = collision.contacts[0].normal;
+
+        // 위 방식으로 구하면 겹칠때 에러 발생
+        // 레이캐스트로 벽 탐지
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, moveDirection, 3.0f, wallLayer);
+        Vector2 wallNormal = hit.normal;
+
         // 만약 법선과 moveDirection의 방향이 180도에 가깝다면 대시 중지
         float angle = Vector2.Angle(wallNormal, moveDirection);
         if (angle > 170f)
         {
+            Debug.Log($" 멈춤 각도: {angle}, 법선 백터: {wallNormal}");
+
             prePlayerPos = transform.position;
             return;
         }
+        else Debug.Log($" 진행 각도: {angle}, 법선 백터: {wallNormal}");
 
         // 기존 대시 벡터에서 수직 성분 제거 → 벽을 따라 미끄러지는 방향 계산
         Vector2 slideDirection = moveDirection - Vector2.Dot(moveDirection, wallNormal) * wallNormal;
@@ -70,13 +87,7 @@ public class Bahamut : Enemy
         // prePlayerPos 갱신
         prePlayerPos = (Vector2)transform.position + moveDirection * dist;
     }
-    /*private void OnCollisionStay2D(Collision2D collision)
-    {
-        //collision.gameObject.layer
-        Debug.Log($"Collision 물리 충돌: {collision.gameObject.name}");
-        //Physics2D.CapsuleCast()
-        //prePlayerPos = transform.position;
-    }*/
+    
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -163,6 +174,7 @@ public class Bahamut : Enemy
             MoveSpeed = target.GetComponent<Player>().MoveSpeed * dashMultiple; // 타겟 스피드의 n배로
             //bodyCol.isTrigger = true;
             //bodyCol.enabled = false;
+            bIsDash = true;
             prePlayerPos = target.transform.position;
             return INode.ENodeState.Failure; // 이 다음에 행동 노드가 있다면 다른 걸 해야할 수도 있다. 지금은 상관 없다.
         }
@@ -185,7 +197,7 @@ public class Bahamut : Enemy
             moveDirection = Vector2.zero;
             //bodyCol.isTrigger = false;
             //bodyCol.enabled = true;
-
+            bIsDash = false;
 
             return INode.ENodeState.Success;
         }
@@ -360,7 +372,7 @@ public class Bahamut : Enemy
         if (bodyDamageTimer >= bodyDamageTime)
         {
             bodyDamageTimer -= bodyDamageTime;
-            Debug.Log($"플레이어에게 몸박 데미지{bodyDamage}");
+            //Debug.Log($"플레이어에게 몸박 데미지{bodyDamage}");
         }
     }
 }
