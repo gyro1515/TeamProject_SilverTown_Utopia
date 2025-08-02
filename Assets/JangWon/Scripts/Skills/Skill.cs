@@ -22,6 +22,7 @@ public abstract class Skill : ScriptableObject
     //Position where attack will be held
     [SerializeField] public Vector3 positionCenter = Vector3.zero;
     [SerializeField] public GameObject animPrefab;
+    [SerializeField] public AudioClip audioClip;
 
 
     public virtual void UseSkill(Entity entity, Vector2 dir)

@@ -37,6 +37,8 @@ public class Player : Entity
         damageStartTime -= damageDelay;
         attackTime -= attackDelay;
         cam = Camera.main;
+
+        UIManager.Instance.SetHpBar((float)currentHp / MaxHp); // 체력바 세팅
     }
 
     /*protected override void Start()// 사용 안한다면 마지막에 지우기
@@ -56,11 +58,11 @@ public class Player : Entity
         base.Update();
 
         // UI 테스트용도
-        if(Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I))
         {
             UIManager.Instance.SetSelectCardUIActive();
         }
-        
+
     }
 
     /*protected override void FixedUpdate()
@@ -96,6 +98,8 @@ public class Player : Entity
 
         damageStartTime = Time.fixedTime;
         base.TakeDamage(damage);
+        Debug.Log($"{currentHp} / {MaxHp}");
+        UIManager.Instance.SetHpBar((float)currentHp / MaxHp);
     }
     private void BaseAttack(Vector2 mousepos)
     {
@@ -169,5 +173,4 @@ public class Player : Entity
         isJumping = false;
         Debug.Log("Player Jump End");
     }
-
 }

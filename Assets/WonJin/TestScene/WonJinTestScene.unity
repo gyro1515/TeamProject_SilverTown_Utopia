@@ -1470,7 +1470,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.646
+  m_Value: 0.462
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3207,7 +3207,7 @@ MonoBehaviour:
   desiredRoomCount: 12
   roomMinSize: {x: 25, y: 20}
   roomMaxSize: {x: 40, y: 40}
-  roomSpacing: 4
+  roomSpacing: 5
   tilemap: {fileID: 1627723567}
   wallTilemap: {fileID: 1276648849}
   bossWallMap: {fileID: 1132871200}
@@ -3232,6 +3232,7 @@ MonoBehaviour:
   - {fileID: 2374766826625083467, guid: aae9595b6a301e649aeb5712789e3922, type: 3}
   - {fileID: 4189207589073314067, guid: 8fc746cf44ebe08458f59172295a4787, type: 3}
   spawnObstacleCount: 20
+  tCam: {fileID: 1307315096}
 --- !u!4 &1218764671
 Transform:
   m_ObjectHideFlags: 0
@@ -3799,6 +3800,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1388373047}
   m_CullTransparentMesh: 1
+--- !u!1 &1429257146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1429257147}
+  - component: {fileID: 1429257148}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1429257147
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429257146}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1429257148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429257146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00f97c3fe417154eac9a41b7cd872a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapGenerater: {fileID: 1218764670}
 --- !u!1001 &1530490432
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3858,6 +3904,14 @@ PrefabInstance:
     - target: {fileID: 3751168330861033206, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812867654055286121, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: MaxHp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812867654055286121, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: currentHp
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 9141937517711360191, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
       propertyPath: m_Layer
@@ -5148,3 +5202,4 @@ SceneRoots:
   - {fileID: 998844368}
   - {fileID: 1999712907}
   - {fileID: 515104436}
+  - {fileID: 1429257147}

@@ -8,7 +8,7 @@ public abstract class Enemy : Entity
     [SerializeField] public Player target;
     [SerializeField] protected float attackRange = 3.0f;
     [SerializeField] protected float chaseRange = 10.0f;
-    [SerializeField] protected float bodyDamage = 1.0f; // 몸박 데미지
+    [SerializeField] protected int bodyDamage = 1; // 몸박 데미지
     [SerializeField] protected float bodyDamageTime = 0.1f; // 몸박 데미지 간격
     [SerializeField] protected float dashMultiple = 3.0f; // 대시 스피드 배율(플레이어 * dashMultiple = 대시 스피드)
     [SerializeField] protected PatternActor actor;
@@ -166,6 +166,7 @@ public abstract class Enemy : Entity
         {
             bodyDamageTimer -= bodyDamageTime;
             //Debug.Log($"플레이어에게 몸박 데미지{bodyDamage}");
+            ApplyDamage(target, bodyDamage, false);
         }
     }
     protected virtual INode.ENodeState Chase()

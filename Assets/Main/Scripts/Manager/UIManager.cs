@@ -12,4 +12,8 @@ public class UIManager : Singleton<UIManager> // 해당 형식으로 상속하�
     {
         selectCardUI.SetActive();
     }
+    public void SetHpBar(float hpPercentage)
+    {
+        mainUI.SetHpBar(hpPercentage);
+    }
 }

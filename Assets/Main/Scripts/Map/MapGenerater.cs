@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.Windows;
+using static Unity.Burst.Intrinsics.X86.Avx;
 using static UnityEditor.PlayerSettings;
 
 public class MapGenerater : MonoBehaviour
@@ -35,6 +36,7 @@ public class MapGenerater : MonoBehaviour
 
     [Header("Character Setting")]
     [SerializeField] GameObject player;
+    public GameObject PlayerGO { get { return player; } }
     [SerializeField] GameObject boss;
     [SerializeField] List<GameObject> enemys;
 
@@ -42,10 +44,10 @@ public class MapGenerater : MonoBehaviour
     [SerializeField] float time = 4.0f;
     [Header("ObstacleObjcet 세팅")]
     [SerializeField] List<GameObject> obstacles = new List<GameObject>();
+    [SerializeField] private int spawnObstacleCount = 20; // 용규 추가 -> 굿
     List<GameObject> spawnObstacles = new List<GameObject>();
-
-    [SerializeField] private int spawnObstacleCount = 20; // 용규 추가
-
+    [Header("카메라 세팅")]
+    [SerializeField] TestCam tCam;
 
     private List<RectInt> candidateRooms = new List<RectInt>();
     private List<RectInt> finalRooms = new List<RectInt>();
@@ -53,18 +55,22 @@ public class MapGenerater : MonoBehaviour
     private List<Vector2Int> roomCenters = new List<Vector2Int>();
     private HashSet<(int, int)> connections = new HashSet<(int, int)>();
     private Dictionary<int, List<int>> connectionMap = new Dictionary<int, List<int>>();
-    // 보스룸 체크용, 몬스터가 많아진다면 방 클래스 만들어야...?
-    
+
+    // 맵 탐색용 변수들
+    bool bIsMoveToRoom = false; // true일때만 현재 위치한 방이 어떤 방인지 탐색하도록 설정
+    public bool IsMoveToRoom { get { return bIsMoveToRoom; } set { bIsMoveToRoom = value; } }
+
 
     private void Awake()
     {
-        roadTriger.GetComponent<RoadTriger>().Init(this, player);
-
+        roadTriger.GetComponent<RoadTriger>().Init(this);
     }
     void Start() => GenerateMap();
 
     void Update()
     {
+        if (bIsMoveToRoom) GetRoomByPos(player.transform.position); // 이 상태일 시만 현재 위치의 방 찾기
+
         if (UnityEngine.Input.GetKeyDown(KeyCode.E))
         {
             GenerateMap();
@@ -75,6 +81,7 @@ public class MapGenerater : MonoBehaviour
             // 보스 방의 벽 비활성화
             OpenBossRoom();
         }
+
     }
 
     void GenerateMap()
@@ -456,6 +463,7 @@ public class MapGenerater : MonoBehaviour
     }
     public RectInt GetRoomByPos(Vector3 pos)
     {
+        Debug.Log("Check!!!!!!!!!");
         Vector2Int tmpPos = new Vector2Int();
         tmpPos.x = (int)pos.x;
         tmpPos.y = (int)pos.y;
@@ -463,7 +471,7 @@ public class MapGenerater : MonoBehaviour
         for (int i = 0; i < finalRooms.Count; i++)
         {
             // 판정을 위해 상 하 좌우 n 칸씩 확대
-            int roomPadding = 2;
+            int roomPadding = 0;
             RectInt room = finalRooms[i];
             RectInt expanded = new RectInt(room.xMin - roomPadding, room.yMin - roomPadding, room.width + roomPadding * 2, room.height + roomPadding * 2);
             if (expanded.Contains(tmpPos))
@@ -485,15 +493,15 @@ public class MapGenerater : MonoBehaviour
                     CloseBossRoom();
                     break;
                 }
+                tCam.SetMap(room);
+                // 방을 찼았다면 탐색 중지
+                IsMoveToRoom = false;
                 return room;
             }
         }
 
-
-
-
-            // 그럴리는 없겠지만 방을 못찾았다면 멀리 있는 값 리턴
-            return new RectInt(666, 666, 0, 0);
+        // 그럴리는 없겠지만 방을 못찾았다면 멀리 있는 값 리턴
+        return new RectInt(666, 666, 0, 0);
     }
     void SetBossRoom(RectInt bossRoom, TileBase wallTile)
     {
@@ -535,6 +543,6 @@ public class MapGenerater : MonoBehaviour
             if (tmpEnemy == null) continue;
             tmpEnemy.BossState = Enemy.EBossState.Deactivate;
         }
-
+        tCam.CamState = TestCam.ECameraState.ChageToRoad;
     }
 }

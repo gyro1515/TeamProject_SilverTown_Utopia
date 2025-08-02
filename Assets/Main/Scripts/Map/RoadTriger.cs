@@ -7,26 +7,21 @@ public class RoadTriger : MonoBehaviour
 {
     private bool bIsOnRoad = false;
     private MapGenerater mapGenerater = null;
-    private GameObject player = null;
-    TestCam testCam = null;
-    public void Init(MapGenerater _mapGenerater, GameObject _player)
+    public void Init(MapGenerater _mapGenerater)
     {
         mapGenerater = _mapGenerater;
-        player = _player;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player")) return;
+        mapGenerater.IsMoveToRoom = false; // 복도에 진입했다면 방탐색 중지
 
         // 복도 진입
         //Debug.Log("복도 진입");
         bIsOnRoad = true;
-        if(testCam == null) testCam = FindObjectOfType<TestCam>();
-
         // 보스 전부 비활성화
         mapGenerater.SetBossDeActive();
 
-        testCam.CamState = TestCam.ECameraState.ChageToRoad;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -34,11 +29,8 @@ public class RoadTriger : MonoBehaviour
         // 먼저 콜리전이 플레이어인지 체크
         if (!collision.CompareTag("Player")) return;
 
-        // 이동한 맵 가져오기(맵 가져오면서 해당 맵에 있는 보스 활성화)
-        RectInt tmp = mapGenerater.GetRoomByPos(collision.transform.position);
-        // 카메라 제한을 이동한 맵에 맞추기
-        if (testCam == null) testCam = FindObjectOfType<TestCam>();
-        testCam.SetMap(tmp);
+        mapGenerater.IsMoveToRoom = true; // 복도에서 나왔다면 방 탐색 시작
+        // 방을 찼았다면 자동으로 탐색 중지
 
     }
 }
