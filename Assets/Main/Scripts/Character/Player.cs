@@ -55,6 +55,11 @@ public class Player : Entity
         // 방향을 정하고 애니메이션이 실행되도록
         base.Update();
 
+        // UI 테스트용도
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            UIManager.Instance.SetSelectCardUIActive();
+        }
         
     }
 
