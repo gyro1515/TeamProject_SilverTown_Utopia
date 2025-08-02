@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Pattern Data", menuName = "Scriptable Object/Pattern/BasePattern")]
@@ -57,6 +58,12 @@ public class Pattern : ScriptableObject
     float fixedY = 0.0f;
     //Saved value for FixPlayer
     Vector3 fixedV3 = Vector3.zero;
+    // 패턴 당 쿨타임 설정하기
+    // 쿨타임 용
+    [SerializeField] public float patternCoolTime = 5.0f;
+    [HideInInspector] public float patternCoolTimer = 0.0f;
+    [HideInInspector] public bool isCoolTime = true;
+
 
     //If unequal Array Size, Error
     private void Start()
@@ -78,6 +85,7 @@ public class Pattern : ScriptableObject
             return;
         }
     }
+    
     //Copy all Skills
     public void Init()
     {
@@ -87,6 +95,7 @@ public class Pattern : ScriptableObject
         {
             skills[i] = Instantiate(skills[i]);
         }
+        isCoolTime = true; // 시작하자마자 스킬 난사 못하도록 쿨타임 돌아가게 하기
     }
 
     //Set each skill's Positions

@@ -164,8 +164,7 @@ public class Bahamut : Enemy
             return INode.ENodeState.Failure;
         }
         // 스킬 쿨타임 여부
-        bool canUseSkill = UnityEngine.Random.Range(0, 2) == 0 ? true : false;
-        if (canUseSkill) // 쿨타임이 다 돌았다면
+        if (!actor.patternList[0].isCoolTime) // 쿨타임이 다 돌았다면
         {
             Debug.Log("스킬 패턴1 사용!!");
             this.isPatternEnd = false;
@@ -202,8 +201,7 @@ public class Bahamut : Enemy
         }
         // 여기서 스킬(패턴) 사용!
         // 스킬 쿨타임 여부
-        bool canUseSkill = UnityEngine.Random.Range(0, 2) == 0 ? true : false;
-        if (canUseSkill) // 쿨타임이 다 돌았다면
+        if (!actor.patternList[1].isCoolTime) // 쿨타임이 다 돌았다면
         {
             Debug.Log("스킬 패턴2 사용!!");
             this.isPatternEnd = false;
@@ -226,8 +224,7 @@ public class Bahamut : Enemy
             return INode.ENodeState.Failure;
         }
         // 스킬 쿨타임 여부
-        bool canUseSkill = UnityEngine.Random.Range(0, 2) == 0 ? true : false;
-        if (canUseSkill) // 쿨타임이 다 돌았다면
+        if (!actor.patternList[2].isCoolTime) // 쿨타임이 다 돌았다면
         {
             Debug.Log("스킬 패턴3 사용!!");
             this.isPatternEnd = false;
@@ -250,8 +247,7 @@ public class Bahamut : Enemy
             return INode.ENodeState.Failure;
         }
         // 스킬 쿨타임 여부
-        bool canUseSkill = UnityEngine.Random.Range(0, 2) == 0 ? true : false;
-        if (canUseSkill) // 쿨타임이 다 돌았다면
+        if (!actor.patternList[3].isCoolTime) // 쿨타임이 다 돌았다면
         {
             Debug.Log("스킬 패턴4 사용!!");
             this.isPatternEnd = false;

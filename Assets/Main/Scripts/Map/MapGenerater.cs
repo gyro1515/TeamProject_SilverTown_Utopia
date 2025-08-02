@@ -463,7 +463,7 @@ public class MapGenerater : MonoBehaviour
     }
     public RectInt GetRoomByPos(Vector3 pos)
     {
-        Debug.Log("Check!!!!!!!!!");
+        //Debug.Log("Check!!!!!!!!!");
         Vector2Int tmpPos = new Vector2Int();
         tmpPos.x = (int)pos.x;
         tmpPos.y = (int)pos.y;

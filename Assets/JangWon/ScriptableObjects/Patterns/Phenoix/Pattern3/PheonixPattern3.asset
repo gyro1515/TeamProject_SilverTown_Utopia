@@ -79,3 +79,6 @@ MonoBehaviour:
   randomMax: {x: 0, y: 0}
   entityToPlayerScale: 0.5
   previousPosIndex: 9
+  patternCoolTime: 15
+  patternCoolTimer: 0
+  isCoolTime: 1

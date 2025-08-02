@@ -13,7 +13,7 @@ public class PatternActor : MonoBehaviour
     //Pattern which will be used
     //<=============== Need To be Fixed : Pattern to PatternList ===============>
     [SerializeField] public List<Pattern> patternList;
-
+    
     //Copy Pattern
     private void Start()
     {
@@ -25,9 +25,25 @@ public class PatternActor : MonoBehaviour
             patternList[i].Init();
         }
     }
+    private void Update()
+    {
+        if (enemy.BossState != Enemy.EBossState.Active) return; // 활성화될때만 스킬 쿨타임 돌기
+        for (int i = 0; i < patternList.Count; i++)
+        {
+            //Debug.Log($"Pattern{i}: {patternList[i].isCoolTime} -> {patternList[i].patternCoolTimer} / {patternList[i].patternCoolTime}");
+            if (!patternList[i].isCoolTime) continue; // 해당 패턴 쿨타임 이면 다음
+            patternList[i].patternCoolTimer += Time.deltaTime;
+            if(patternList[i].patternCoolTimer >= patternList[i].patternCoolTime)
+            {
+                patternList[i].patternCoolTimer = 0.0f;
+                patternList[i].isCoolTime = false;
+            }
+        }
+    }
     //Active Pattern skill Sequence based on Pattern
     public IEnumerator ActivePattern(int index)
     {
+        patternList[index].isCoolTime = true;
         for (int i = 0; i < patternList[index].skills.Length; i++)
         {
             dir = enemy.target.transform.position - enemy.transform.position;
