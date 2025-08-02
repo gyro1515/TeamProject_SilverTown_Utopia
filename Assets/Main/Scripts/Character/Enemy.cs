@@ -49,6 +49,7 @@ public abstract class Enemy : Entity
         trigerCol = gameObject.AddComponent<CapsuleCollider2D>();
         trigerCol.isTrigger = true;
         trigerCol.size = bodyCol.size;
+        trigerCol.offset = bodyCol.offset;
         int include = LayerMask.GetMask("Player");
         trigerCol.includeLayers = include; // 포함
         int exclude = 0;

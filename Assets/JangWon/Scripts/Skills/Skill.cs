@@ -21,6 +21,8 @@ public abstract class Skill : ScriptableObject
 
     //Position where attack will be held
     [SerializeField] public Vector3 positionCenter = Vector3.zero;
+    [SerializeField] public GameObject animPrefab;
+
 
     public virtual void UseSkill(Entity entity, Vector2 dir)
     {
@@ -30,6 +32,8 @@ public abstract class Skill : ScriptableObject
         this.direction = dir;
         skillDamage = entity.attackDamage + skillDamage;
         skillDamage = (int)(skillDamage * skillMultiplier);
+        if (animPrefab == null) return;
+
     }
 
     public void UpgradeMultiplier(float multiscale)

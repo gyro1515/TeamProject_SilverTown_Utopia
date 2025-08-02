@@ -117,13 +117,24 @@ public class Pattern : ScriptableObject
                 Vector2 midPoint = Vector2.Lerp(enemy.transform.position, enemy.target.transform.position, entityToPlayerScale);
                 skills[i].positionCenter = midPoint; break;
             case PositionState.FixPlayerX:
-                if (i == 0)
+                /*if (i == 0)
                     fixedX = enemy.target.transform.position.x;
-                skills[i].positionCenter = new Vector2(fixedX, 0) + positions[i]; break;
+                skills[i].positionCenter = new Vector2(fixedX, 0) + positions[i]; break;*/
+
+                // X가 고정이라고 플레이어 X값만 가져오면 안됨 -> 플레이어 좌표에서 + positions[i]해서 Y값만 다르게 해야 함
+                // 위 방식대로 하면 플레이어의 X와 Y = 0에서 + positions[i] 계산됨...
+                // *************결국 논리상 FixPlayerX = FixPlayerY = PlayerFixed***************
+
+
+                skills[i].positionCenter = enemy.target.transform.position + (Vector3)positions[i]; break;
             case PositionState.FixPlayerY:
-                if (i == 0)
-                    fixedY = enemy.target.transform.position.y;
-                skills[i].positionCenter = new Vector2(0, fixedY) + positions[i]; break;
+                //if (i == 0)
+                //    fixedY = enemy.target.transform.position.y;
+                //skills[i].positionCenter = new Vector2(0, fixedY) + positions[i]; break;
+
+                // 위와 돌일
+                skills[i].positionCenter = enemy.target.transform.position + (Vector3)positions[i]; break;
+
             case PositionState.TakePreviousPosOffset:
                 if (i < previousPosIndex)
                 {

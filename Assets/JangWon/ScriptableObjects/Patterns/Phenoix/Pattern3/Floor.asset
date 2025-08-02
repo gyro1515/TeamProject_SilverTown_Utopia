@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Floor
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
-  _skillDamage: 10
+  skillDamage: 0
   direction: {x: 0, y: 0}
-  isLocal: 1
-  PositionCenter: {x: 0, y: 0, z: 0}
+  positionCenter: {x: 0, y: 0, z: 0}
+  animPrefab: {fileID: 3072376599235886547, guid: 3b551b9ee01e6cd4089da107214d89d7, type: 3}
   colliderPrefab: {fileID: 3617344549384259999, guid: 391e73a73e3e091458c24ca5d790fea6, type: 3}
-  collider: {fileID: 0}
+  hitCollider: {fileID: 0}
   warningDuration: 0
   attackRemain: 5
   attackAngle: 0

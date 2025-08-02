@@ -33,9 +33,15 @@ public class HitCollider : MonoBehaviour
     int damage = 0;
     //For Sleeping rigidbody mode
     List<Rigidbody2D> rigidbody2Ds = new List<Rigidbody2D>();
+    // 스킬 게임오브젝트 임시 저장용
+    GameObject skillObject = null;
+    // 쿼터써클은 스킬 이펙트 소환 위치를 다르게
+    public enum HitColliderShape
+    {
+        Cone, Other
+    }
 
-
-    public void Init(Entity entity, Vector2 pos, float warningEnd, float remain, float attackAngle, int damage)
+    public void Init(Entity entity, Vector2 pos, float warningEnd, float remain, float attackAngle, int damage, GameObject animPrefab)
     {
         //During Warning, disable Collider
         hitCollider.enabled = false;
@@ -57,11 +63,11 @@ public class HitCollider : MonoBehaviour
         }
         this.damage = damage;
         //Start show Warning
-        StartCoroutine(showWarning());
+        StartCoroutine(showWarning(animPrefab));
     }
 
     //Show warning zone
-    public IEnumerator showWarning()
+    public IEnumerator showWarning(GameObject animPrefab)
     {
         while (warningDuration != 0.0f && warningDuration > start)
         {
@@ -85,9 +91,24 @@ public class HitCollider : MonoBehaviour
             }
 
             Enemy enemy = shooter.GetComponent<Enemy>();
+            
+            if (animPrefab != null)
+            {
+                //Debug.Log(animPrefab.name);
+                skillObject = Instantiate(animPrefab, transform.position, Quaternion.identity);
+
+                /*if (hitCollider.GetComponent<RectTransform>() == null)
+                {
+                    skillObject = Instantiate(animPrefab, transform.position, Quaternion.identity);
+                }
+                else
+                {
+                    Debug.Log($"{hitCollider.GetComponent<RectTransform>().anchoredPosition} / {hitCollider.GetComponent<RectTransform>().localPosition} / {transform.position} / {transform.localPosition}");
+                    skillObject = Instantiate(animPrefab, hitCollider.GetComponent<RectTransform>().anchoredPosition, Quaternion.identity);
+                }*/
+            }
             //Enable Collider and Start applying damage
             ApplyDamage();
-            
         }
     }
 
@@ -95,6 +116,12 @@ public class HitCollider : MonoBehaviour
     {
         hitCollider.enabled = true;
         Destroy(gameObject, attackRemain + 0.1f);
+        if (skillObject != null)
+        {
+            AnimatorStateInfo stateInfo = skillObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
+            float animLength = stateInfo.length;
+            Destroy(skillObject, (attackRemain > animLength ? attackRemain : animLength) + 0.1f);
+        }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {

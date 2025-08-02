@@ -20,7 +20,6 @@ public class RangedSkill : Skill
     [SerializeField] public bool isFixedRotation = true;
     //HitCollider Size
     [SerializeField] public Vector2 size = Vector2.one;
-    
 
     public override void UseSkill(Entity entity, Vector2 dir)
     {
@@ -30,7 +29,7 @@ public class RangedSkill : Skill
         hitCollider.transform.localScale = size;
         hitCollider.Init(shooter, positionCenter,warningDuration, attackRemain,
             isFixedRotation ? attackAngle : Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + attackAngle,
-            skillDamage);
+            skillDamage, animPrefab);
     }
 
     public void UpgradeSize(float sizescale)
