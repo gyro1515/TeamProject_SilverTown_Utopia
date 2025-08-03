@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ee12395610fa240a5d93fa8432423c, type: 3}
+  m_Name: Circle Damage Skill
+  m_EditorClassIdentifier: 
+  shooter: {fileID: 0}
+  _skillDamage: 5
+  direction: {x: 0, y: 0}
+  isLocal: 0
+  PositionCenter: {x: 0, y: 0, z: 0}
+  colliderPrefab: {fileID: 3617344549384259999, guid: ddff3a9b92fcc4b4984a933e4374ab12, type: 3}
+  warningDuration: 1
+  attackRemain: 0
+  attackAngle: 0
+  isFixedRotation: 1

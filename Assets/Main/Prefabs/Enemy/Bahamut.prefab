@@ -49,14 +49,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHp: 0
   MaxHp: 0
-  attackDamage: 0
   moveSpeed: 3
   target: {fileID: 0}
   attackRange: 4
   chaseRange: 10
-  dashMultiple: 3
   bodyDamage: 1
   bodyDamageTime: 0.1
+  dashMultiple: 3
+  actor: {fileID: 7254568558009265219, guid: 8ec33daef5b297e4b91709bb75ee041c, type: 3}
+  isPatternEnd: 1
 --- !u!50 &3495806721669898294
 Rigidbody2D:
   serializedVersion: 4
@@ -116,8 +117,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 3.3, y: 5}
+  m_Offset: {x: -0.087795734, y: -0.4097123}
+  m_Size: {x: 3.8267736, y: 5.8194246}
   m_Direction: 0
 --- !u!1 &4177502656284844177
 GameObject:

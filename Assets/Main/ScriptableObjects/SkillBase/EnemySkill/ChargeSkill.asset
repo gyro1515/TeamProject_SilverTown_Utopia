@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2eb94ce3e788d945bd59f76314bab0a, type: 3}
+  m_Name: ChargeSkill
+  m_EditorClassIdentifier: 
+  shooter: {fileID: 0}
+  _skillDamage: 10
+  direction: {x: 0, y: 0}
+  isLocal: 1
+  PositionCenter: {x: 0, y: 0, z: 0}
+  warningPrefab: {fileID: -4062254150371820900, guid: 6ac8a4039cf45f940b34a33734c3a4e7, type: 3}
+  WarningDuration: 1
+  ChargeDuration: 1

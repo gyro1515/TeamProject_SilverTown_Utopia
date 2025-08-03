@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1347143391266293937}
   - component: {fileID: 1652270621724521425}
   - component: {fileID: 6358108891848314741}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -48,9 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 937dd3624392e3643ba533774f283864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHp: 0
-  MaxHp: 0
-  moveSpeed: 5
+  currentHp: 100
+  MaxHp: 100
+  moveSpeed: 8
   killCount: 0
   baseAttack: {fileID: 11400000, guid: e4c731e206ca3a44f8310fe997e67705, type: 2}
 --- !u!50 &1347143391266293937
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 8035605591497592119}
   - component: {fileID: 5047071833215454758}
   - component: {fileID: 3512918493436355867}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MainSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5608395313788908814}
   - component: {fileID: 5580664958117344607}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MeleeWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
