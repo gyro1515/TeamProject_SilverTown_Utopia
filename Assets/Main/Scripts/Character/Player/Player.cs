@@ -26,7 +26,11 @@ public class Player : Entity
     // 방향용 Cam
     Camera cam;
     Vector2 lookDirection;
+    public Vector2 LookDirection { get { return lookDirection; } }
     float length = 0f;
+    // 와이어 액션
+    bool isWireActive = false;
+    public bool IsWireActive { get { return isWireActive; } set { isWireActive = value; } }
     protected override void Awake()
     {
         base.Awake();
@@ -117,6 +121,7 @@ public class Player : Entity
     // 아래는 Player Input Component에서 불러와줌
     void OnMove(InputValue inputValue)
     {
+        if(isWireActive) return; // 와이어 액션 중에는 이동 불가
         moveDirection = inputValue.Get<Vector2>();
         moveDirection = moveDirection.normalized; // 아마 자동 노멀라이즈
     }
@@ -130,6 +135,7 @@ public class Player : Entity
     }
     void OnJump(InputValue inputValue)
     {
+        if (isWireActive) return; // 와이어 액션 중에는 점프 불가
         // inputValue.isPressed를 안하면 키 다운, 키 업 두 번 호출 됨
         if (!inputValue.isPressed) return;
         if (isJumping)
@@ -155,12 +161,13 @@ public class Player : Entity
         // 현재 좌클릭
 
         // 3초 지속
-        Debug.DrawLine(transform.position, transform.position + (Vector3)lookDirection * length, Color.blue, 3.0f);
+        //Debug.DrawLine(transform.position, transform.position + (Vector3)lookDirection * length, Color.blue, 3.0f);
     }
 
     void OnBaseAttack(InputValue inputValue)
     {
         if (!inputValue.isPressed) return;
+        if (isWireActive) return; // 와이어 액션 중에는 공격 불가
         if (Time.fixedTime - attackTime < attackDelay)
             return;
         baseAttack.UseSkill(this, lookDirection);

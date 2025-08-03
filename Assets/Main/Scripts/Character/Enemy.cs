@@ -60,6 +60,7 @@ public abstract class Enemy : Entity
         exclude |= 1 << 5;
         exclude |= 1 << 6;
         exclude |= 1 << 8;
+        exclude |= 1 << 9; // 장애물도 제외
         trigerCol.excludeLayers = exclude; // 제외, 플레이어 빼고 다 제외
 
         bodyDamageTimer = bodyDamageTime; // 몸박당하자 마자 데미지 주기

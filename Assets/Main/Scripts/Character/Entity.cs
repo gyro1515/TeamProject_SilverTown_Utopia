@@ -20,6 +20,7 @@ public abstract class Entity : MonoBehaviour
    
 
     protected Vector2 moveDirection;
+    public Vector2 MoveDirection { get { return moveDirection; } set { moveDirection = value; } }
     //protected List<Skill> skills;
 
     protected virtual void Awake()
@@ -60,7 +61,7 @@ public abstract class Entity : MonoBehaviour
     {
         rigidBody2D.velocity = moveDirection * MoveSpeed;
     }
-    protected virtual void MoveAnimation(Vector2 direction)
+    public virtual void MoveAnimation(Vector2 direction)
     {
         if (direction == Vector2.zero)
         {

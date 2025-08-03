@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6285718782246976551}
   - component: {fileID: 5126615148152883678}
   - component: {fileID: -4353563347400854540}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ObstacleObjcet_Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
