@@ -31,6 +31,7 @@ public class Player : Entity
     // 와이어 액션
     bool isWireActive = false;
     public bool IsWireActive { get { return isWireActive; } set { isWireActive = value; } }
+    WireAction wireaction = null;
 
     protected override void Awake()
     {
@@ -42,6 +43,7 @@ public class Player : Entity
         damageStartTime -= damageDelay;
         attackTime -= attackDelay;
         cam = Camera.main;
+        wireaction = GetComponent<WireAction>();
 
         UIManager.Instance.SetHpBar((float)currentHp / MaxHp); // 체력바 세팅
     }
@@ -70,6 +72,16 @@ public class Player : Entity
 
     }
 
+    /*private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (isWireActive) wireaction.CheckIsWiredObstacle(collision.gameObject);
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (isWireActive) wireaction.CheckIsWiredObstacle(collision.gameObject);
+
+    }*/
+    
     /*protected override void FixedUpdate()
     {
         base.FixedUpdate(); // 무브는 부모에서
@@ -160,6 +172,14 @@ public class Player : Entity
     {
         // inputValue.isPressed를 안하면 키 다운, 키 업 두 번 호출 됨
         if (!inputValue.isPressed) return;
+
+        //lookDirection 다시 계산하는 이유: 마우스 움직임이 없다면 OnLook() 호출 안됨...
+        // 따라서 lookDirection따라 스킬을 사용하는 것들은 발사할때 lookDirection갱신 필요
+        Vector2 mousePosition = Mouse.current.position.ReadValue();
+        Vector2 worldPos = cam.ScreenToWorldPoint(mousePosition);
+        lookDirection = (worldPos - (Vector2)transform.position);
+        lookDirection = lookDirection.normalized;
+        wireaction.CheckCanWireAction();
 
     }
     void OnSkill1(InputValue inputValue)

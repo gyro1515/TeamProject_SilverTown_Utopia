@@ -25,9 +25,9 @@
                 },
                 {
                     "name": "Wire",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "68ed3e0e-f5cc-4530-9a96-8051cd0908ac",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -130,7 +130,7 @@
                 {
                     "name": "",
                     "id": "8d887fe3-75c9-4e76-8165-9d9910b4f2e6",
-                    "path": "",
+                    "path": "<Keyboard>/v",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
