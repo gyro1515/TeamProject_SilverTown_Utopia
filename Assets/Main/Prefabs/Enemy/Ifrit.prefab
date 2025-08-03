@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7469700472621411297}
   - component: {fileID: 6342397406001884058}
-  - component: {fileID: 8336818272198695992}
+  - component: {fileID: 860633845330994319}
+  - component: {fileID: 7639927277982300351}
   m_Layer: 0
   m_Name: Ifrit
   m_TagString: Untagged
@@ -61,7 +62,42 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8336818272198695992
+--- !u!70 &860633845330994319
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682035191368389784}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.06720054, y: -0.4368024}
+  m_Size: {x: 2.664407, y: 5.150816}
+  m_Direction: 0
+--- !u!114 &7639927277982300351
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,9 +106,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1682035191368389784}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 133d9543d4393d64696f994880b07768, type: 3}
+  m_Script: {fileID: 11500000, guid: 722e913469ae8bf4bb2ac862e20b7745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHp: 0
+  MaxHp: 0
+  moveSpeed: 5
+  target: {fileID: 0}
+  attackRange: 3
+  chaseRange: 10
+  bodyDamage: 1
+  bodyDamageTime: 0.1
+  dashMultiple: 3
+  actor: {fileID: 1548962701196398411, guid: d545e1a1d783b7148bbaa1137adb118e, type: 3}
+  isPatternEnd: 1
 --- !u!1 &3052415846485800928
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,7 +146,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3052415846485800928}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -146,7 +193,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: -1800771819, guid: 4799975632af7a24da6256848be36b7f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

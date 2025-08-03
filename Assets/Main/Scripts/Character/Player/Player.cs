@@ -31,6 +31,7 @@ public class Player : Entity
     // 와이어 액션
     bool isWireActive = false;
     public bool IsWireActive { get { return isWireActive; } set { isWireActive = value; } }
+
     protected override void Awake()
     {
         base.Awake();
@@ -102,6 +103,13 @@ public class Player : Entity
 
         damageStartTime = Time.fixedTime;
         base.TakeDamage(damage);
+        
+        // 데미지를 입었을때 카메라 흔들고 데미지 애니매이션 재생
+        ShakeCamera shake = Camera.main.GetComponent<ShakeCamera>();
+        if (shake != null)
+            StartCoroutine(shake.ShakeEffectCamera());
+        gameObject.GetComponentInChildren<Animator>().Play("TakeDamage");
+
         Debug.Log($"{currentHp} / {MaxHp}");
         UIManager.Instance.SetHpBar((float)currentHp / MaxHp);
     }
