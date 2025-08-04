@@ -34,6 +34,8 @@ public class MapGenerater : MonoBehaviour
     [SerializeField] TileBase wallTile;
     [SerializeField] TileBase bossWallTile; // 적과 보스 타일 구분용
     [SerializeField] TileBase enemyWallTile; // 적과 보스 타일 구분용
+    [SerializeField] GameObject grid; // 보스 벽을 그리기 위한 그리드
+    List<Tilemap> bossWallMaps = new List<Tilemap>(); // 보스 별로 벽 따로 생성하기
 
     [Header("Character Setting")]
     [SerializeField] GameObject player;
@@ -57,6 +59,7 @@ public class MapGenerater : MonoBehaviour
     private HashSet<(int, int)> connections = new HashSet<(int, int)>();
     private Dictionary<int, List<int>> connectionMap = new Dictionary<int, List<int>>();
 
+
     // 맵 탐색용 변수들
     bool bIsMoveToRoom = false; // true일때만 현재 위치한 방이 어떤 방인지 탐색하도록 설정
     public bool IsMoveToRoom { get { return bIsMoveToRoom; } set { bIsMoveToRoom = value; } }
@@ -79,9 +82,21 @@ public class MapGenerater : MonoBehaviour
         else if(UnityEngine.Input.GetKeyDown(KeyCode.R))
         {
             // 보스 방 진입 시 호출되는 함수, 추후 함수 다른 곳으로 이동해야 함
-            // 보스 방의 벽 비활성화
-            OpenBossRoom();
+            // 보스 방의 벽 비활성화 -> 우선 모든 방 비활성화
+            for (int i = 0; i < bossWallMaps.Count; i++)
+            {
+                OpenBossRoom(i); 
+            }
         }
+        else if (UnityEngine.Input.GetKeyDown(KeyCode.T))
+        {
+            // 테스트로 모든 방 비활성화
+            for (int i = 0; i < bossWallMaps.Count; i++)
+            {
+                CloseBossRoom(i);
+            }
+        }
+
 
     }
 
@@ -89,7 +104,10 @@ public class MapGenerater : MonoBehaviour
     {
         tilemap.ClearAllTiles();
         wallTilemap.ClearAllTiles();
-        bossWallMap.ClearAllTiles();
+        foreach (var bossWall in bossWallMaps)
+        {
+            bossWall.ClearAllTiles();
+        }
         roadTriger.ClearAllTiles();
         candidateRooms.Clear();
         finalRooms.Clear();
@@ -116,7 +134,10 @@ public class MapGenerater : MonoBehaviour
 
         tilemap.CompressBounds(); // 타일 맵 크기 최적화
         wallTilemap.CompressBounds(); // 타일 맵 크기 최적화
-        bossWallMap.CompressBounds(); // 타일 맵 크기 최적화
+        foreach (var bossWall in bossWallMaps)
+        {
+            bossWall.CompressBounds();
+        }
         roadTriger.CompressBounds(); // 타일 맵 크기 최적화
     }
 
@@ -415,6 +436,7 @@ public class MapGenerater : MonoBehaviour
         boss.transform.position = finalRooms[bossRoomIdx].center;
         boss.GetComponent<Enemy>().MyRoom.Room = finalRooms[bossRoomIdx];
         boss.GetComponent<Enemy>().MyRoom.RoomIdx = bossRoomIdx;
+        boss.GetComponent<Enemy>().MyRoom.RoomWallIdx = bossWallMaps.Count;
         // 보스 방 입구 벽으로 막기
         SetBossRoom(finalRooms[bossRoomIdx], bossWallTile);
 
@@ -434,6 +456,8 @@ public class MapGenerater : MonoBehaviour
                 enemys[j].transform.position = finalRooms[i].center;
                 enemys[j].GetComponent<Enemy>().MyRoom.Room = finalRooms[i];
                 enemys[j].GetComponent<Enemy>().MyRoom.RoomIdx = i;
+                enemys[j].GetComponent<Enemy>().MyRoom.RoomWallIdx = bossWallMaps.Count;
+
                 // 몬스터 방 입구 벽으로 막기
                 SetBossRoom(finalRooms[i], enemyWallTile);
                 break;
@@ -482,7 +506,8 @@ public class MapGenerater : MonoBehaviour
                 if (testBoss?.MyRoom.RoomIdx == i) // 보스방이라면 보스 활성화
                 {
                     testBoss.BossState = Enemy.EBossState.Active;
-                    CloseBossRoom();
+                    CloseBossRoom(testBoss.MyRoom.RoomWallIdx);
+                    AudioManager.Instance.SetBossBattleBGM(testBoss.BossBGM);
                 }
                 // 몬스터 방 체크
                 for (int j = 0; j < enemys.Count; j++)
@@ -491,11 +516,13 @@ public class MapGenerater : MonoBehaviour
                     if (enemy?.MyRoom.RoomIdx != i) continue;
 
                     enemy.BossState = Enemy.EBossState.Active;
-                    CloseBossRoom();
+                    CloseBossRoom(enemy.MyRoom.RoomWallIdx);
+                    AudioManager.Instance.SetBossBattleBGM(enemy.BossBGM);
+
                     break;
                 }
                 tCam.SetMap(room);
-                Debug.Log("BossRoom");
+                Debug.Log("InRoom");
                 // 방을 찼았다면 탐색 중지
                 IsMoveToRoom = false;
                 return room;
@@ -508,29 +535,29 @@ public class MapGenerater : MonoBehaviour
     void SetBossRoom(RectInt bossRoom, TileBase wallTile)
     {
         if (bossWallMap == null) return;
-
+        bossWallMaps.Add(Instantiate(bossWallMap, grid.transform));
+        int curBossWalMapIdx = bossWallMaps.Count - 1;
         // 버전 1: 가장 쉬운 버전, 벽으로 둘러싸기
         for (int i = bossRoom.min.x - 1; i < bossRoom.max.x + 1; i++)
         {
-            bossWallMap.SetTile(new Vector3Int(i, bossRoom.min.y - 1, 0), wallTile);
-            bossWallMap.SetTile(new Vector3Int(i, bossRoom.max.y, 0), wallTile);
+            bossWallMaps[curBossWalMapIdx].SetTile(new Vector3Int(i, bossRoom.min.y - 1, 0), wallTile);
+            bossWallMaps[curBossWalMapIdx].SetTile(new Vector3Int(i, bossRoom.max.y, 0), wallTile);
         }
         for (int j = bossRoom.min.y - 1; j < bossRoom.max.y + 1; j++)
         {
-            bossWallMap.SetTile(new Vector3Int(bossRoom.min.x - 1, j, 0), wallTile);
-            bossWallMap.SetTile(new Vector3Int(bossRoom.max.x, j, 0), wallTile);
-
+            bossWallMaps[curBossWalMapIdx].SetTile(new Vector3Int(bossRoom.min.x - 1, j, 0), wallTile);
+            bossWallMaps[curBossWalMapIdx].SetTile(new Vector3Int(bossRoom.max.x, j, 0), wallTile);
         }
     }
 
     // 통합해서 SetBossRoomDoor(bool active) 로??
-    void OpenBossRoom()
+    public void OpenBossRoom(int roomWallIdx)
     {
-        bossWallMap.gameObject.SetActive(false);
+        bossWallMaps[roomWallIdx].gameObject.SetActive(false);
     }
-    void CloseBossRoom()
+    void CloseBossRoom(int roomWallIdx)
     {
-        bossWallMap.gameObject.SetActive(true);
+        bossWallMaps[roomWallIdx].gameObject.SetActive(true);
     }
     public void SetBossDeActive()
     {

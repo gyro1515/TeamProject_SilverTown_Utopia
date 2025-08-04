@@ -21,6 +21,7 @@ public class RoadTriger : MonoBehaviour
         bIsOnRoad = true;
         // 보스 전부 비활성화
         mapGenerater.SetBossDeActive();
+        AudioManager.Instance.PlayBGM(BGMType.Feild);
 
     }
     private void OnTriggerExit2D(Collider2D collision)
