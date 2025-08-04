@@ -275,11 +275,6 @@ public class Player : Entity
         this.currentHp = Mathf.Clamp(currentHp + hp, 0, GetMaxHP());
     }
 
-    public void UpgradeSpeed(int speed)
-    {
-        this.MoveSpeed += speed;
-    }
-
     public void SetDamageMultiplier(float f)
     {
         this.playerDamageMultiplier = f;

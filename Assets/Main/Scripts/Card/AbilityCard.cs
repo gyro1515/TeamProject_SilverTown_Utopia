@@ -10,7 +10,6 @@ public class AbilityCard : UpgradeCard
     Player player;
     [SerializeField]int plusHp = 0;
     [SerializeField] float weaponAtkMultiplier = 1.0f;
-    [SerializeField]int plusSpeed = 0;
 
     public override void ApplySelectedCard()
     {
@@ -22,10 +21,6 @@ public class AbilityCard : UpgradeCard
         if (weaponAtkMultiplier != 1.0f)
         {
             player.SetDamageMultiplier(weaponAtkMultiplier);
-        }
-        if (plusSpeed != 0)
-        {
-            player.UpgradeSpeed(plusSpeed);
         }
     }
 
