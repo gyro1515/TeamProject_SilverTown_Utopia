@@ -26,4 +26,4 @@ MonoBehaviour:
   attackRemain: 0
   attackAngle: 0
   isFixedRotation: 1
-  size: {x: 2, y: 2}
+  size: {x: 10, y: 10}

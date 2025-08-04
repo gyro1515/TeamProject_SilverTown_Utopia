@@ -18,7 +18,7 @@ MonoBehaviour:
   includeEntityAttack: 0
   direction: {x: 0, y: 0}
   positionCenter: {x: 0, y: 0, z: 0}
-  animPrefab: {fileID: 0}
+  animPrefab: {fileID: 3656194253745927580, guid: e38e9b49ccacef4478c6aa38306cfdcf, type: 3}
   audioClip: {fileID: 0}
   colliderPrefab: {fileID: 3617344549384259999, guid: 9b8a40c66a1a6ba4ca60c0f2d551ffb8, type: 3}
   hitCollider: {fileID: 0}

@@ -487,12 +487,13 @@ public class MapGenerater : MonoBehaviour
         {
             // 몇개 설치할 것인가 -> 대충 최소 2개 ~ 최대 spawnObstacleCount개
             int obsCnt = Random.Range(2, spawnObstacleCount);
+            int padding = 2;
             for (int i = 0; i < obsCnt; i++)
             {
                 // 소환할 위치
                 Vector3 pos = new Vector3();
-                pos.x = Random.Range(room.min.x + 1, room.max.x - 1) + 0.5f;
-                pos.y = Random.Range(room.min.y + 1, room.max.y - 1) + 0.5f;
+                pos.x = Random.Range(room.min.x + padding, room.max.x - padding) + 0.5f;
+                pos.y = Random.Range(room.min.y + padding, room.max.y - padding) + 0.5f;
                 // 장애물 인덱스 선택
                 int obsIdx = Random.Range(0, obstacles.Count);
                 // 지정 위치에 소환

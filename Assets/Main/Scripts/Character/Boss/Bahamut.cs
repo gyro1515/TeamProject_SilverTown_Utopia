@@ -326,6 +326,11 @@ public class Bahamut : Enemy
         BossState = EBossState.PowerOff;
         return INode.ENodeState.Success;
     }
-   
-    
+
+    protected override void OnDead()
+    {
+        base.OnDead();
+        // 엔딩으로 넘어가기
+        Debug.Log("보스 클리어, 엔딩 씬으로 넘어가기");
+    }
 }

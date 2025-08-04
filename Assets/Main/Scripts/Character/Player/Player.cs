@@ -311,4 +311,10 @@ public class Player : Entity
         UIManager.Instance.SetHpBar((float)currentHp / GetMaxHP());
         Debug.Log($"체력 회복량: {addHp} = cur: {currentHp} / max: {GetMaxHP()}");
     }
+    protected override void OnDead()
+    {
+        base.OnDead();
+        // 플레이어 죽음처리
+        Debug.Log("플레이어 죽음");
+    }
 }

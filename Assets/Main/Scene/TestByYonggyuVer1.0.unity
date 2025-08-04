@@ -4442,6 +4442,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d681fd0534d62ba4597ca2f7e0b9747f, type: 2}
   - {fileID: 11400000, guid: e224aff605b1e0347b55fea7f554170d, type: 2}
   - {fileID: 11400000, guid: 7c810332df8a3d74b8674d058780f6b0, type: 2}
+  baseAttackSprite: {fileID: 0}
+  skillSprites: []
 --- !u!1 &1726223289
 GameObject:
   m_ObjectHideFlags: 0

@@ -188,6 +188,7 @@ public abstract class Enemy : Entity
 
     protected override void OnDead()
     {
+        // 기본 몬스터 죽음
         base.OnDead();
         target.killCount++;
         target.closestEnemy = null;

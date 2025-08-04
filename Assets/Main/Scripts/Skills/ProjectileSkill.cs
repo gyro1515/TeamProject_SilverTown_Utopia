@@ -43,6 +43,8 @@ public class ProjectileSkill : Skill
         do
         {
             Projectile projectile = Instantiate(projectilePrefab, positionCenter, Quaternion.identity);
+            Instantiate(animPrefab, projectile.transform);
+
             projectile.transform.localScale = scale;
             projectile.Init(shooter, RotateVector2(direction * projectileSpeed, startangle), skillDamage);
             startangle += (spread / 2.0f) / (projectileQuantity / 2);

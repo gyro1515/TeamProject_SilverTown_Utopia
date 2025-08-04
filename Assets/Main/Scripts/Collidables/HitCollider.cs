@@ -90,7 +90,13 @@ public class HitCollider : MonoBehaviour
             if (animPrefab != null)
             {
                 //Debug.Log(animPrefab.name);
-                skillObject = Instantiate(animPrefab, transform.position, Quaternion.identity);
+                skillObject = Instantiate(animPrefab);
+                skillObject.gameObject.transform.rotation = transform.rotation;
+                skillObject.gameObject.transform.position = transform.position;
+                /*Vector3 rot = transform.rotation.eulerAngles;
+                rot.z += 90.0f;
+                
+                skillObject = Instantiate(animPrefab, transform.position, Quaternion.Euler(rot));*/
 
                 /*if (hitCollider.GetComponent<RectTransform>() == null)
                 {

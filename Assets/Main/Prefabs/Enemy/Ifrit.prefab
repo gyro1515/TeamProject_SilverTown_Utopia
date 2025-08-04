@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7469700472621411297}
+  - component: {fileID: 7639927277982300351}
   - component: {fileID: 6342397406001884058}
   - component: {fileID: 860633845330994319}
-  - component: {fileID: 7639927277982300351}
   m_Layer: 0
   m_Name: Ifrit
   m_TagString: Enemy
@@ -35,6 +35,30 @@ Transform:
   - {fileID: 6772312442819429266}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7639927277982300351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682035191368389784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 722e913469ae8bf4bb2ac862e20b7745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHp: 200
+  MaxHp: 200
+  moveSpeed: 5
+  target: {fileID: 0}
+  attackRange: 3
+  chaseRange: 10
+  bodyDamage: 1
+  bodyDamageTime: 0.1
+  dashMultiple: 3
+  actor: {fileID: 1548962701196398411, guid: d545e1a1d783b7148bbaa1137adb118e, type: 3}
+  bossBGM: {fileID: 8300000, guid: 43b9d0ef5d30e654bae3d432ee707e5f, type: 3}
+  isPatternEnd: 1
 --- !u!50 &6342397406001884058
 Rigidbody2D:
   serializedVersion: 4
@@ -97,30 +121,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.52602494}
   m_Size: {x: 1.5937312, y: 2.1172407}
   m_Direction: 0
---- !u!114 &7639927277982300351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1682035191368389784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 722e913469ae8bf4bb2ac862e20b7745, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHp: 200
-  MaxHp: 200
-  moveSpeed: 5
-  target: {fileID: 0}
-  attackRange: 3
-  chaseRange: 10
-  bodyDamage: 1
-  bodyDamageTime: 0.1
-  dashMultiple: 3
-  actor: {fileID: 1548962701196398411, guid: d545e1a1d783b7148bbaa1137adb118e, type: 3}
-  bossBGM: {fileID: 8300000, guid: 43b9d0ef5d30e654bae3d432ee707e5f, type: 3}
-  isPatternEnd: 1
 --- !u!1 &3052415846485800928
 GameObject:
   m_ObjectHideFlags: 0

@@ -141,9 +141,16 @@ MonoBehaviour:
   playerExtraHealth: 0
   killCount: 0
   baseAttack: {fileID: 11400000, guid: e4c731e206ca3a44f8310fe997e67705, type: 2}
-  playerSkills: []
-  skillCooldown: []
-  activateTime: []
+  playerSkills:
+  - {fileID: 11400000, guid: 33c6f001404e14f4e92c39f66d866db5, type: 2}
+  - {fileID: 11400000, guid: 0172d1a900064be44b323df49a09c494, type: 2}
+  skillCooldown:
+  - 20
+  - 60
+  activateTime:
+  - 0
+  - 0
+  closestEnemy: {fileID: 0}
 --- !u!114 &5754774147068705049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeedMultiple: 5
-  wireSpeed: 8
+  wireSpeed: 24
   wireDistance: 8
   coolTime: 3
   wireGO: {fileID: 2764614529410434145}

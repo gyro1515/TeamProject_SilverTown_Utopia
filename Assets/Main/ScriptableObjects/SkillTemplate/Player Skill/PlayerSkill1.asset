@@ -18,10 +18,11 @@ MonoBehaviour:
   includeEntityAttack: 0
   direction: {x: 1, y: 0}
   positionCenter: {x: 0, y: 0, z: 0}
-  animPrefab: {fileID: 0}
+  animPrefab: {fileID: 7979663448906532440, guid: 842dc5680c583d349bb6f4c9f3e3ff28, type: 3}
   audioClip: {fileID: 0}
   projectilePrefab: {fileID: 8324435634244213426, guid: cac8bffb8dd1e2c439f81fa8be92be0c, type: 3}
   projectileQuantity: 3
   spread: 30
   projectileSpeed: 5
   scale: {x: 0.4, y: 0.4}
+  isAuto: 0
