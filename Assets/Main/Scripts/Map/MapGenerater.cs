@@ -59,6 +59,7 @@ public class MapGenerater : MonoBehaviour
     private Dictionary<int, List<int>> connectionMap = new Dictionary<int, List<int>>();
     private Enemy curEnemy = null;
     private int bossRoomIdx = -1;
+    private int bossWallIdx = -1;
 
     // 맵 탐색용 변수들
     bool bIsMoveToRoom = false; // true일때만 현재 위치한 방이 어떤 방인지 탐색하도록 설정
@@ -78,13 +79,6 @@ public class MapGenerater : MonoBehaviour
         if (UnityEngine.Input.GetKeyDown(KeyCode.E))
         {
             GenerateMap();
-        }
-        if (UnityEngine.Input.GetKeyDown(KeyCode.G))
-        {
-            // 보스방문 열기
-            Enemy bossE = boss.gameObject.GetComponent<Enemy>();
-            OpenBossRoom(bossE.MyRoom.RoomWallIdx);
-
         }
         else if (UnityEngine.Input.GetKeyDown(KeyCode.K))
         {
@@ -418,6 +412,7 @@ public class MapGenerater : MonoBehaviour
         int maxMoveCnt = -1;
         bossRoomIdx = -1;
         float maxDist = -1;
+        bossWallIdx = -1;
         for (int i = 1; i < finalRooms.Count; i++)
         {
             float tmpDist = Vector2.Distance(finalRooms[0].center, finalRooms[i].center);
@@ -432,8 +427,9 @@ public class MapGenerater : MonoBehaviour
         boss.GetComponent<Enemy>().MyRoom.Room = finalRooms[bossRoomIdx];
         boss.GetComponent<Enemy>().MyRoom.RoomIdx = bossRoomIdx;
         boss.GetComponent<Enemy>().MyRoom.RoomWallIdx = bossWallMaps.Count;
+        bossWallIdx = bossWallMaps.Count;
         // 보스 방 입구 벽으로 막기
-        SetBossRoom(finalRooms[bossRoomIdx], bossWallTile);
+        SetBossRoom(true, bossRoomIdx, bossWallTile);
 
         int[] visitedForEnemy = new int[finalRooms.Count];
         visitedForEnemy[0] = 1;
@@ -454,7 +450,7 @@ public class MapGenerater : MonoBehaviour
                 enemys[j].GetComponent<Enemy>().MyRoom.RoomWallIdx = bossWallMaps.Count;
 
                 // 몬스터 방 입구 벽으로 막기
-                SetBossRoom(finalRooms[i], enemyWallTile);
+                SetBossRoom(false, i, enemyWallTile);
                 bossWallMaps[bossWallMaps.Count - 1].gameObject.SetActive(false); // 몬스터 방은 처음에 비활성화
                 break;
             }
@@ -533,11 +529,16 @@ public class MapGenerater : MonoBehaviour
         // 그럴리는 없겠지만 방을 못찾았다면 멀리 있는 값 리턴
         return new RectInt(666, 666, 0, 0);
     }
-    void SetBossRoom(RectInt bossRoom, TileBase wallTile)
+    //void SetBossRoom(RectInt bossRoom, TileBase wallTile)
+    void SetBossRoom(bool isBossRoom, int bossRoomIdx, TileBase wallTile)
     {
         if (bossWallMap == null) return;
         bossWallMaps.Add(Instantiate(bossWallMap, grid.transform));
         int curBossWalMapIdx = bossWallMaps.Count - 1;
+        BossWallCollision bWCol = bossWallMaps[curBossWalMapIdx].GetComponent<BossWallCollision>();
+        bWCol?.Init(isBossRoom, bossRoomIdx, curBossWalMapIdx);
+
+        RectInt bossRoom = finalRooms[bossRoomIdx];
         // 버전 1: 가장 쉬운 버전, 벽으로 둘러싸기
         for (int i = bossRoom.min.x - 1; i < bossRoom.max.x + 1; i++)
         {
@@ -556,8 +557,13 @@ public class MapGenerater : MonoBehaviour
     {
         bossWallMaps[roomWallIdx].gameObject.SetActive(false);
     }
-    void CloseBossRoom(int roomWallIdx)
+    public void CloseBossRoom(int roomWallIdx)
     {
+        if(roomWallIdx == bossWallIdx)
+        {
+            BossWallCollision bwCol = bossWallMaps[roomWallIdx].GetComponent<BossWallCollision>();
+            bwCol.SetIsInBossRoom(true);
+        }
         bossWallMaps[roomWallIdx].gameObject.SetActive(true);
     }
     public void SetBossDeActive()
