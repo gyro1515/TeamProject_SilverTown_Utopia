@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8206946798181338089}
   - component: {fileID: 3617344549384259999}
   - component: {fileID: 1130454020744266073}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SquareHitCollider
   m_TagString: Attack
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ PolygonCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -165,7 +165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 468803856005588522}
   - component: {fileID: 7165879538314558774}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WarningZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3612861517456462271}
   - component: {fileID: 4934801133052725983}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}

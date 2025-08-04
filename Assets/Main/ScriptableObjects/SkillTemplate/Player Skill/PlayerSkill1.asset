@@ -23,5 +23,5 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8324435634244213426, guid: cac8bffb8dd1e2c439f81fa8be92be0c, type: 3}
   projectileQuantity: 3
   spread: 30
-  projectileSpeed: 1
-  scale: {x: 1, y: 1}
+  projectileSpeed: 5
+  scale: {x: 0.2, y: 0.2}

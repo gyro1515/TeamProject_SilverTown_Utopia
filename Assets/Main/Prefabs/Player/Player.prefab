@@ -137,8 +137,13 @@ MonoBehaviour:
   currentHp: 100
   MaxHp: 100
   moveSpeed: 7
+  playerDamageMultiplier: 1
+  playerExtraHealth: 0
   killCount: 0
   baseAttack: {fileID: 11400000, guid: e4c731e206ca3a44f8310fe997e67705, type: 2}
+  playerSkills: []
+  skillCooldown: []
+  activateTime: []
 --- !u!114 &5754774147068705049
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5735290356251631903}
   - component: {fileID: 8206946798181338089}
   - component: {fileID: -4062254150371820900}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ChargeWarningCollider
   m_TagString: Attack
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   m_Component:
   - component: {fileID: 468803856005588522}
   - component: {fileID: 7165879538314558774}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WarningZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3612861517456462271}
   - component: {fileID: 4934801133052725983}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
