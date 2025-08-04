@@ -38,24 +38,7 @@
 
 > 궁수의 전설을 재해석하여, 절차적 맵 생성과 몬스터 회피 패턴을 차용한 역동적인 전투를 구현하고자 하였습니다.
 
-- 플레이어와 몬스터가 모두 원거리 공격에 치중하면 게임성이 단조로워질 수 있다는 점을 고려하여,
-- **플레이어는 근접 공격 위주로 설계**하여 조작감과 긴장감을 높였습니다.
-
----
-
-## 💜 주요기능
-
-### 1. 절차적 맵 생성
-- 충돌 분산 알고리즘(Room Separation)과 MST(Minimum Spanning Tree)을 접목하여
-- **매번 다른 형태의 맵**을 자동으로 생성하도록 구성
-<p align="center">
-  <img src="https://raw.githubusercontent.com/gyro1515/TeamProject_SilverTown_Utopia/main/README_Images/Mapping.gif" alt="SilverTown Utopia 로고" width="600"/>
-</p>
-
-
-### 2. Behavior Tree 기반 AI
-- 몬스터가 **고정된 공격만 하지 않고**, 상황에 따라 패턴을 달리함
-- 다양한 공격 루트를 통해 **회피 중심의 전투 지양**
+- 플레이어와 몬스터가 모두 원거리 공격등)
 
 ### 3. ScriptableObject 기반 스킬 관리
 - 스킬/패턴 데이터를 모듈화하여 **인스펙터에서 직접 수정 가능**
