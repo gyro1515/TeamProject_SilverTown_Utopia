@@ -16,7 +16,6 @@ public class MapGenerater : MonoBehaviour
         RectInt map;
         int mapIdx;
     }
-    private int bossRoomIdx;
 
     [Header("Map Settings")]
     public int totalCandidates = 50;
@@ -59,6 +58,8 @@ public class MapGenerater : MonoBehaviour
     private HashSet<(int, int)> connections = new HashSet<(int, int)>();
     private Dictionary<int, List<int>> connectionMap = new Dictionary<int, List<int>>();
     private Enemy curEnemy = null;
+    private int bossRoomIdx = -1;
+    private int bossWallIdx = -1;
 
     // 맵 탐색용 변수들
     bool bIsMoveToRoom = false; // true일때만 현재 위치한 방이 어떤 방인지 탐색하도록 설정
@@ -75,26 +76,9 @@ public class MapGenerater : MonoBehaviour
     {
         if (bIsMoveToRoom) GetRoomByPos(player.transform.position); // 이 상태일 시만 현재 위치의 방 찾기
 
-        /*if (UnityEngine.Input.GetKeyDown(KeyCode.E))
+        if (UnityEngine.Input.GetKeyDown(KeyCode.E))
         {
             GenerateMap();
-        }*/
-        if(UnityEngine.Input.GetKeyDown(KeyCode.G))
-        {
-            // 보스 방 진입 시 호출되는 함수, 추후 함수 다른 곳으로 이동해야 함
-            // 보스 방의 벽 비활성화 -> 우선 모든 방 비활성화
-            for (int i = 0; i < bossWallMaps.Count; i++)
-            {
-                OpenBossRoom(i); 
-            }
-        }
-        else if (UnityEngine.Input.GetKeyDown(KeyCode.H))
-        {
-            // 테스트로 모든 방 비활성화
-            for (int i = 0; i < bossWallMaps.Count; i++)
-            {
-                CloseBossRoom(i);
-            }
         }
         else if (UnityEngine.Input.GetKeyDown(KeyCode.K))
         {
@@ -426,8 +410,9 @@ public class MapGenerater : MonoBehaviour
 
         // 최다 이동 횟수 중 가장 거리가 긴 곳을 보스방으로
         int maxMoveCnt = -1;
-        int bossRoomIdx = -1;
+        bossRoomIdx = -1;
         float maxDist = -1;
+        bossWallIdx = -1;
         for (int i = 1; i < finalRooms.Count; i++)
         {
             float tmpDist = Vector2.Distance(finalRooms[0].center, finalRooms[i].center);
@@ -442,8 +427,9 @@ public class MapGenerater : MonoBehaviour
         boss.GetComponent<Enemy>().MyRoom.Room = finalRooms[bossRoomIdx];
         boss.GetComponent<Enemy>().MyRoom.RoomIdx = bossRoomIdx;
         boss.GetComponent<Enemy>().MyRoom.RoomWallIdx = bossWallMaps.Count;
+        bossWallIdx = bossWallMaps.Count;
         // 보스 방 입구 벽으로 막기
-        SetBossRoom(finalRooms[bossRoomIdx], bossWallTile);
+        SetBossRoom(true, bossRoomIdx, bossWallTile);
 
         int[] visitedForEnemy = new int[finalRooms.Count];
         visitedForEnemy[0] = 1;
@@ -464,7 +450,8 @@ public class MapGenerater : MonoBehaviour
                 enemys[j].GetComponent<Enemy>().MyRoom.RoomWallIdx = bossWallMaps.Count;
 
                 // 몬스터 방 입구 벽으로 막기
-                SetBossRoom(finalRooms[i], enemyWallTile);
+                SetBossRoom(false, i, enemyWallTile);
+                bossWallMaps[bossWallMaps.Count - 1].gameObject.SetActive(false); // 몬스터 방은 처음에 비활성화
                 break;
             }
         }
@@ -476,8 +463,8 @@ public class MapGenerater : MonoBehaviour
     {
         foreach(var room in finalRooms)
         {
-            // 몇개 설치할 것인가 -> 대충 최대 20개
-            int obsCnt = Random.Range(0, spawnObstacleCount);
+            // 몇개 설치할 것인가 -> 대충 최소 2개 ~최대 20개
+            int obsCnt = Random.Range(2, spawnObstacleCount);
             for (int i = 0; i < obsCnt; i++)
             {
                 // 소환할 위치
@@ -509,7 +496,7 @@ public class MapGenerater : MonoBehaviour
                 curEnemy = null;
                 // 보스 방 체크
                 Enemy testBoss = boss?.GetComponent<Enemy>();
-                if (testBoss?.MyRoom.RoomIdx == i) // 보스방이라면 보스 활성화
+                if (testBoss.gameObject.activeSelf && testBoss?.MyRoom.RoomIdx == i) // 보스가 활성화 되어 있고 보스방이라면 보스 방 활성화
                 {
                     testBoss.BossState = Enemy.EBossState.Active;
                     CloseBossRoom(testBoss.MyRoom.RoomWallIdx);
@@ -519,7 +506,9 @@ public class MapGenerater : MonoBehaviour
                 // 몬스터 방 체크
                 for (int j = 0; j < enemys.Count; j++)
                 {
-                    if (enemys[j] == null) continue; 
+                    if (enemys[j] == null) continue;
+                    if (!enemys[j].gameObject.activeSelf) continue;
+
                     Enemy enemy = enemys[j]?.GetComponent<Enemy>();
                     if (enemy?.MyRoom.RoomIdx != i) continue;
 
@@ -530,7 +519,7 @@ public class MapGenerater : MonoBehaviour
                     break;
                 }
                 tCam.SetMap(room);
-                Debug.Log("InRoom");
+                //Debug.Log("InRoom");
                 // 방을 찼았다면 탐색 중지
                 IsMoveToRoom = false;
                 return room;
@@ -540,11 +529,16 @@ public class MapGenerater : MonoBehaviour
         // 그럴리는 없겠지만 방을 못찾았다면 멀리 있는 값 리턴
         return new RectInt(666, 666, 0, 0);
     }
-    void SetBossRoom(RectInt bossRoom, TileBase wallTile)
+    //void SetBossRoom(RectInt bossRoom, TileBase wallTile)
+    void SetBossRoom(bool isBossRoom, int bossRoomIdx, TileBase wallTile)
     {
         if (bossWallMap == null) return;
         bossWallMaps.Add(Instantiate(bossWallMap, grid.transform));
         int curBossWalMapIdx = bossWallMaps.Count - 1;
+        BossWallCollision bWCol = bossWallMaps[curBossWalMapIdx].GetComponent<BossWallCollision>();
+        bWCol?.Init(isBossRoom, bossRoomIdx, curBossWalMapIdx);
+
+        RectInt bossRoom = finalRooms[bossRoomIdx];
         // 버전 1: 가장 쉬운 버전, 벽으로 둘러싸기
         for (int i = bossRoom.min.x - 1; i < bossRoom.max.x + 1; i++)
         {
@@ -563,8 +557,13 @@ public class MapGenerater : MonoBehaviour
     {
         bossWallMaps[roomWallIdx].gameObject.SetActive(false);
     }
-    void CloseBossRoom(int roomWallIdx)
+    public void CloseBossRoom(int roomWallIdx)
     {
+        if(roomWallIdx == bossWallIdx)
+        {
+            BossWallCollision bwCol = bossWallMaps[roomWallIdx].GetComponent<BossWallCollision>();
+            bwCol.SetIsInBossRoom(true);
+        }
         bossWallMaps[roomWallIdx].gameObject.SetActive(true);
     }
     public void SetBossDeActive()

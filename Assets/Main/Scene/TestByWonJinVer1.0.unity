@@ -2692,6 +2692,42 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1799361076}
+    - target: {fileID: 6812867654055286121, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: activateTime.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812867654055286121, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: playerSkills.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812867654055286121, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: skillCooldown.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812867654055286121, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: playerSkills.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 33c6f001404e14f4e92c39f66d866db5, type: 2}
+    - target: {fileID: 6812867654055286121, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: playerSkills.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0172d1a900064be44b323df49a09c494, type: 2}
+    - target: {fileID: 6812867654055286121, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: playerSkills.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0172d1a900064be44b323df49a09c494, type: 2}
+    - target: {fileID: 6812867654055286121, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: skillCooldown.Array.data[0]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812867654055286121, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: skillCooldown.Array.data[1]
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812867654055286121, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: skillCooldown.Array.data[2]
+      value: 120
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -159,6 +159,7 @@ public abstract class Enemy : Entity
     {
         base.OnDead();
         target.killCount++;
+        target.Levelup();
         // 해당 적 죽으면 방 문 열고, 
         GameManager.Instance.MapGenerater.OpenBossRoom(MyRoom.RoomWallIdx);
         // 카드 선택UI 키기
