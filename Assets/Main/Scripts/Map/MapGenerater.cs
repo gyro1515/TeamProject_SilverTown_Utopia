@@ -40,7 +40,12 @@ public class MapGenerater : MonoBehaviour
     [SerializeField] GameObject player;
     public GameObject PlayerGO { get { return player; } }
     [SerializeField] GameObject boss;
-    [SerializeField] List<GameObject> enemys;
+    [SerializeField] List<GameObject> enemys = new List<GameObject>();
+
+    [Header("Potion Setting")]
+    [SerializeField] List<GameObject> potions = new List<GameObject>();
+    List<GameObject> spawnPotions = new List<GameObject>();
+
 
     [Header("DrawLine Setting")]
     [SerializeField] float time = 4.0f;
@@ -96,7 +101,9 @@ public class MapGenerater : MonoBehaviour
         foreach (var bossWall in bossWallMaps)
         {
             bossWall.ClearAllTiles();
+            Destroy(bossWall.gameObject);
         }
+        bossWallMaps.Clear();
         roadTriger.ClearAllTiles();
         candidateRooms.Clear();
         finalRooms.Clear();
@@ -108,6 +115,11 @@ public class MapGenerater : MonoBehaviour
             Destroy(obs);
         }
         spawnObstacles.Clear();
+        foreach (var potion in spawnPotions)
+        {
+            Destroy(potion);
+        }
+        spawnPotions.Clear();
 
         GenerateInitialRooms();
         ResolveRoomCollisions();
@@ -456,14 +468,24 @@ public class MapGenerater : MonoBehaviour
             }
         }
 
-        // 테스트로 캐릭터 옆으로 이동
-        //boss.transform.position = player.transform.position + (Vector3)(Vector2.right * 3);
+        // 방 남았으면 남은 방에 아이템까지
+        for (int i = 0; i < potions.Count; i++)
+        {
+            for (int j = 0; j < finalRooms.Count; j++)
+            {
+                if (visitedForEnemy[j] == 1) continue; // 이미 배정된 몬스터가 있다면 다음
+                visitedForEnemy[i] = 1;
+                spawnPotions.Add(Instantiate(potions[i], finalRooms[j].center, Quaternion.identity, grid.transform));
+                break;
+            }
+        }
+        
     }
     void SetObstacles()
     {
         foreach(var room in finalRooms)
         {
-            // 몇개 설치할 것인가 -> 대충 최소 2개 ~최대 20개
+            // 몇개 설치할 것인가 -> 대충 최소 2개 ~ 최대 spawnObstacleCount개
             int obsCnt = Random.Range(2, spawnObstacleCount);
             for (int i = 0; i < obsCnt; i++)
             {
@@ -474,7 +496,7 @@ public class MapGenerater : MonoBehaviour
                 // 장애물 인덱스 선택
                 int obsIdx = Random.Range(0, obstacles.Count);
                 // 지정 위치에 소환
-                spawnObstacles.Add(Instantiate(obstacles[obsIdx], pos, Quaternion.identity));
+                spawnObstacles.Add(Instantiate(obstacles[obsIdx], pos, Quaternion.identity, tilemap.gameObject.transform));
             }
         }
     }
