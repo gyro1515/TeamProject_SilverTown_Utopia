@@ -41,6 +41,7 @@ public class SelectCardUI : MonoBehaviour
         //Add stat upgrades
         foreach (AbilityCard card in AbilityCardPrefabs)
         {
+            if (card == null) continue;
             AbilityCard copycard = Instantiate(card, transform);
             copycard.SetCard(player);
             upgradeCard.Add(copycard);
