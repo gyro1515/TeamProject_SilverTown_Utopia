@@ -165,7 +165,9 @@ public abstract class Enemy : Entity
         UIManager.Instance.SetSelectCardUIActive();
         // 승리 BGM 추가
         AudioManager.Instance.PlayBGM(BGMType.Victory);
-        Destroy(this.gameObject);
+
+        //Destroy(this.gameObject); 파괴하면 여러 문제 생김
+        gameObject.SetActive(false); // 일단 비활성화로
     }
 
     void AddBodyDamageToTarget()
