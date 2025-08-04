@@ -710,9 +710,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1184322388}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f145eddf79e1c3847b84ffa9b7bae378, type: 3}
+  m_Script: {fileID: 11500000, guid: 623cf08e2dbbcff4db19a18602bd8707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuAnimator: {fileID: 1184322391}
 --- !u!95 &1184322391
 Animator:
   serializedVersion: 5
