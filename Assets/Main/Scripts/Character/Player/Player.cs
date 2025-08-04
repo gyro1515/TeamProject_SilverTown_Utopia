@@ -292,6 +292,7 @@ public class Player : Entity
 
     public void Levelup()
     {
+        Debug.Log("Levelup");
         MaxHp = (int)(100 + 20 * Mathf.Sqrt(killCount));
         int HPoffset =  MaxHp - (int)(100 + 20 * Mathf.Sqrt(killCount - 1));
         this.currentHp = Mathf.Clamp(currentHp + HPoffset, 0, GetMaxHP());
