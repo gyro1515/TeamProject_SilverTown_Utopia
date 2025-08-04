@@ -44,27 +44,34 @@ public class PatternActor : MonoBehaviour
     public IEnumerator ActivePattern(int index)
     {
         patternList[index].isCoolTime = true;
-        for (int i = 0; i < patternList[index].skills.Length; i++)
+        if(patternList[index].isScreenPattern) // 스크린 스킬은 별로도 구현하기
         {
-            dir = enemy.target.transform.position - enemy.transform.position;
-            dir = dir.normalized;
-            patternList[index].SetSkills(i);
-            patternList[index].skills[i].UseSkill(enemy, dir);
-            if (i + 1 == patternList[index].skills.Length)
-                break;
-            float waitdelay = patternList[index].activeTime[i + 1] - patternList[index].activeTime[i];
-            if (patternList[index].ignoreSkillCooldown)
+            ((ScreenPattern)patternList[index]).UseScreenSkillPattern();
+        }
+        else
+        {
+            for (int i = 0; i < patternList[index].skills.Length; i++)
             {
-                if (waitdelay < 0)
-                    waitdelay = 0;
-                yield return new WaitForSeconds(waitdelay);
-            }
-            else
-            {
-                waitdelay += patternList[index].skills[i].coolTime;
-                if (waitdelay < 0)
-                    waitdelay = 0;
-                yield return new WaitForSeconds(waitdelay);
+                dir = enemy.target.transform.position - enemy.transform.position;
+                dir = dir.normalized;
+                patternList[index].SetSkills(i);
+                patternList[index].skills[i].UseSkill(enemy, dir);
+                if (i + 1 == patternList[index].skills.Length)
+                    break;
+                float waitdelay = patternList[index].activeTime[i + 1] - patternList[index].activeTime[i];
+                if (patternList[index].ignoreSkillCooldown)
+                {
+                    if (waitdelay < 0)
+                        waitdelay = 0;
+                    yield return new WaitForSeconds(waitdelay);
+                }
+                else
+                {
+                    waitdelay += patternList[index].skills[i].coolTime;
+                    if (waitdelay < 0)
+                        waitdelay = 0;
+                    yield return new WaitForSeconds(waitdelay);
+                }
             }
         }
     }

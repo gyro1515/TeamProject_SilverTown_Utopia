@@ -114,27 +114,34 @@ public class Player : Entity
 
         Debug.Log("Parring tried at : " + parringStartTime.ToString());
     }
-    protected override void TakeDamage(int damage, bool isJumpAvoidable = false)
+    protected override void TakeDamage(int damage, bool isJumpAvoidable = false, bool canParring = true)
     {
-        // 패링이 된다면 데미지를 받지 않도록
-        if (Time.fixedTime - parringStartTime <= invincibleDelay)
+        if (canParring)
         {
-            damageStartTime = Time.fixedTime;
-            return;
+            // 패링이 된다면 데미지를 받지 않도록
+            if (Time.fixedTime - parringStartTime <= invincibleDelay)
+            {
+                damageStartTime = Time.fixedTime;
+                return;
+            }
         }
+
         //점프로 공격 피하기 가능하다면, 피하기
         if (isJumping && isJumpAvoidable)
         {
             return;
         }
+
         if (Time.fixedTime - damageStartTime <= damageDelay)
         {
             return;
         }
 
         damageStartTime = Time.fixedTime;
+
         base.TakeDamage(damage);
-        
+        Debug.Log("afterTakeDamage");
+
         // 데미지를 입었을때 카메라 흔들고 데미지 애니매이션 재생
         ShakeCamera shake = Camera.main.GetComponent<ShakeCamera>();
         if (shake != null)

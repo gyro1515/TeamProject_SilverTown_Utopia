@@ -16,4 +16,8 @@ public class UIManager : Singleton<UIManager> // 해당 형식으로 상속하�
     {
         mainUI.SetHpBar(hpPercentage);
     }
+    public void SetMainUIActive(bool active)
+    {
+        mainUI.gameObject.SetActive(active);
+    }
 }
