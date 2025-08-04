@@ -2251,14 +2251,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a7e60ebec895748ad9a19e49c7fb6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1281758707}
   cards:
   - {fileID: 194371894}
   - {fileID: 1716830922}
   - {fileID: 1705061090}
-  upgradeCardPrefabs:
+  upgradeCard: []
+  projectileSkillCardPrefabs:
+  - {fileID: 11400000, guid: 43d2724863df41242aecbd94341e2b5d, type: 2}
+  - {fileID: 11400000, guid: 2452a47f581e71e4987fbbc2564408bd, type: 2}
+  - {fileID: 11400000, guid: bd95c9595180aaa40954f07f5a8193b0, type: 2}
+  rangedSkillCardPrefabs:
+  - {fileID: 11400000, guid: fa180dc2fc96a2246a5cdf98380f7bfe, type: 2}
+  - {fileID: 11400000, guid: dd43ccec96c06e849807ed08f547156b, type: 2}
+  AbilityCardPrefabs:
   - {fileID: 11400000, guid: d681fd0534d62ba4597ca2f7e0b9747f, type: 2}
   - {fileID: 11400000, guid: e224aff605b1e0347b55fea7f554170d, type: 2}
-  - {fileID: 11400000, guid: bd95c9595180aaa40954f07f5a8193b0, type: 2}
   - {fileID: 11400000, guid: 7c810332df8a3d74b8674d058780f6b0, type: 2}
 --- !u!224 &1100595983
 RectTransform:
@@ -2842,6 +2850,42 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1799361076}
+    - target: {fileID: 6812867654055286121, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: activateTime.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812867654055286121, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: playerSkills.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812867654055286121, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: skillCooldown.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812867654055286121, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: playerSkills.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7c4ac6659ef1d3649919dbb69faa8560, type: 2}
+    - target: {fileID: 6812867654055286121, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: playerSkills.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0d8a1b27832eb564db5ae765b8554cd8, type: 2}
+    - target: {fileID: 6812867654055286121, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: playerSkills.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: c22e29c89f4150d48b89b0d018b02e73, type: 2}
+    - target: {fileID: 6812867654055286121, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: skillCooldown.Array.data[0]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812867654055286121, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: skillCooldown.Array.data[1]
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812867654055286121, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: skillCooldown.Array.data[2]
+      value: 120
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

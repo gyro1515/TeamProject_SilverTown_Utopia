@@ -14,7 +14,7 @@ public abstract class Skill : ScriptableObject
 
     //SkillDamage
     public int skillDamage;
-    float skillMultiplier = 1.0f;
+    [SerializeField] float skillMultiplier = 1.0f;
 
     //direction to attack
     public Vector2 direction;

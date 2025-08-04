@@ -42,6 +42,24 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Skill2",
+                    "type": "Value",
+                    "id": "7f7e05ba-725d-4256-a2c5-c3d61b383562",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Skill3",
+                    "type": "Value",
+                    "id": "f91d5d96-f825-4f5f-a095-963145adb601",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Look",
                     "type": "Value",
                     "id": "407098a7-51c0-475a-8604-3df77e614985",
@@ -141,7 +159,7 @@
                 {
                     "name": "",
                     "id": "e89b5965-d893-4d88-b162-d1be563b0448",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -168,6 +186,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "BaseAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fdde757f-4ebc-4877-9d2c-b510823b4991",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Skill2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1b819b54-31fe-4e44-b3e7-63ebcd1e0e78",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Skill3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
