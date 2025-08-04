@@ -215,8 +215,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04de683df86acf84bbf2a812d267a363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHp: 200
-  MaxHp: 200
+  currentHp: 600
+  MaxHp: 600
   moveSpeed: 5
   target: {fileID: 0}
   attackRange: 3
