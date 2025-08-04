@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   skills:
-  - {fileID: 11400000, guid: f5ff6401e835b0f4ca016b16e7e09ece, type: 2}
-  - {fileID: 11400000, guid: fadd6dfaa2af9dc42bd13466f4715881, type: 2}
+  - {fileID: 11400000, guid: ae002a052ec37df4c986c02d6d0f6a46, type: 2}
+  - {fileID: 11400000, guid: 52a3bcc400f0c6c458414ff126e96a3f, type: 2}
   activeTime:
   - 0
   - 0

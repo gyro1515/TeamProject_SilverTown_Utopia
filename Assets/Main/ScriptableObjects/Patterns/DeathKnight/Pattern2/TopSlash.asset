@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: TopSlash
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
-  skillDamage: 0
+  skillDamage: 40
+  skillMultiplier: 1
+  includeEntityAttack: 0
   direction: {x: 0, y: 0}
   positionCenter: {x: 0, y: 0, z: 0}
   animPrefab: {fileID: 3190636438002380371, guid: c18e4dd1103ac8148af8338b052b4316, type: 3}
