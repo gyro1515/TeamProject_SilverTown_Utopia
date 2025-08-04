@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   patternList:
-  - {fileID: 11400000, guid: 7856e8bd4565ad0409a4b99035afde3a, type: 2}
-  - {fileID: 11400000, guid: 03fb4f52eaff1dd40a49e15d1d03f95d, type: 2}
-  - {fileID: 11400000, guid: dffff67f3a31c8f418786501eba6c95f, type: 2}
-  - {fileID: 11400000, guid: 753bc1e8de6b20647b756834910f4f52, type: 2}
+  - {fileID: 11400000, guid: 43608a3f8a990c24e8bb8ef5d7658384, type: 2}
+  - {fileID: 11400000, guid: 48fe4a82166ed42428474ef6614ef49b, type: 2}
+  - {fileID: 11400000, guid: 361de52207e99bf43b04b9c44860e3c0, type: 2}
+  - {fileID: 11400000, guid: f7daadf3dd952634aa99e5ff5c3b0505, type: 2}

@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: FireBall
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
-  _skillDamage: 30
+  skillDamage: 0
   direction: {x: 1, y: 0}
-  isLocal: 1
-  PositionCenter: {x: 0, y: 0, z: 0}
+  positionCenter: {x: 0, y: 0, z: 0}
+  animPrefab: {fileID: 2476545726243265464, guid: 24f5aed2043675a4597046efe666f143, type: 3}
+  audioClip: {fileID: 0}
   projectilePrefab: {fileID: 8324435634244213426, guid: cac8bffb8dd1e2c439f81fa8be92be0c, type: 3}
   projectileQuantity: 1
   spread: 0

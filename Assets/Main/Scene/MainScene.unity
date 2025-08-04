@@ -1790,6 +1790,10 @@ PrefabInstance:
       value: phoenix
       objectReference: {fileID: 0}
     - target: {fileID: 4807187242689097693, guid: 0ccea072197aa1f409d109147c5fbaaa, type: 3}
+      propertyPath: actor
+      value: 
+      objectReference: {fileID: -8782899659279230520, guid: 7499bfc0a8fc2284085595068b4d9026, type: 3}
+    - target: {fileID: 4807187242689097693, guid: 0ccea072197aa1f409d109147c5fbaaa, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1281758707}
@@ -3001,6 +3005,10 @@ PrefabInstance:
       value: DeathNight
       objectReference: {fileID: 0}
     - target: {fileID: 6778490003573116259, guid: 03476e2f151e61b4f83c8f33aacce789, type: 3}
+      propertyPath: actor
+      value: 
+      objectReference: {fileID: -8782899659279230520, guid: 7499bfc0a8fc2284085595068b4d9026, type: 3}
+    - target: {fileID: 6778490003573116259, guid: 03476e2f151e61b4f83c8f33aacce789, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1281758707}
@@ -3737,6 +3745,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7639927277982300351, guid: bc58a9a92af41ce4495d40b0d7faccd4, type: 3}
+      propertyPath: actor
+      value: 
+      objectReference: {fileID: -8782899659279230520, guid: 7499bfc0a8fc2284085595068b4d9026, type: 3}
     - target: {fileID: 7639927277982300351, guid: bc58a9a92af41ce4495d40b0d7faccd4, type: 3}
       propertyPath: target
       value: 
