@@ -17,6 +17,7 @@ MonoBehaviour:
   direction: {x: 0, y: 0}
   positionCenter: {x: 0, y: 0, z: 0}
   animPrefab: {fileID: 280430011027260941, guid: 52ef262f8b4110f4f953e3c1fe1bb3e9, type: 3}
+  audioClip: {fileID: 8300000, guid: 06a51dc81b5fc8e4fa56985efd1fc945, type: 3}
   colliderPrefab: {fileID: 3617344549384259999, guid: ddff3a9b92fcc4b4984a933e4374ab12, type: 3}
   hitCollider: {fileID: 0}
   warningDuration: 2

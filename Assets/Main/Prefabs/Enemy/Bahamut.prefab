@@ -100,7 +100,7 @@ CapsuleCollider2D:
     m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 439
+    m_Bits: 951
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -117,8 +117,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.087795734, y: -0.4097123}
-  m_Size: {x: 3.8267736, y: 5.8194246}
+  m_Offset: {x: 0, y: -1.7413291}
+  m_Size: {x: 1.8150263, y: 2.6403587}
   m_Direction: 0
 --- !u!1 &4177502656284844177
 GameObject:

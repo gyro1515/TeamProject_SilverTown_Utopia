@@ -136,7 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHp: 100
   MaxHp: 100
-  moveSpeed: 5
+  moveSpeed: 7
   killCount: 0
   baseAttack: {fileID: 11400000, guid: e4c731e206ca3a44f8310fe997e67705, type: 2}
 --- !u!114 &5754774147068705049
