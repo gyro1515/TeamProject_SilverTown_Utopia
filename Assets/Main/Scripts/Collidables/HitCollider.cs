@@ -113,7 +113,6 @@ public class HitCollider : MonoBehaviour
         Destroy(gameObject, attackRemain + 0.1f);
         if (skillObject != null)
         {
-            skillObject.GetComponent<Animator>().transform.rotation = new Quaternion(0,0,transform.rotation.z, transform.rotation.w);
             AnimatorStateInfo stateInfo = skillObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
             float animLength = stateInfo.length;
             Destroy(skillObject, (attackRemain > animLength ? attackRemain : animLength) + 0.1f);

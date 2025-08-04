@@ -28,6 +28,6 @@ MonoBehaviour:
   randomMax: {x: 0, y: 0}
   entityToPlayerScale: 0.5
   previousPosIndex: 0
-  patternCoolTime: 5
+  patternCoolTime: 7
   patternCoolTimer: 0
   isCoolTime: 1
