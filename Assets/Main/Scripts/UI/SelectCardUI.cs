@@ -1,0 +1,112 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using Unity.Collections.LowLevel.Unsafe;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class SelectCardUI : MonoBehaviour
+{
+    // 원래는 버튼을 상속받아 카드 선택용 버튼을 만들어야 하지만, 시간이 부족한 관계로 노가다를...
+    private bool isInitialized = false;
+    [Header("플레이어")]
+    [SerializeField] Player player;
+    [Header("선택할 카드 UI")]
+    [SerializeField] List<CardButton> cards = new List<CardButton>();
+    [Header("선택할 수 있는 카드 효과들")]
+    [SerializeField] List<UpgradeCard> upgradeCard = new List<UpgradeCard>();
+    HashSet<int> selectedUpgradeCards = new HashSet<int>();
+
+    [Header("복사할 스킬 강화")]
+    [SerializeField] ProjectileSkillCard[] projectileSkillCardPrefabs = new ProjectileSkillCard[3];
+    [SerializeField] RangedSkillCard[] rangedSkillCardPrefabs = new RangedSkillCard[2];
+    [SerializeField] AbilityCard[] AbilityCardPrefabs = new AbilityCard[3];
+
+
+    // 아래는 테스트 용도, 추후 지울 수도...?
+    private bool isActive = false;
+    private void Awake()
+    {
+        isActive = gameObject.activeSelf;
+    }
+
+    private void InitializeCards()
+    {
+        if (player == null)
+        {
+            Debug.Log("Undefined Player in selectCardUI");
+            return;
+        }
+        //Add stat upgrades
+        foreach (AbilityCard card in AbilityCardPrefabs)
+        {
+            AbilityCard copycard = Instantiate(card, transform);
+            copycard.SetCard(player);
+            upgradeCard.Add(copycard);
+        }
+        //Add Skill Upgrades
+        AddUpgrades(player.baseAttack);
+        foreach (Skill skill in player.playerSkills)
+        {
+            AddUpgrades(skill);
+        }
+        isInitialized = true;
+        Debug.Log("InitializeCards");
+    }
+
+
+    public void SetCard() // 클리어할때마다 다른 카드 세팅하기
+    {
+        //최초 실행시 카드 세팅
+        if (!isInitialized)
+        {
+            InitializeCards();
+        }
+        // 선택 가능한 카드 개수에 따라 카드 효과 넣어주기
+        for (int i = 0; i < cards.Count; i++)
+        {
+            int tmpIdx = -1;
+            do
+            {
+                tmpIdx = Random.Range(0, upgradeCard.Count); // 우선 랜덤으로 하나 뽑고
+            }
+            while (selectedUpgradeCards.Contains(tmpIdx)); // 처음 뽑은 카드라면 종료
+            Debug.Log($"{tmpIdx} / {i}");
+            selectedUpgradeCards.Add(tmpIdx);
+            cards[i].SetCardData(upgradeCard[tmpIdx]);
+        }
+        selectedUpgradeCards.Clear(); // 계속 빈공간 유지
+    }
+    public void SetActive()
+    {
+        isActive = !isActive;
+        if (isActive) SetCard();
+        gameObject.SetActive(isActive);
+    }
+
+    private void AddUpgrades(Skill skill)
+    {
+        if (skill is RangedSkill)
+        {
+            foreach (RangedSkillCard card in rangedSkillCardPrefabs)
+            {
+                RangedSkillCard copycard = Instantiate(card,transform);
+                copycard.SetCard(skill as RangedSkill);
+                upgradeCard.Add(copycard);
+            }
+
+        }
+        else if (skill is ProjectileSkill)
+        {
+            foreach (ProjectileSkillCard card in projectileSkillCardPrefabs)
+            {
+                ProjectileSkillCard copycard = Instantiate(card, transform);
+                copycard.SetCard(skill as ProjectileSkill);
+                upgradeCard.Add(copycard);
+            }
+        }
+    }
+
+
+}

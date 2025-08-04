@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c5f4f03e3a9605489f781a44e90f675, type: 3}
+  m_Name: AddProjectileCard
+  m_EditorClassIdentifier: 
+  cardTitle: Add Projectile Count
+  cardExplanation: Projectile count increased by 2
+  cardSprite: {fileID: 21300000, guid: eb52ab89179b54746a35c7f9be6f7cb4, type: 3}
+  damageMultiplier: 1
+  addProjectileCnt: 2
+  projectileSpeed: 1
+  skill: {fileID: 0}
+  skillName: 
