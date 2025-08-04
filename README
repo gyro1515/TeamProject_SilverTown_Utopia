@@ -1,21 +1,23 @@
 # SilverTown Utopia
 
 ## 📖 목차
-1. [프로젝트 소개](#프로젝트-소개)
-2. [팀소개](#팀소개)
-3. [프로젝트 계기](#프로젝트-계기)
-4. [주요기능](#주요기능)
-5. [개발기간](#개발기간)
-6. [기술스택](#기술스택)
-7. [와이어프레임](#와이어프레임)
-8. [프로젝트 파일 구조](#프로젝트-파일-구조)
-9. [Trouble Shooting](#trouble-shooting)
+1. [프로젝트 소개](#-프로젝트-소개)
+2. [팀소개](#-팀소개)
+3. [프로젝트 계기](#-프로젝트-계기)
+4. [주요기능](#-주요기능)
+5. [개발기간](#-개발기간)
+6. [기술스택](#-기술스택)
+7. [와이어프레임](#-와이어프레임)
+8. [프로젝트 파일 구조](#-프로젝트-파일-구조)
+9. [Trouble Shooting](#️-trouble-shooting)
 
 ---
+
 ## 👨‍🏫 프로젝트 소개
 
-<img src="https://raw.githubusercontent.com/gyro1515/TeamProject_SilverTown_Utopia/main/README_Images/1.png" alt="SilverTown Utopia 로고" width="600"/>
-
+<p align="center">
+  <img src="https://raw.githubusercontent.com/gyro1515/TeamProject_SilverTown_Utopia/main/README_Images/1.png" alt="SilverTown Utopia 로고" width="600"/>
+</p>
 
 **SilverTown Utopia**는  
 은퇴를 하고싶은 늙고 지친 용사의 실버타운 입주를 향한 마지막 모험담을 그린 로그라이크 액션 게임입니다.  
