@@ -58,7 +58,7 @@ public class MapGenerater : MonoBehaviour
     private List<Vector2Int> roomCenters = new List<Vector2Int>();
     private HashSet<(int, int)> connections = new HashSet<(int, int)>();
     private Dictionary<int, List<int>> connectionMap = new Dictionary<int, List<int>>();
-
+    private Enemy curEnemy = null;
 
     // 맵 탐색용 변수들
     bool bIsMoveToRoom = false; // true일때만 현재 위치한 방이 어떤 방인지 탐색하도록 설정
@@ -75,11 +75,11 @@ public class MapGenerater : MonoBehaviour
     {
         if (bIsMoveToRoom) GetRoomByPos(player.transform.position); // 이 상태일 시만 현재 위치의 방 찾기
 
-        if (UnityEngine.Input.GetKeyDown(KeyCode.E))
+        /*if (UnityEngine.Input.GetKeyDown(KeyCode.E))
         {
             GenerateMap();
-        }
-        else if(UnityEngine.Input.GetKeyDown(KeyCode.R))
+        }*/
+        if(UnityEngine.Input.GetKeyDown(KeyCode.G))
         {
             // 보스 방 진입 시 호출되는 함수, 추후 함수 다른 곳으로 이동해야 함
             // 보스 방의 벽 비활성화 -> 우선 모든 방 비활성화
@@ -88,13 +88,18 @@ public class MapGenerater : MonoBehaviour
                 OpenBossRoom(i); 
             }
         }
-        else if (UnityEngine.Input.GetKeyDown(KeyCode.T))
+        else if (UnityEngine.Input.GetKeyDown(KeyCode.H))
         {
             // 테스트로 모든 방 비활성화
             for (int i = 0; i < bossWallMaps.Count; i++)
             {
                 CloseBossRoom(i);
             }
+        }
+        else if (UnityEngine.Input.GetKeyDown(KeyCode.K))
+        {
+            // 테스트로 방에 있는 보스 죽이기
+            KillBoss();
         }
 
 
@@ -501,24 +506,27 @@ public class MapGenerater : MonoBehaviour
             //if (expanded.Contains(tmpPos))
             if (RectContainsPos(room, pos))
             {
+                curEnemy = null;
                 // 보스 방 체크
-                Enemy testBoss = boss.GetComponent<Enemy>();
+                Enemy testBoss = boss?.GetComponent<Enemy>();
                 if (testBoss?.MyRoom.RoomIdx == i) // 보스방이라면 보스 활성화
                 {
                     testBoss.BossState = Enemy.EBossState.Active;
                     CloseBossRoom(testBoss.MyRoom.RoomWallIdx);
                     AudioManager.Instance.SetBossBattleBGM(testBoss.BossBGM);
+                    curEnemy = testBoss;
                 }
                 // 몬스터 방 체크
                 for (int j = 0; j < enemys.Count; j++)
                 {
-                    Enemy enemy = enemys[j].GetComponent<Enemy>();
+                    if (enemys[j] == null) continue; 
+                    Enemy enemy = enemys[j]?.GetComponent<Enemy>();
                     if (enemy?.MyRoom.RoomIdx != i) continue;
 
                     enemy.BossState = Enemy.EBossState.Active;
                     CloseBossRoom(enemy.MyRoom.RoomWallIdx);
                     AudioManager.Instance.SetBossBattleBGM(enemy.BossBGM);
-
+                    curEnemy = enemy;
                     break;
                 }
                 tCam.SetMap(room);
@@ -568,6 +576,7 @@ public class MapGenerater : MonoBehaviour
         
         foreach(var enemy in enemys)
         {
+            if (enemy == null) continue;
             Enemy tmpEnemy = enemy.GetComponent<Enemy>();
             if (tmpEnemy == null) continue;
             tmpEnemy.BossState = Enemy.EBossState.Deactivate;
@@ -577,5 +586,11 @@ public class MapGenerater : MonoBehaviour
     bool RectContainsPos(RectInt room, Vector3 pos)
     {
         return pos.x >= room.xMin && pos.y >= room.yMin && pos.x < room.xMax && pos.y < room.yMax;
+    }
+    // 보스 죽이기 테스트 용도
+    void KillBoss()
+    {
+        if (curEnemy == null) return;
+        curEnemy.KillBoss();
     }
 }
