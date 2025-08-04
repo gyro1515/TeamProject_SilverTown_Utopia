@@ -16,7 +16,6 @@ public class MapGenerater : MonoBehaviour
         RectInt map;
         int mapIdx;
     }
-    private int bossRoomIdx;
 
     [Header("Map Settings")]
     public int totalCandidates = 50;
@@ -59,6 +58,7 @@ public class MapGenerater : MonoBehaviour
     private HashSet<(int, int)> connections = new HashSet<(int, int)>();
     private Dictionary<int, List<int>> connectionMap = new Dictionary<int, List<int>>();
     private Enemy curEnemy = null;
+    private int bossRoomIdx = -1;
 
     // 맵 탐색용 변수들
     bool bIsMoveToRoom = false; // true일때만 현재 위치한 방이 어떤 방인지 탐색하도록 설정
@@ -75,26 +75,16 @@ public class MapGenerater : MonoBehaviour
     {
         if (bIsMoveToRoom) GetRoomByPos(player.transform.position); // 이 상태일 시만 현재 위치의 방 찾기
 
-        /*if (UnityEngine.Input.GetKeyDown(KeyCode.E))
+        if (UnityEngine.Input.GetKeyDown(KeyCode.E))
         {
             GenerateMap();
-        }*/
-        if(UnityEngine.Input.GetKeyDown(KeyCode.G))
-        {
-            // 보스 방 진입 시 호출되는 함수, 추후 함수 다른 곳으로 이동해야 함
-            // 보스 방의 벽 비활성화 -> 우선 모든 방 비활성화
-            for (int i = 0; i < bossWallMaps.Count; i++)
-            {
-                OpenBossRoom(i); 
-            }
         }
-        else if (UnityEngine.Input.GetKeyDown(KeyCode.H))
+        if (UnityEngine.Input.GetKeyDown(KeyCode.G))
         {
-            // 테스트로 모든 방 비활성화
-            for (int i = 0; i < bossWallMaps.Count; i++)
-            {
-                CloseBossRoom(i);
-            }
+            // 보스방문 열기
+            Enemy bossE = boss.gameObject.GetComponent<Enemy>();
+            OpenBossRoom(bossE.MyRoom.RoomWallIdx);
+
         }
         else if (UnityEngine.Input.GetKeyDown(KeyCode.K))
         {
@@ -426,7 +416,7 @@ public class MapGenerater : MonoBehaviour
 
         // 최다 이동 횟수 중 가장 거리가 긴 곳을 보스방으로
         int maxMoveCnt = -1;
-        int bossRoomIdx = -1;
+        bossRoomIdx = -1;
         float maxDist = -1;
         for (int i = 1; i < finalRooms.Count; i++)
         {
@@ -533,7 +523,7 @@ public class MapGenerater : MonoBehaviour
                     break;
                 }
                 tCam.SetMap(room);
-                Debug.Log("InRoom");
+                //Debug.Log("InRoom");
                 // 방을 찼았다면 탐색 중지
                 IsMoveToRoom = false;
                 return room;
