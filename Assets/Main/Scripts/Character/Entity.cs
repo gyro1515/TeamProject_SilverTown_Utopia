@@ -94,5 +94,6 @@ public abstract class Entity : MonoBehaviour
     {
         return MaxHp;
     }
+    
 
 }

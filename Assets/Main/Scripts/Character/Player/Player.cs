@@ -297,4 +297,10 @@ public class Player : Entity
 
         attackDamage = (int)(10 + 5 * Mathf.Sqrt(killCount));
     }
+    public void SetCurHp(int addHp)
+    {
+        currentHp = Mathf.Clamp(currentHp + addHp, 0, GetMaxHP());
+        UIManager.Instance.SetHpBar((float)currentHp / GetMaxHP());
+        Debug.Log($"체력 회복량: {addHp} = cur: {currentHp} / max: {GetMaxHP()}");
+    }
 }

@@ -2963,8 +2963,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dad385814629ad4bb9549b00d70aa53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalCandidates: 5
-  desiredRoomCount: 5
+  totalCandidates: 7
+  desiredRoomCount: 7
   roomMinSize: {x: 25, y: 20}
   roomMaxSize: {x: 40, y: 40}
   roomSpacing: 5
@@ -2983,6 +2983,8 @@ MonoBehaviour:
   - {fileID: 2110280700}
   - {fileID: 1392732511}
   - {fileID: 1576226169}
+  potions:
+  - {fileID: 3235942766293248511, guid: 9f4747ba2f9fdec4d95c8bf1340a9e3a, type: 3}
   time: 3
   obstacles:
   - {fileID: 1602827136951235873, guid: 1055e6aa07e6ed54aa498b66cd4f69bf, type: 3}
