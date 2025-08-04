@@ -280,9 +280,9 @@ public class Player : Entity
         this.MoveSpeed += speed;
     }
 
-    public void UpgradeAtk(int atk)
+    public void SetDamageMultiplier(float f)
     {
-        this.attackDamage += atk;
+        this.playerDamageMultiplier = f;
     }
 
     public override int GetAttackDamage()
@@ -295,4 +295,12 @@ public class Player : Entity
         return base.GetMaxHP() + playerExtraHealth;
     }
 
+    public void Levelup()
+    {
+        MaxHp = (int)(100 + 20 * Mathf.Sqrt(killCount));
+        int HPoffset =  MaxHp - (int)(100 + 20 * Mathf.Sqrt(killCount - 1));
+        this.currentHp = Mathf.Clamp(currentHp + HPoffset, 0, GetMaxHP());
+
+        attackDamage = (int)(10 + 5 * Mathf.Sqrt(killCount));
+    }
 }

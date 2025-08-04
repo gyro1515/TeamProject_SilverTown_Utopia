@@ -9,7 +9,7 @@ public class AbilityCard : UpgradeCard
     [Header("능력치 강화")]
     Player player;
     [SerializeField]int plusHp = 0;
-    [SerializeField]int plusAtk = 0;
+    [SerializeField] float weaponAtkMultiplier = 1.0f;
     [SerializeField]int plusSpeed = 0;
 
     public override void ApplySelectedCard()
@@ -19,9 +19,9 @@ public class AbilityCard : UpgradeCard
         {
             player.UpgradeHP(plusHp);
         }
-        if (plusAtk != 0)
+        if (weaponAtkMultiplier != 1.0f)
         {
-            player.UpgradeAtk(plusAtk);
+            player.SetDamageMultiplier(weaponAtkMultiplier);
         }
         if (plusSpeed != 0)
         {
