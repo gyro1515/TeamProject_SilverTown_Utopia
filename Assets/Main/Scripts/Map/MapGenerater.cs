@@ -465,6 +465,7 @@ public class MapGenerater : MonoBehaviour
 
                 // 몬스터 방 입구 벽으로 막기
                 SetBossRoom(finalRooms[i], enemyWallTile);
+                bossWallMaps[bossWallMaps.Count - 1].gameObject.SetActive(false); // 몬스터 방은 처음에 비활성화
                 break;
             }
         }
@@ -476,8 +477,8 @@ public class MapGenerater : MonoBehaviour
     {
         foreach(var room in finalRooms)
         {
-            // 몇개 설치할 것인가 -> 대충 최대 20개
-            int obsCnt = Random.Range(0, spawnObstacleCount);
+            // 몇개 설치할 것인가 -> 대충 최소 2개 ~최대 20개
+            int obsCnt = Random.Range(2, spawnObstacleCount);
             for (int i = 0; i < obsCnt; i++)
             {
                 // 소환할 위치
