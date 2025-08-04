@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 using UnityEngine.Windows;
 using static Unity.Burst.Intrinsics.X86.Avx;
 using static UnityEditor.PlayerSettings;
@@ -463,7 +464,6 @@ public class MapGenerater : MonoBehaviour
     }
     public RectInt GetRoomByPos(Vector3 pos)
     {
-        //Debug.Log("Check!!!!!!!!!");
         Vector2Int tmpPos = new Vector2Int();
         tmpPos.x = (int)pos.x;
         tmpPos.y = (int)pos.y;
@@ -471,10 +471,11 @@ public class MapGenerater : MonoBehaviour
         for (int i = 0; i < finalRooms.Count; i++)
         {
             // 판정을 위해 상 하 좌우 n 칸씩 확대
-            int roomPadding = 0;
+            //int roomPadding = 0;
             RectInt room = finalRooms[i];
-            RectInt expanded = new RectInt(room.xMin - roomPadding, room.yMin - roomPadding, room.width + roomPadding * 2, room.height + roomPadding * 2);
-            if (expanded.Contains(tmpPos))
+            //RectInt expanded = new RectInt(room.xMin - roomPadding, room.yMin - roomPadding, room.width + roomPadding * 2, room.height + roomPadding * 2);
+            //if (expanded.Contains(tmpPos))
+            if (RectContainsPos(room, pos))
             {
                 // 보스 방 체크
                 Enemy testBoss = boss.GetComponent<Enemy>();
@@ -494,6 +495,7 @@ public class MapGenerater : MonoBehaviour
                     break;
                 }
                 tCam.SetMap(room);
+                Debug.Log("BossRoom");
                 // 방을 찼았다면 탐색 중지
                 IsMoveToRoom = false;
                 return room;
@@ -544,5 +546,9 @@ public class MapGenerater : MonoBehaviour
             tmpEnemy.BossState = Enemy.EBossState.Deactivate;
         }
         tCam.CamState = TestCam.ECameraState.ChageToRoad;
+    }
+    bool RectContainsPos(RectInt room, Vector3 pos)
+    {
+        return pos.x >= room.xMin && pos.y >= room.yMin && pos.x < room.xMax && pos.y < room.yMax;
     }
 }
