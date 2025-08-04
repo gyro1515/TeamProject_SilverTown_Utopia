@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   skills:
-  - {fileID: 11400000, guid: 42901ead6e0d4ef4eb039b6803cb23ca, type: 2}
+  - {fileID: 11400000, guid: 7b667a301404b5b49842a63813092d7f, type: 2}
   - {fileID: 11400000, guid: fadd6dfaa2af9dc42bd13466f4715881, type: 2}
   activeTime:
   - 0
@@ -27,3 +27,7 @@ MonoBehaviour:
   randomMin: {x: 0, y: 0}
   randomMax: {x: 0, y: 0}
   entityToPlayerScale: 0.1
+  previousPosIndex: 0
+  patternCoolTime: 5
+  patternCoolTimer: 0
+  isCoolTime: 1
