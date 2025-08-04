@@ -33,7 +33,7 @@ public abstract class Skill : ScriptableObject
             positionCenter = entity.transform.position + Vector3.down * 0.5f;
         this.direction = dir;
         if (includeEntityAttack)
-            skillDamage += entity.GetAttackDamage();
+            skillDamage = entity.GetAttackDamage();
         skillDamage = (int)(skillDamage * skillMultiplier);
         if (animPrefab == null) return;
 

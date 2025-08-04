@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8206946798181338089}
   - component: {fileID: 3617344549384259999}
   - component: {fileID: 1130454020744266073}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FloorCircleHitCollider
   m_TagString: Attack
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ PolygonCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -185,7 +185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2827266393313718981}
   - component: {fileID: 2316019312319467655}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,7 +269,7 @@ GameObject:
   m_Component:
   - component: {fileID: 14890955448396349}
   - component: {fileID: 1475659400454415060}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WarningZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
