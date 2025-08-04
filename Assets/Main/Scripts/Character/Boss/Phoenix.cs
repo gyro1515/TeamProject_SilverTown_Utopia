@@ -35,7 +35,7 @@ public class Phoenix : Enemy
         WaitNode attack4Time = new WaitNode(1.5f);
         SequenceNode attack4Sequence = new SequenceNode(new List<INode>() { attack4, attack4Time });
         // 패턴 셀렉터, 패턴 중 사용 가능한 패턴부터 사용.
-        SelectorNode patternSelector = new SelectorNode(new List<INode>() { attack3Sequence, attack4Sequence, attack1Sequence, attack2Sequence }); // 쿨타임 긴 순서대로 설정하기
+        SelectorNode patternSelector = new SelectorNode(new List<INode>() { attack1Sequence, attack2Sequence, attack3Sequence, attack4Sequence }); // 쿨타임 긴 순서대로 설정하기
         // 패턴 시전 가능 체크하고, 사용 가능한 패턴들 체크(패턴 쿨타임 체크)
         SequenceNode patternSequence = new SequenceNode(new List<INode>() { canAttack, patternSelector });
 

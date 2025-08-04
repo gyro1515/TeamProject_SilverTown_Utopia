@@ -19,22 +19,22 @@ public class Demon : Enemy
         ActionNode canAttack = new ActionNode(CanAttack); // 공격 범위 && 패턴 사용 가능 체크
         // 패턴 1:
         ActionNode attack1 = new ActionNode(Attack1);
-        WaitNode attack1Time = new WaitNode(3.5f); // 공격 지속 시간에 해당, 공격하고 일정 시간 비헤이비어 트리 상태 유지
+        WaitNode attack1Time = new WaitNode(2.0f); // 공격 지속 시간에 해당, 공격하고 일정 시간 비헤이비어 트리 상태 유지
         SequenceNode attack1Sequence = new SequenceNode(new List<INode>() { attack1, attack1Time }); // 공격이 끝나야 성공처리
         // 패턴 2
         ActionNode attack2 = new ActionNode(Attack2);
-        WaitNode attack2Time = new WaitNode(3.0f);
+        WaitNode attack2Time = new WaitNode(1.5f);
         SequenceNode attack2Sequence = new SequenceNode(new List<INode>() { attack2, attack2Time });
         // 패턴 3
         ActionNode attack3 = new ActionNode(Attack3);
-        WaitNode attack3Time = new WaitNode(2.5f);
+        WaitNode attack3Time = new WaitNode(1.0f);
         SequenceNode attack3Sequence = new SequenceNode(new List<INode>() { attack3, attack3Time });
-        // 패턴 4
+        /*// 패턴 4
         ActionNode attack4 = new ActionNode(Attack4);
         WaitNode attack4Time = new WaitNode(1.5f);
-        SequenceNode attack4Sequence = new SequenceNode(new List<INode>() { attack4, attack4Time });
+        SequenceNode attack4Sequence = new SequenceNode(new List<INode>() { attack4, attack4Time });*/
         // 패턴 셀렉터, 패턴 중 사용 가능한 패턴부터 사용.
-        SelectorNode patternSelector = new SelectorNode(new List<INode>() { attack3Sequence, attack4Sequence, attack1Sequence, attack2Sequence }); // 쿨타임 긴 순서대로 설정하기
+        SelectorNode patternSelector = new SelectorNode(new List<INode>() { attack1Sequence, attack2Sequence, attack3Sequence }); // 쿨타임 긴 순서대로 설정하기
         // 패턴 시전 가능 체크하고, 사용 가능한 패턴들 체크(패턴 쿨타임 체크)
         SequenceNode patternSequence = new SequenceNode(new List<INode>() { canAttack, patternSelector });
 
