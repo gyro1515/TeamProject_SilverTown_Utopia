@@ -509,7 +509,7 @@ public class MapGenerater : MonoBehaviour
                 curEnemy = null;
                 // 보스 방 체크
                 Enemy testBoss = boss?.GetComponent<Enemy>();
-                if (testBoss?.MyRoom.RoomIdx == i) // 보스방이라면 보스 활성화
+                if (testBoss.gameObject.activeSelf && testBoss?.MyRoom.RoomIdx == i) // 보스가 활성화 되어 있고 보스방이라면 보스 방 활성화
                 {
                     testBoss.BossState = Enemy.EBossState.Active;
                     CloseBossRoom(testBoss.MyRoom.RoomWallIdx);
@@ -519,7 +519,9 @@ public class MapGenerater : MonoBehaviour
                 // 몬스터 방 체크
                 for (int j = 0; j < enemys.Count; j++)
                 {
-                    if (enemys[j] == null) continue; 
+                    if (enemys[j] == null) continue;
+                    if (!enemys[j].gameObject.activeSelf) continue;
+
                     Enemy enemy = enemys[j]?.GetComponent<Enemy>();
                     if (enemy?.MyRoom.RoomIdx != i) continue;
 
