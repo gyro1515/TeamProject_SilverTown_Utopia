@@ -113,12 +113,12 @@ public abstract class Enemy : Entity
         float angle = Vector2.Angle(wallNormal, moveDirection);
         if (angle > 170f)
         {
-            Debug.Log($" 멈춤 각도: {angle}, 법선 백터: {wallNormal}, 레이 거리: {rayDist}");
+            //Debug.Log($" 멈춤 각도: {angle}, 법선 백터: {wallNormal}, 레이 거리: {rayDist}");
 
             prePlayerPos = transform.position;
             return;
         }
-        else Debug.Log($" 진행 각도: {angle}, 법선 백터: {wallNormal}, 레이 거리: {rayDist}");
+        //else Debug.Log($" 진행 각도: {angle}, 법선 백터: {wallNormal}, 레이 거리: {rayDist}");
 
         // 기존 대시 벡터에서 수직 성분 제거 → 벽을 따라 미끄러지는 방향 계산
         Vector2 slideDirection = moveDirection - Vector2.Dot(moveDirection, wallNormal) * wallNormal;
@@ -159,8 +159,12 @@ public abstract class Enemy : Entity
     {
         base.OnDead();
         target.killCount++;
-        // 해당 적 죽으면 방 문 열기
-        GameManager.Instance.MapGenerater.OpenBossRoom(MyRoom.RoomWallIdx); 
+        // 해당 적 죽으면 방 문 열고, 
+        GameManager.Instance.MapGenerater.OpenBossRoom(MyRoom.RoomWallIdx);
+        // 카드 선택UI 키기
+        UIManager.Instance.SetSelectCardUIActive();
+        // 승리 BGM 추가
+        AudioManager.Instance.PlayBGM(BGMType.Victory);
         Destroy(this.gameObject);
     }
 
@@ -250,5 +254,12 @@ public abstract class Enemy : Entity
         //Debug.Log("MoveToCenterSuccess");
         BossState = EBossState.PowerOff;
         return INode.ENodeState.Success;
+    }
+
+
+    // 테스트 용
+    public void KillBoss()
+    {
+        OnDead();
     }
 }

@@ -118,7 +118,7 @@ public class AudioManager : MonoBehaviour
     {
         if (clip == null) return;
 
-        // 현재는 BGMType로 '정해진' 오디오만 추가 가능해서, 보스 별 BGM을 모두 오디오 풀에 등록하지 못합니다.
+        // 현재는 BGMType로 '정해진' 오디오만 추가 가능해서, 보스 별 BGM을 모두 bgmDictionary에 등록하지 못합니다.
         // BGMType은 enum으로 런타임(게임 실행 중) 확장이 안되기 때문입니다.
         // 예시로 바하뮤트 BGM은 BGMType.BossBattle로 추가가 가능하지만, 피닉스 BGM은 또 어떻게 bgmDictionary에 추가할 수 있을까요?
         // 현재 구조로는 안됩니다. 따라서 이 추가 기능(함수)을 설정하여, BGMType.BossBattle의 값만 변경했습니다.
