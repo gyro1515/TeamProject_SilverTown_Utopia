@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ccffc05c2a0fed04ba7189406ddb057c, type: 3}
-  m_Name: AddHpCard
+  m_Name: Weapon Multi 2
   m_EditorClassIdentifier: 
-  cardTitle: Add Hp Power
-  cardExplanation: This Card Increases The Character's Hp.
-  cardSprite: {fileID: 21300000, guid: 967602ce567cb4f42935860ae629a937, type: 3}
-  plusHp: 20
-  weaponAtkMultiplier: 1
-  plusSpeed: 0
+  cardTitle: Weapon
+  cardExplanation: Your base damage multiplies by 1.2
+  cardSprite: {fileID: 21300000, guid: 693d9ca77177ec049b664aab61105e92, type: 3}
+  plusHp: 0
+  weaponAtkMultiplier: 1.4

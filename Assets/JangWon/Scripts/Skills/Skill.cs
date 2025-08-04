@@ -31,7 +31,7 @@ public abstract class Skill : ScriptableObject
         if(shooter.CompareTag("Player"))
             positionCenter = entity.transform.position + Vector3.down * 0.5f;
         this.direction = dir;
-        skillDamage = entity.attackDamage + skillDamage;
+        skillDamage = entity.GetAttackDamage() + skillDamage;
         skillDamage = (int)(skillDamage * skillMultiplier);
         if (animPrefab == null) return;
 

@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 6778490003573116259}
   m_Layer: 0
   m_Name: DeathNight
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -225,4 +225,5 @@ MonoBehaviour:
   bodyDamageTime: 0.1
   dashMultiple: 3
   actor: {fileID: -2524123634477253528, guid: 8aac238eca0791942b1c3d1129b0aa5b, type: 3}
+  bossBGM: {fileID: 8300000, guid: f10089e1dcfe44a4cbc379f0c6aaacb7, type: 3}
   isPatternEnd: 1
