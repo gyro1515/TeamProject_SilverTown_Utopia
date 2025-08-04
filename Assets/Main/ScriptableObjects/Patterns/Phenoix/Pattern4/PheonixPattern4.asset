@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   skills:
-  - {fileID: 11400000, guid: ae134fc104642f84ba13262dee48a061, type: 2}
-  - {fileID: 11400000, guid: ae134fc104642f84ba13262dee48a061, type: 2}
-  - {fileID: 11400000, guid: ae134fc104642f84ba13262dee48a061, type: 2}
-  - {fileID: 11400000, guid: fadd6dfaa2af9dc42bd13466f4715881, type: 2}
+  - {fileID: 11400000, guid: f6bcadf205bafc047a23edd07beb2389, type: 2}
+  - {fileID: 11400000, guid: f6bcadf205bafc047a23edd07beb2389, type: 2}
+  - {fileID: 11400000, guid: f6bcadf205bafc047a23edd07beb2389, type: 2}
+  - {fileID: 11400000, guid: 52a3bcc400f0c6c458414ff126e96a3f, type: 2}
   activeTime:
   - 0
   - 0

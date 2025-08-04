@@ -41,6 +41,7 @@ public class SelectCardUI : MonoBehaviour
         //Add stat upgrades
         foreach (AbilityCard card in AbilityCardPrefabs)
         {
+            if (card == null) continue;
             AbilityCard copycard = Instantiate(card, transform);
             copycard.SetCard(player);
             upgradeCard.Add(copycard);
@@ -72,7 +73,6 @@ public class SelectCardUI : MonoBehaviour
                 tmpIdx = Random.Range(0, upgradeCard.Count); // 우선 랜덤으로 하나 뽑고
             }
             while (selectedUpgradeCards.Contains(tmpIdx)); // 처음 뽑은 카드라면 종료
-            Debug.Log($"{tmpIdx} / {i}");
             selectedUpgradeCards.Add(tmpIdx);
             cards[i].SetCardData(upgradeCard[tmpIdx]);
         }

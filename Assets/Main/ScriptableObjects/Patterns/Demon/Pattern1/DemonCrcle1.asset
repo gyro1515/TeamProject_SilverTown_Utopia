@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: DemonCrcle1
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
-  skillDamage: 0
+  skillDamage: 10
+  skillMultiplier: 1
+  includeEntityAttack: 0
   direction: {x: 0, y: 0}
   positionCenter: {x: 0, y: 0, z: 0}
-  animPrefab: {fileID: 4277537935513851806, guid: f57393296a53def4aa10bde0ca6314f2, type: 3}
+  animPrefab: {fileID: 7828470015727839319, guid: 4d6e5093d78a8a344a34feb6fdc84d54, type: 3}
   audioClip: {fileID: 0}
   colliderPrefab: {fileID: 3617344549384259999, guid: ddff3a9b92fcc4b4984a933e4374ab12, type: 3}
   hitCollider: {fileID: 0}
