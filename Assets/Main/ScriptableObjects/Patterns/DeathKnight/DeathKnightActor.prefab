@@ -46,6 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   patternList:
-  - {fileID: 11400000, guid: 09bf5baf2e2216244942190e6c7be3e0, type: 2}
   - {fileID: 11400000, guid: ccc576c15348a9d46844017ff07182fc, type: 2}
+  - {fileID: 11400000, guid: 09bf5baf2e2216244942190e6c7be3e0, type: 2}
   - {fileID: 11400000, guid: 73ad6ee7bb516394093ef4800d9b85c3, type: 2}

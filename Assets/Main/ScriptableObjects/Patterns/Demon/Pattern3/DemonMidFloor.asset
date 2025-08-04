@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ee12395610fa240a5d93fa8432423c, type: 3}
+  m_Name: DemonMidFloor
+  m_EditorClassIdentifier: 
+  shooter: {fileID: 0}
+  skillDamage: 10
+  skillMultiplier: 1
+  includeEntityAttack: 0
+  direction: {x: 0, y: 0}
+  positionCenter: {x: 0, y: 0, z: 0}
+  animPrefab: {fileID: 6240558603005667130, guid: 1fc261a3deca4ba4f83febc5d6498759, type: 3}
+  audioClip: {fileID: 0}
+  colliderPrefab: {fileID: 3617344549384259999, guid: 391e73a73e3e091458c24ca5d790fea6, type: 3}
+  hitCollider: {fileID: 0}
+  warningDuration: 0.5
+  attackRemain: 10
+  attackAngle: 0
+  isFixedRotation: 1
+  size: {x: 8, y: 8}

@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: PheonixExplosion
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
-  skillDamage: 0
+  skillDamage: 50
+  skillMultiplier: 1
+  includeEntityAttack: 0
   direction: {x: 0, y: 0}
   positionCenter: {x: 0, y: 0, z: 0}
   animPrefab: {fileID: 280430011027260941, guid: 52ef262f8b4110f4f953e3c1fe1bb3e9, type: 3}

@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class Player : Entity
 {
+    [Header("추가능력치")]
+    [SerializeField] public float playerDamageMultiplier = 1.0f;
+    [SerializeField] public int playerExtraHealth = 0;
     // Parring
     [Header("패링")]
     [SerializeField] private const float damageDelay = 1.0f;
@@ -23,7 +26,7 @@ public class Player : Entity
     [SerializeField] public List<Skill> playerSkills;
     [SerializeField] public List<float> skillCooldown;
     [SerializeField] public List<float> activateTime;
-    [SerializeField] private const float attackDelay = 1.5f;
+    [SerializeField] private const float attackDelay = 3.0f;
     private float attackTime = 0.0f;
 
     // 방향용 Cam
@@ -39,6 +42,7 @@ public class Player : Entity
     protected override void Awake()
     {
         base.Awake();
+        attackDamage = 10;
         if(baseAttack != null)
             baseAttack = Instantiate(baseAttack,transform);
 
@@ -60,7 +64,7 @@ public class Player : Entity
         cam = Camera.main;
         wireaction = GetComponent<WireAction>();
 
-        UIManager.Instance.SetHpBar((float)currentHp / MaxHp); // 체력바 세팅
+        UIManager.Instance.SetHpBar((float)currentHp / GetMaxHP()); // 체력바 세팅
     }
 
     /*protected override void Start()// 사용 안한다면 마지막에 지우기
@@ -136,9 +140,7 @@ public class Player : Entity
         if (shake != null)
             StartCoroutine(shake.ShakeEffectCamera());
         gameObject.GetComponentInChildren<Animator>().Play("TakeDamage");
-
-        Debug.Log($"{currentHp} / {MaxHp}");
-        UIManager.Instance.SetHpBar((float)currentHp / MaxHp);
+        UIManager.Instance.SetHpBar((float)currentHp / GetMaxHP());
     }
     private void BaseAttack(Vector2 mousepos)
     {
@@ -267,19 +269,38 @@ public class Player : Entity
 
     public void UpgradeHP(int hp)
     {
-        this.MaxHp += hp;
-        this.currentHp += hp;
-        if(currentHp > MaxHp)
-            currentHp = MaxHp;
+        this.playerExtraHealth += hp;
+        this.currentHp = Mathf.Clamp(currentHp + hp, 0, GetMaxHP());
     }
 
-    public void UpgradeSpeed(int speed)
+    public void SetDamageMultiplier(float f)
     {
-        this.MoveSpeed += speed;
+        this.playerDamageMultiplier = f;
     }
 
-    public void UpgradeAtk(int atk)
+    public override int GetAttackDamage()
     {
-        this.attackDamage += atk;
+        return (int)(attackDamage * playerDamageMultiplier);
+    }
+
+    protected override int GetMaxHP()
+    {
+        return base.GetMaxHP() + playerExtraHealth;
+    }
+
+    public void Levelup()
+    {
+        Debug.Log("Levelup");
+        MaxHp = (int)(100 + 20 * Mathf.Sqrt(killCount));
+        int HPoffset =  MaxHp - (int)(100 + 20 * Mathf.Sqrt(killCount - 1));
+        this.currentHp = Mathf.Clamp(currentHp + HPoffset, 0, GetMaxHP());
+
+        attackDamage = (int)(10 + 5 * Mathf.Sqrt(killCount));
+    }
+    public void SetCurHp(int addHp)
+    {
+        currentHp = Mathf.Clamp(currentHp + addHp, 0, GetMaxHP());
+        UIManager.Instance.SetHpBar((float)currentHp / GetMaxHP());
+        Debug.Log($"체력 회복량: {addHp} = cur: {currentHp} / max: {GetMaxHP()}");
     }
 }

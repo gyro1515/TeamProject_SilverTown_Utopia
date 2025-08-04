@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: PheonixClaw
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
-  skillDamage: 0
+  skillDamage: 20
+  skillMultiplier: 1
+  includeEntityAttack: 0
   direction: {x: 0, y: 0}
   positionCenter: {x: 0, y: 0, z: 0}
   animPrefab: {fileID: 216862929348617019, guid: 30e6e047d14219a4eac460d28d0f8064, type: 3}

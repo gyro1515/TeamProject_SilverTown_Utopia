@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: FireBreath
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
-  skillDamage: 0
+  skillDamage: 50
+  skillMultiplier: 1
+  includeEntityAttack: 0
   direction: {x: 0, y: 0}
   positionCenter: {x: 0, y: 0, z: 0}
   animPrefab: {fileID: 2185972367248427985, guid: 1913c7c3d251fba48855dd9b167a5b0f, type: 3}

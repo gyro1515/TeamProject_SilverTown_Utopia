@@ -45,8 +45,8 @@ public abstract class Entity : MonoBehaviour
     {
         Debug.Log("Entity " + this.gameObject.name + " Took " +damage.ToString() + "Damage");
         currentHp -= damage;
-        Mathf.Clamp(currentHp, 0, MaxHp);
-        if (currentHp == 0)
+        currentHp = Mathf.Clamp(currentHp, 0, GetMaxHP());
+        if (currentHp <= 0)
         {
             Invoke("OnDead", 0);
         }
@@ -75,6 +75,11 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
+    public virtual int GetAttackDamage()
+    {
+        return attackDamage;
+    }
+
     protected virtual void OnDead()
     {
         isDead = true;
@@ -84,5 +89,11 @@ public abstract class Entity : MonoBehaviour
     {
         currentHp = MaxHp;
     }
+
+    protected virtual int GetMaxHP()
+    {
+        return MaxHp;
+    }
+    
 
 }
