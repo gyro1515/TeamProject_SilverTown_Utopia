@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   skills:
-  - {fileID: 11400000, guid: a1c133b6a281ac94e83350aeaa809d9c, type: 2}
-  - {fileID: 11400000, guid: a1c133b6a281ac94e83350aeaa809d9c, type: 2}
-  - {fileID: 11400000, guid: a1c133b6a281ac94e83350aeaa809d9c, type: 2}
-  - {fileID: 11400000, guid: 24b70a40a2a6e644e974556efd5cf570, type: 2}
-  - {fileID: 11400000, guid: 24b70a40a2a6e644e974556efd5cf570, type: 2}
-  - {fileID: 11400000, guid: 24b70a40a2a6e644e974556efd5cf570, type: 2}
-  - {fileID: 11400000, guid: fadd6dfaa2af9dc42bd13466f4715881, type: 2}
+  - {fileID: 11400000, guid: 1254af3e7bbd6ec49a67300b6d6020f8, type: 2}
+  - {fileID: 11400000, guid: 1254af3e7bbd6ec49a67300b6d6020f8, type: 2}
+  - {fileID: 11400000, guid: 1254af3e7bbd6ec49a67300b6d6020f8, type: 2}
+  - {fileID: 11400000, guid: a8e35204e6de89b44b24c9d92a50507a, type: 2}
+  - {fileID: 11400000, guid: a8e35204e6de89b44b24c9d92a50507a, type: 2}
+  - {fileID: 11400000, guid: a8e35204e6de89b44b24c9d92a50507a, type: 2}
+  - {fileID: 11400000, guid: 52a3bcc400f0c6c458414ff126e96a3f, type: 2}
   activeTime:
   - 0
   - 0
@@ -43,3 +43,6 @@ MonoBehaviour:
   randomMax: {x: 5, y: 5}
   entityToPlayerScale: 0.5
   previousPosIndex: 3
+  patternCoolTime: 5
+  patternCoolTimer: 0
+  isCoolTime: 1

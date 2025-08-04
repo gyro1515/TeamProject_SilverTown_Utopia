@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54ee12395610fa240a5d93fa8432423c, type: 3}
-  m_Name: PheonixExplosion
+  m_Name: FireFloor
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
-  skillDamage: 50
+  skillDamage: 10
   skillMultiplier: 1
   includeEntityAttack: 0
   direction: {x: 0, y: 0}
   positionCenter: {x: 0, y: 0, z: 0}
-  animPrefab: {fileID: 280430011027260941, guid: 52ef262f8b4110f4f953e3c1fe1bb3e9, type: 3}
-  audioClip: {fileID: 8300000, guid: 06a51dc81b5fc8e4fa56985efd1fc945, type: 3}
-  colliderPrefab: {fileID: 3617344549384259999, guid: ddff3a9b92fcc4b4984a933e4374ab12, type: 3}
+  animPrefab: {fileID: 3072376599235886547, guid: 3b551b9ee01e6cd4089da107214d89d7, type: 3}
+  audioClip: {fileID: 0}
+  colliderPrefab: {fileID: 3617344549384259999, guid: 391e73a73e3e091458c24ca5d790fea6, type: 3}
   hitCollider: {fileID: 0}
-  warningDuration: 2
-  attackRemain: 0
+  warningDuration: 0
+  attackRemain: 3
   attackAngle: 0
   isFixedRotation: 1
-  size: {x: 8, y: 8}
+  size: {x: 4, y: 4}

@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: DemonCrcle1
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
-  skillDamage: 0
+  skillDamage: 10
+  skillMultiplier: 1
+  includeEntityAttack: 0
   direction: {x: 0, y: 0}
   positionCenter: {x: 0, y: 0, z: 0}
   animPrefab: {fileID: 4277537935513851806, guid: f57393296a53def4aa10bde0ca6314f2, type: 3}
