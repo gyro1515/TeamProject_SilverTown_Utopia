@@ -990,6 +990,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1281758707}
+    - target: {fileID: 4082295972029532856, guid: 76f19b79ffa65b54c8bdb430f52a82fe, type: 3}
+      propertyPath: bossBGM
+      value: 
+      objectReference: {fileID: 8300000, guid: 443f3ca05fedc3d49a97976841aca364, type: 3}
     - target: {fileID: 8219168924295596478, guid: 76f19b79ffa65b54c8bdb430f52a82fe, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.19
@@ -1675,6 +1679,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1281758707}
+    - target: {fileID: 4807187242689097693, guid: 0ccea072197aa1f409d109147c5fbaaa, type: 3}
+      propertyPath: bossBGM
+      value: 
+      objectReference: {fileID: 8300000, guid: b2e5d7d38c4d4a84e951e0c5f4eeb0cd, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2990,6 +2998,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1281758707}
+    - target: {fileID: 6778490003573116259, guid: 03476e2f151e61b4f83c8f33aacce789, type: 3}
+      propertyPath: bossBGM
+      value: 
+      objectReference: {fileID: 8300000, guid: f10089e1dcfe44a4cbc379f0c6aaacb7, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3363,6 +3375,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1281758707}
+    - target: {fileID: 7639927277982300351, guid: bc58a9a92af41ce4495d40b0d7faccd4, type: 3}
+      propertyPath: bossBGM
+      value: 
+      objectReference: {fileID: 8300000, guid: 43b9d0ef5d30e654bae3d432ee707e5f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
