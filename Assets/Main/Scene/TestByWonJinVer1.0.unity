@@ -283,7 +283,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 39245191}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1670301750}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &39245191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1676,6 +1688,10 @@ PrefabInstance:
       value: phoenix
       objectReference: {fileID: 0}
     - target: {fileID: 4807187242689097693, guid: 0ccea072197aa1f409d109147c5fbaaa, type: 3}
+      propertyPath: actor
+      value: 
+      objectReference: {fileID: -8782899659279230520, guid: 7499bfc0a8fc2284085595068b4d9026, type: 3}
+    - target: {fileID: 4807187242689097693, guid: 0ccea072197aa1f409d109147c5fbaaa, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1281758707}
@@ -2431,7 +2447,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1055495996}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1670301750}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1055495996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2811,7 +2839,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1386872855}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1670301750}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1386872855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3728,9 +3768,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fa180dc2fc96a2246a5cdf98380f7bfe, type: 2}
   - {fileID: 11400000, guid: dd43ccec96c06e849807ed08f547156b, type: 2}
   AbilityCardPrefabs:
-  - {fileID: 11400000, guid: d681fd0534d62ba4597ca2f7e0b9747f, type: 2}
   - {fileID: 11400000, guid: e224aff605b1e0347b55fea7f554170d, type: 2}
-  - {fileID: 11400000, guid: 7c810332df8a3d74b8674d058780f6b0, type: 2}
+  - {fileID: 11400000, guid: b78e2f678e3027f43b7199e1d570c5f4, type: 2}
+  - {fileID: 11400000, guid: 40625e21b92e38748806bb2ee11db114, type: 2}
+  - {fileID: 11400000, guid: d681fd0534d62ba4597ca2f7e0b9747f, type: 2}
+  - {fileID: 11400000, guid: ab141eef3430ad64780316574ed88d67, type: 2}
 --- !u!1 &1726223289
 GameObject:
   m_ObjectHideFlags: 0
