@@ -1242,6 +1242,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1281758707}
+    - target: {fileID: 4082295972029532856, guid: 76f19b79ffa65b54c8bdb430f52a82fe, type: 3}
+      propertyPath: bossBGM
+      value: 
+      objectReference: {fileID: 8300000, guid: 443f3ca05fedc3d49a97976841aca364, type: 3}
     - target: {fileID: 8219168924295596478, guid: 76f19b79ffa65b54c8bdb430f52a82fe, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.19
@@ -1793,6 +1797,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1281758707}
+    - target: {fileID: 4807187242689097693, guid: 0ccea072197aa1f409d109147c5fbaaa, type: 3}
+      propertyPath: bossBGM
+      value: 
+      objectReference: {fileID: 8300000, guid: b2e5d7d38c4d4a84e951e0c5f4eeb0cd, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2332,7 +2340,6 @@ Transform:
   m_Children:
   - {fileID: 716858283}
   - {fileID: 958887447}
-  - {fileID: 1463685374}
   - {fileID: 2071694037}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3004,6 +3011,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1281758707}
+    - target: {fileID: 6778490003573116259, guid: 03476e2f151e61b4f83c8f33aacce789, type: 3}
+      propertyPath: bossBGM
+      value: 
+      objectReference: {fileID: 8300000, guid: f10089e1dcfe44a4cbc379f0c6aaacb7, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3251,237 +3262,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &1463685373
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1463685374}
-  - component: {fileID: 1463685379}
-  - component: {fileID: 1463685378}
-  - component: {fileID: 1463685377}
-  - component: {fileID: 1463685376}
-  - component: {fileID: 1463685375}
-  m_Layer: 6
-  m_Name: BossWall
-  m_TagString: Wall
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1463685374
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1463685373}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1122647174}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!66 &1463685375
-CompositeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1463685373}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 1
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1463685377}
-    m_ColliderPaths: []
-  m_CompositePaths:
-    m_Paths: []
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0
-  m_UseDelaunayMesh: 0
-  m_CompositeGameObject: {fileID: 1463685373}
---- !u!50 &1463685376
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1463685373}
-  m_BodyType: 2
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!19719996 &1463685377
-TilemapCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1463685373}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 1
-  m_Offset: {x: 0, y: 0}
-  m_MaximumTileChangeCount: 1000
-  m_ExtrusionFactor: 0
-  m_UseDelaunayMesh: 0
---- !u!483693784 &1463685378
-TilemapRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1463685373}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
-  m_MaxChunkCount: 16
-  m_MaxFrameAge: 16
-  m_SortOrder: 0
-  m_Mode: 0
-  m_DetectChunkCullingBounds: 0
-  m_MaskInteraction: 0
---- !u!1839735485 &1463685379
-Tilemap:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1463685373}
-  m_Enabled: 1
-  m_Tiles: {}
-  m_AnimatedTiles: {}
-  m_TileAssetArray: []
-  m_TileSpriteArray: []
-  m_TileMatrixArray: []
-  m_TileColorArray: []
-  m_TileObjectToInstantiateArray: []
-  m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: 0, y: 0, z: 0}
-  m_Size: {x: 0, y: 0, z: 1}
-  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
-  m_TileOrientation: 0
-  m_TileOrientationMatrix:
-    e00: 1
-    e01: 0
-    e02: 0
-    e03: 0
-    e10: 0
-    e11: 1
-    e12: 0
-    e13: 0
-    e20: 0
-    e21: 0
-    e22: 1
-    e23: 0
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 1
 --- !u!1 &1468343175
 GameObject:
   m_ObjectHideFlags: 0
@@ -3648,12 +3428,13 @@ MonoBehaviour:
   roomSpacing: 5
   tilemap: {fileID: 716858285}
   wallTilemap: {fileID: 958887452}
-  bossWallMap: {fileID: 1463685379}
+  bossWallMap: {fileID: 3962293413733905933, guid: de734400799d9cf44a95214d1975014e, type: 3}
   roadTriger: {fileID: 2071694043}
   floorTile: {fileID: 11400000, guid: 1ec11722a23d0ff4aadea95a7d5c3ce8, type: 2}
   wallTile: {fileID: 11400000, guid: 5799a4cb4118d7a498ed0e34ed381b8f, type: 2}
   bossWallTile: {fileID: 11400000, guid: 8b083ea061ebd784a84db378979afba7, type: 2}
   enemyWallTile: {fileID: 11400000, guid: 8b083ea061ebd784a84db378979afba7, type: 2}
+  grid: {fileID: 1122647172}
   player: {fileID: 1281758706}
   boss: {fileID: 504145943}
   enemys:
@@ -3741,6 +3522,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1281758707}
+    - target: {fileID: 7639927277982300351, guid: bc58a9a92af41ce4495d40b0d7faccd4, type: 3}
+      propertyPath: bossBGM
+      value: 
+      objectReference: {fileID: 8300000, guid: 43b9d0ef5d30e654bae3d432ee707e5f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3948,7 +3733,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4045,6 +3830,8 @@ MonoBehaviour:
   bgmDatas:
   - type: 2
     clip: {fileID: 8300000, guid: 79d469d81c2def1459c8894b37fa1347, type: 3}
+  - type: 1
+    clip: {fileID: 8300000, guid: 491e4c0d143a1184094b626b9f7af500, type: 3}
   seDatas:
   - type: 0
     clip: {fileID: 0}

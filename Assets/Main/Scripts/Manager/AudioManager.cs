@@ -72,11 +72,16 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void Start()
+    {
+        PlayBGM(BGMType.Feild); // 테스트로 게임 시작시 필드BGM 재생
+    }
     // BGM을 재생 - 오디오 소스는 하나의 소스를 인스펙터창에 등록해서 사용
     public void PlayBGM(BGMType type)
     {
         if (bgmDictionary.TryGetValue(type, out AudioClip clip))
         {
+            Debug.Log($"{type} : {bgmSource.clip} -> {clip}");
             if (bgmSource.clip == clip) return;
             bgmSource.Stop();
             bgmSource.clip = clip;
@@ -108,4 +113,33 @@ public class AudioManager : MonoBehaviour
         // 모두 재생중이면 첫 번째 소스를 강제 사용(최악의 경우)
         return seSourcePool[0];
     }
+
+    public void SetBossBattleBGM(AudioClip clip) 
+    {
+        if (clip == null) return;
+
+        // 현재는 BGMType로 '정해진' 오디오만 추가 가능해서, 보스 별 BGM을 모두 오디오 풀에 등록하지 못합니다.
+        // BGMType은 enum으로 런타임(게임 실행 중) 확장이 안되기 때문입니다.
+        // 예시로 바하뮤트 BGM은 BGMType.BossBattle로 추가가 가능하지만, 피닉스 BGM은 또 어떻게 bgmDictionary에 추가할 수 있을까요?
+        // 현재 구조로는 안됩니다. 따라서 이 추가 기능(함수)을 설정하여, BGMType.BossBattle의 값만 변경했습니다.
+        if (!bgmDictionary.ContainsKey(BGMType.BossBattle)) return;
+        bgmDictionary[BGMType.BossBattle] = clip;
+        PlayBGM(BGMType.BossBattle);
+    }
+    public void SetBGM(BGMType type, AudioClip clip = null)
+    {
+        if (bgmDictionary.ContainsKey(type)) // 오디오 풀에 있다면 재생
+        {
+            PlayBGM(type);
+        }
+        else // 오디오 풀에 없다면 추가
+        {
+            if (clip == null) return; // 클립이 없다면 추가 실패
+
+            bgmDictionary.Add(type, clip);
+            PlayBGM(type);
+        }
+    }
+
+
 }

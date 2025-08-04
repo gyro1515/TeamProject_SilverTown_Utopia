@@ -12,6 +12,8 @@ public abstract class Enemy : Entity
     [SerializeField] protected float bodyDamageTime = 0.1f; // 몸박 데미지 간격
     [SerializeField] protected float dashMultiple = 3.0f; // 대시 스피드 배율(플레이어 * dashMultiple = 대시 스피드)
     [SerializeField] protected PatternActor actor;
+    [SerializeField] protected AudioClip bossBGM;
+    public AudioClip BossBGM { get { return bossBGM; } }
     protected float baseSpeed; // 몬스터는 이동속도가 변하기 때문에, 베이스 이동속도 따로 추가
     public enum EBossState // 보스 방 진입시 활성화, 탈출 시 비활성화(맵 중앙으로 돌아가기), 중앙으로 돌아가면 작동 안하도록(업데이트x)
     {
@@ -102,8 +104,10 @@ public abstract class Enemy : Entity
         // 위 방식으로 구하면 위아래로 겹칠때 에러 발생
 
         // 레이캐스트로 벽 탐지
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, moveDirection, rayDist, wallLayer); // 캡슐 크기에 따라 레이캐스트 거리 달라져야함
+        Vector2 startPos = (Vector2)transform.position + bodyCol.offset;
+        RaycastHit2D hit = Physics2D.Raycast(startPos, moveDirection, rayDist, wallLayer); // 캡슐 크기에 따라 레이캐스트 거리 달라져야함
         Vector2 wallNormal = hit.normal;
+        //Debug.DrawLine(startPos, startPos + moveDirection * rayDist, Color.gray, 1.0f);
 
         // 만약 법선과 moveDirection의 방향이 180도에 가깝다면 대시 중지
         float angle = Vector2.Angle(wallNormal, moveDirection);
@@ -155,6 +159,8 @@ public abstract class Enemy : Entity
     {
         base.OnDead();
         target.killCount++;
+        // 해당 적 죽으면 방 문 열기
+        GameManager.Instance.MapGenerater.OpenBossRoom(MyRoom.RoomWallIdx); 
         Destroy(this.gameObject);
     }
 
