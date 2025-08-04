@@ -208,7 +208,8 @@ public class WireAction : MonoBehaviour
 
         // 또 다른 방식: 자연스러운 이동위해 움직일때마다 충돌 
         Collider2D hit = Physics2D.OverlapCapsule(curPoint, playerCol.size, playerCol.direction, 0f, wireLayer);
-        if (hit == null || hit.gameObject != colGO)
+        //if (hit == null || hit.gameObject != colGO)
+        if (hit == null)
         {
             //Debug.Log("이동");
             player.gameObject.transform.position = curPoint;
@@ -261,6 +262,7 @@ public class WireAction : MonoBehaviour
         player.IsWireActive = false;
         colGO = null;
         playerCol.isTrigger = false;
+        wireGO.SetActive(false);
     }
    /* public bool CheckIsWiredObstacle(GameObject col)
     {
