@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54ee12395610fa240a5d93fa8432423c, type: 3}
-  m_Name: DemonCrcle1
+  m_Name: PlayerBaseAttack
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
-  skillDamage: 10
+  skillDamage: 0
   skillMultiplier: 1
-  includeEntityAttack: 0
+  includeEntityAttack: 1
   direction: {x: 0, y: 0}
   positionCenter: {x: 0, y: 0, z: 0}
-  animPrefab: {fileID: 7828470015727839319, guid: 4d6e5093d78a8a344a34feb6fdc84d54, type: 3}
+  animPrefab: {fileID: 0}
   audioClip: {fileID: 0}
-  colliderPrefab: {fileID: 3617344549384259999, guid: ddff3a9b92fcc4b4984a933e4374ab12, type: 3}
+  colliderPrefab: {fileID: 3617344549384259999, guid: 1f591c1b6b784174a975c7fa791c2e3d, type: 3}
   hitCollider: {fileID: 0}
-  warningDuration: 1
+  warningDuration: 0.1
   attackRemain: 0
-  attackAngle: 0
-  isFixedRotation: 1
+  attackAngle: -135
+  isFixedRotation: 0
   size: {x: 2, y: 2}

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2194e5ab6e65f5f42aea95da7f589cdc, type: 3}
-  m_Name: FireBall
+  m_Name: PlayerSkill1
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
   skillDamage: 30
@@ -18,10 +18,10 @@ MonoBehaviour:
   includeEntityAttack: 0
   direction: {x: 1, y: 0}
   positionCenter: {x: 0, y: 0, z: 0}
-  animPrefab: {fileID: 2476545726243265464, guid: 24f5aed2043675a4597046efe666f143, type: 3}
+  animPrefab: {fileID: 0}
   audioClip: {fileID: 0}
   projectilePrefab: {fileID: 8324435634244213426, guid: cac8bffb8dd1e2c439f81fa8be92be0c, type: 3}
-  projectileQuantity: 1
-  spread: 0
-  projectileSpeed: 5
-  scale: {x: 2, y: 2}
+  projectileQuantity: 3
+  spread: 30
+  projectileSpeed: 1
+  scale: {x: 1, y: 1}
