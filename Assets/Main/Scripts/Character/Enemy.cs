@@ -40,6 +40,25 @@ public abstract class Enemy : Entity
     // 대시용 bool 변수
     protected bool bIsDash = false;
     public bool isPatternEnd = true;
+    private bool isScreenPattern = false; // 스크린 패턴 중에는 몸박, TakeDamage, 콜라이더 비활성되게
+    public bool IsScreenPattern 
+    { 
+        set 
+        { 
+            isScreenPattern = value;
+            if (isScreenPattern)
+            {
+                bodyCol.enabled = false;
+                trigerCol.enabled = false;
+            }
+            else
+            {
+                bodyCol.enabled = true;
+                trigerCol.enabled = true;
+            }
+
+        } 
+    }
 
     protected override void Awake()
     {
@@ -89,6 +108,11 @@ public abstract class Enemy : Entity
     {
         if (BossState == EBossState.PowerOff) return; // 비활성화시 트리 실행 x
         //Debug.Log("Update");
+        if (target.closestEnemy == null && BossState == EBossState.Active)
+        {
+            target.closestEnemy = this;
+            this.SetHp();
+        }
         behaviorTreeRoot.Evaluate(); // 트리 검사
         // 트리 검사하고 이동 확정된 다음 부모 실행
         base.Update(); // 애니메이션
@@ -132,15 +156,22 @@ public abstract class Enemy : Entity
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (isScreenPattern) return;
         Debug.Log($"Trigger 몸박시작: {collision.gameObject.name}");
         bPlayerInBody = true;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (isScreenPattern) return;
+
         Debug.Log($"Trigger 몸박종료: {collision.gameObject.name}");
         bPlayerInBody = false;
     }
-
+    protected virtual void TakeDamage(int  damage)
+    {
+        if (isScreenPattern) return;
+        base.TakeDamage(damage);
+    }
     protected virtual void Init(Player _target)
     {
         target = _target;
@@ -150,8 +181,8 @@ public abstract class Enemy : Entity
 
     protected override void SetHp()
     {
-        //float hpScale = 1.0f + (target.killCount * 0.1f);
-        //MaxHp = (int)(MaxHp * hpScale);
+        float hpScale = 1.0f + (target.killCount * 0.1f);
+        MaxHp = (int)(MaxHp * hpScale);
         base.SetHp();
     }
 
@@ -159,6 +190,7 @@ public abstract class Enemy : Entity
     {
         base.OnDead();
         target.killCount++;
+        target.closestEnemy = null;
         target.Levelup();
         // 해당 적 죽으면 방 문 열고, 
         GameManager.Instance.MapGenerater.OpenBossRoom(MyRoom.RoomWallIdx);
@@ -180,7 +212,7 @@ public abstract class Enemy : Entity
         {
             bodyDamageTimer -= bodyDamageTime;
             //Debug.Log($"플레이어에게 몸박 데미지{bodyDamage}");
-            ApplyDamage(target, bodyDamage, false);
+            ApplyDamage(target, bodyDamage, false, false);
         }
     }
     protected virtual INode.ENodeState Chase()
@@ -258,7 +290,7 @@ public abstract class Enemy : Entity
         BossState = EBossState.PowerOff;
         return INode.ENodeState.Success;
     }
-
+    
 
     // 테스트 용
     public void KillBoss()

@@ -9,7 +9,8 @@ public class ProjectileSkillCard : UpgradeCard
     [SerializeField] float damageMultiplier = 1.0f;
     [SerializeField] int addProjectileCnt = 0;
     [SerializeField] float projectileSpeed = 1.0f;
-    [SerializeField] ProjectileSkill skill;
+    [SerializeField] public bool isAuto = false;
+    [SerializeField] public ProjectileSkill skill { get; private set; }
     [SerializeField] string skillName;
     public override void ApplySelectedCard()
     {
@@ -20,9 +21,12 @@ public class ProjectileSkillCard : UpgradeCard
             skill.UpgradeProjectileCount(addProjectileCnt);
         if (projectileSpeed != 1.0f)
             skill.UpgradeSpeed(projectileSpeed);
+        if(isAuto)
+            skill.isAuto = true;
     }
-    public void SetCard(ProjectileSkill s)
+    public void SetCard(ProjectileSkill s, Sprite sprite)
     {
+        cardSprite = sprite;
         skill = s;
         skillName = s.name.ToString();
         skillName = skillName.Substring(0,skillName.Length - 7);

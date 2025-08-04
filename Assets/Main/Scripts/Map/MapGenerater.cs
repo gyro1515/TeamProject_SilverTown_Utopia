@@ -538,6 +538,7 @@ public class MapGenerater : MonoBehaviour
                     CloseBossRoom(enemy.MyRoom.RoomWallIdx);
                     AudioManager.Instance.SetBossBattleBGM(enemy.BossBGM);
                     curEnemy = enemy;
+                    
                     break;
                 }
                 tCam.SetMap(room);

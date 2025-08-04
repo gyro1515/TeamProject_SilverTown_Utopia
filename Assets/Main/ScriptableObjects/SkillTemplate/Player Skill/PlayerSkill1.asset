@@ -24,4 +24,4 @@ MonoBehaviour:
   projectileQuantity: 3
   spread: 30
   projectileSpeed: 5
-  scale: {x: 0.2, y: 0.2}
+  scale: {x: 0.4, y: 0.4}

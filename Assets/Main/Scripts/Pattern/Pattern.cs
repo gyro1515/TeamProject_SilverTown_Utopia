@@ -63,6 +63,8 @@ public class Pattern : ScriptableObject
     [SerializeField] public float patternCoolTime = 5.0f;
     [HideInInspector] public float patternCoolTimer = 0.0f;
     [HideInInspector] public bool isCoolTime = true;
+    // 스크린 패턴 용 함수
+    [SerializeField] public bool isScreenPattern = false;
 
 
     //If unequal Array Size, Error
@@ -87,7 +89,7 @@ public class Pattern : ScriptableObject
     }
     
     //Copy all Skills
-    public void Init()
+    public virtual void Init()
     {
         int count = skills.Length;
 

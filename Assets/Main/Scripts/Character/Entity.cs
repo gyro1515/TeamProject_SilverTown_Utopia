@@ -41,7 +41,7 @@ public abstract class Entity : MonoBehaviour
         Move();
     }
 
-    protected virtual void TakeDamage(int damage, bool isJumpAvoidable = false) 
+    protected virtual void TakeDamage(int damage, bool isJumpAvoidable = false, bool canParring = true) 
     {
         Debug.Log("Entity " + this.gameObject.name + " Took " +damage.ToString() + "Damage");
         currentHp -= damage;
@@ -52,9 +52,9 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
-    public void ApplyDamage(Entity e, int damage = 0, bool isJumpAvoidable = false) 
+    public void ApplyDamage(Entity e, int damage = 0, bool isJumpAvoidable = false, bool canParring = true) 
     {
-        e.TakeDamage(damage, isJumpAvoidable);
+        e.TakeDamage(damage, isJumpAvoidable, canParring);
     }
 
     protected void Move()

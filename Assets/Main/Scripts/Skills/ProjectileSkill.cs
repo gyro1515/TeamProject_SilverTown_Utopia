@@ -16,10 +16,21 @@ public class ProjectileSkill : Skill
     [SerializeField] float projectileSpeed = 0.0f;
     //Projectile Size
     [SerializeField] public Vector2 scale = Vector2.one;
+    //Auto Homing
+    [SerializeField] public bool isAuto = false;
 
     public override void UseSkill(Entity entity, Vector2 dir)
     {
         base.UseSkill(entity, dir);
+        if (isAuto)
+        {
+            if (entity.GetComponent<Player>() != null)
+            {
+                Player player = entity as Player;
+                if (player.closestEnemy != null)
+                    direction = (Vector2)(player.closestEnemy.transform.position - player.transform.position);
+            }
+        }
         if (projectileQuantity <= 0)
             return;
         float startangle;
