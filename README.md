@@ -40,6 +40,22 @@
 
 - 플레이어와 몬스터가 모두 원거리 공격등)
 
+- ---
+
+## 💜 주요기능
+
+### 1. 절차적 맵 생성
+- 충돌 분산 알고리즘(Room Separation)과 MST(Minimum Spanning Tree)을 접목하여
+- **매번 다른 형태의 맵**을 자동으로 생성하도록 구성
+
+- <p align="center">
+  <img src="https://raw.githubusercontent.com/gyro1515/TeamProject_SilverTown_Utopia/main/README_Images/Mapping.gif" alt="SilverTown Utopia 로고" width="600"/>
+</p>
+
+### 2. Behavior Tree 기반 AI
+- 몬스터가 **고정된 공격만 하지 않고**, 상황에 따라 패턴을 달리함
+- 다양한 공격 루트를 통해 **회피 중심의 전투 지양**
+
 ### 3. ScriptableObject 기반 스킬 관리
 - 스킬/패턴 데이터를 모듈화하여 **인스펙터에서 직접 수정 가능**
 - 빠른 밸런싱 및 확장성을 확보
