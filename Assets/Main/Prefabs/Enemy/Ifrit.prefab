@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7639927277982300351}
   m_Layer: 0
   m_Name: Ifrit
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,6 +119,7 @@ MonoBehaviour:
   bodyDamageTime: 0.1
   dashMultiple: 3
   actor: {fileID: 1548962701196398411, guid: d545e1a1d783b7148bbaa1137adb118e, type: 3}
+  bossBGM: {fileID: 8300000, guid: 43b9d0ef5d30e654bae3d432ee707e5f, type: 3}
   isPatternEnd: 1
 --- !u!1 &3052415846485800928
 GameObject:

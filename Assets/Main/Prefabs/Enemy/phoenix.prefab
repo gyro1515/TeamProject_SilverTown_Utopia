@@ -163,6 +163,7 @@ MonoBehaviour:
   bodyDamageTime: 0.3
   dashMultiple: 2
   actor: {fileID: -8782899659279230520, guid: 70f48ccc7d1adec498ab3e0898061683, type: 3}
+  bossBGM: {fileID: 8300000, guid: b2e5d7d38c4d4a84e951e0c5f4eeb0cd, type: 3}
   isPatternEnd: 1
 --- !u!50 &9190759626007008994
 Rigidbody2D:
