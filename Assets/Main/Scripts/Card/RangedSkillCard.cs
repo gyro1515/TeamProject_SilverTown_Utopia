@@ -17,8 +17,9 @@ public class RangedSkillCard : UpgradeCard
         if(sizeMultiplier != 1.0f)
             skill.UpgradeSize(sizeMultiplier);
     }
-    public void SetCard(RangedSkill s)
+    public void SetCard(RangedSkill s, Sprite sprite)
     {
+        cardSprite = sprite;
         skill = s;
         skillName = s.name.ToString();
         skillName = skillName.Substring(0, skillName.Length - 7);

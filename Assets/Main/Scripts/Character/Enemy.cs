@@ -108,6 +108,11 @@ public abstract class Enemy : Entity
     {
         if (BossState == EBossState.PowerOff) return; // 비활성화시 트리 실행 x
         //Debug.Log("Update");
+        if (target.closestEnemy == null && BossState == EBossState.Active)
+        {
+            target.closestEnemy = this;
+            this.SetHp();
+        }
         behaviorTreeRoot.Evaluate(); // 트리 검사
         // 트리 검사하고 이동 확정된 다음 부모 실행
         base.Update(); // 애니메이션
@@ -176,8 +181,8 @@ public abstract class Enemy : Entity
 
     protected override void SetHp()
     {
-        //float hpScale = 1.0f + (target.killCount * 0.1f);
-        //MaxHp = (int)(MaxHp * hpScale);
+        float hpScale = 1.0f + (target.killCount * 0.1f);
+        MaxHp = (int)(MaxHp * hpScale);
         base.SetHp();
     }
 
@@ -185,6 +190,7 @@ public abstract class Enemy : Entity
     {
         base.OnDead();
         target.killCount++;
+        target.closestEnemy = null;
         target.Levelup();
         // 해당 적 죽으면 방 문 열고, 
         GameManager.Instance.MapGenerater.OpenBossRoom(MyRoom.RoomWallIdx);
