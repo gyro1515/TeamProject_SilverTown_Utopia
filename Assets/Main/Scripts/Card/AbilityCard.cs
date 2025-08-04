@@ -7,6 +7,7 @@ using UnityEngine;
 public class AbilityCard : UpgradeCard
 {
     [Header("능력치 강화")]
+    Player player;
     [SerializeField]int plusHp = 0;
     [SerializeField]int plusAtk = 0;
     [SerializeField]int plusSpeed = 0;
@@ -14,7 +15,22 @@ public class AbilityCard : UpgradeCard
     public override void ApplySelectedCard()
     {
         Debug.Log("능력치 강화");
-        // 예시: Player.Instace.maxHp += plusHp;
-        //       Player.Instace.curHp += plusHp;
+        if (plusHp != 0)
+        {
+            player.UpgradeHP(plusHp);
+        }
+        if (plusAtk != 0)
+        {
+            player.UpgradeAtk(plusAtk);
+        }
+        if (plusSpeed != 0)
+        {
+            player.UpgradeSpeed(plusSpeed);
+        }
+    }
+
+    public void SetCard(Player player)
+    {
+        this.player = player;
     }
 }

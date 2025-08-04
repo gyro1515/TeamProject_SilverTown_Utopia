@@ -15,11 +15,6 @@ public class Projectile : MonoBehaviour
         projectileRigidbody = GetComponent<Rigidbody2D>();
     }
 
-    //temporary destroy end after 3 seconds
-    private void Start()
-    {
-        Destroy(gameObject, 3.0f);
-    }
     //At generation
     public void Init(Entity entity, Vector2 force, int damage)
     {
@@ -35,6 +30,9 @@ public class Projectile : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision.tag);
+        if (collision.CompareTag("Attack"))
+            return;
         //if Shooter Collider, skip
         if (collision.gameObject.CompareTag(shooter.tag))
             return;

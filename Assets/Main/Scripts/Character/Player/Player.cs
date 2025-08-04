@@ -19,8 +19,11 @@ public class Player : Entity
     bool isJumping = false;
 
     //Attack
-    [SerializeField] Skill baseAttack = null;
-    [SerializeField] private const float attackDelay = 1.0f;
+    [SerializeField] public Skill baseAttack;
+    [SerializeField] public List<Skill> playerSkills;
+    [SerializeField] public List<float> skillCooldown;
+    [SerializeField] public List<float> activateTime;
+    [SerializeField] private const float attackDelay = 1.5f;
     private float attackTime = 0.0f;
 
     // 방향용 Cam
@@ -37,7 +40,19 @@ public class Player : Entity
     {
         base.Awake();
         if(baseAttack != null)
-        baseAttack = Instantiate(baseAttack);
+            baseAttack = Instantiate(baseAttack,transform);
+
+        if (playerSkills.Count != skillCooldown.Count)
+        {
+            Debug.Log("Unmatched Skill count and Skill Cooldown Count in player");
+            return;
+        }
+        
+        for (int i = 0; i < skillCooldown.Count; i++)
+        {
+            playerSkills[i] = Instantiate(playerSkills[i],transform);
+            activateTime[i] = -skillCooldown[i];
+        }
 
         parringStartTime -= parringDelay;
         damageStartTime -= damageDelay;
@@ -132,11 +147,26 @@ public class Player : Entity
             Debug.Log("Player BaseAttack is null");
             return;
         }
+        attackTime = Time.fixedTime;
         if ((mousepos.magnitude) < 0.9f)
             baseAttack.UseSkill(this as Entity, Vector2.zero);
         else
             baseAttack.UseSkill(this as Entity, mousepos.normalized);
     }
+
+    private void SkillAttack(int index)
+    {
+        if (index >= playerSkills.Count || playerSkills[index] == null)
+        {
+            Debug.Log("Player Skill is null");
+            return;
+        }
+        activateTime[index] = Time.fixedTime;
+        attackTime = Time.fixedTime;
+        playerSkills[index].UseSkill(this as Entity, lookDirection.normalized);
+    }
+
+
 
     // 아래는 Player Input Component에서 불러와줌
     void OnMove(InputValue inputValue)
@@ -184,13 +214,39 @@ public class Player : Entity
     }
     void OnSkill1(InputValue inputValue)
     {
-        // inputValue.isPressed를 안하면 키 다운, 키 업 두 번 호출 됨
+        if (!inputValue.isPressed) return;
+        if (isWireActive) return; // 와이어 액션 중에는 공격 불가
+        if (Time.fixedTime - attackTime < attackDelay)
+            return;
 
-        // 현재 좌클릭
-
-        // 3초 지속
-        //Debug.DrawLine(transform.position, transform.position + (Vector3)lookDirection * length, Color.blue, 3.0f);
+        if (0 >= playerSkills.Count || Time.fixedTime - activateTime[0] < skillCooldown[0])
+            return;
+        SkillAttack(0);
     }
+    void OnSkill2(InputValue inputValue)
+    {
+        if (!inputValue.isPressed) return;
+        if (isWireActive) return; // 와이어 액션 중에는 공격 불가
+        if (Time.fixedTime - attackTime < attackDelay)
+            return;
+
+        if (1 >= playerSkills.Count || Time.fixedTime - activateTime[1] < skillCooldown[1])
+            return;
+        SkillAttack(1);
+    }
+    void OnSkill3(InputValue inputValue)
+    {
+        if (!inputValue.isPressed) return;
+        if (isWireActive) return; // 와이어 액션 중에는 공격 불가
+        if (Time.fixedTime - attackTime < attackDelay)
+            return;
+
+        if (2 >= playerSkills.Count || Time.fixedTime - activateTime[2] < skillCooldown[2])
+            return;
+        SkillAttack(2);
+    }
+
+
 
     void OnBaseAttack(InputValue inputValue)
     {
@@ -207,5 +263,23 @@ public class Player : Entity
     {
         isJumping = false;
         Debug.Log("Player Jump End");
+    }
+
+    public void UpgradeHP(int hp)
+    {
+        this.MaxHp += hp;
+        this.currentHp += hp;
+        if(currentHp > MaxHp)
+            currentHp = MaxHp;
+    }
+
+    public void UpgradeSpeed(int speed)
+    {
+        this.MoveSpeed += speed;
+    }
+
+    public void UpgradeAtk(int atk)
+    {
+        this.attackDamage += atk;
     }
 }
