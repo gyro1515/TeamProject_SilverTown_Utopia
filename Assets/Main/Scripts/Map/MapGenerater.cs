@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using UnityEngine.Windows;
 using static Unity.Burst.Intrinsics.X86.Avx;
-using static UnityEditor.PlayerSettings;
+//using static UnityEditor.PlayerSettings;
 
 public class MapGenerater : MonoBehaviour
 {
