@@ -26,7 +26,7 @@ public class Player : Entity
     [SerializeField] public List<Skill> playerSkills;
     [SerializeField] public List<float> skillCooldown;
     [SerializeField] public List<float> activateTime;
-    [SerializeField] private const float attackDelay = 1.5f;
+    [SerializeField] private const float attackDelay = 3.0f;
     private float attackTime = 0.0f;
 
     // 방향용 Cam
@@ -42,7 +42,7 @@ public class Player : Entity
     protected override void Awake()
     {
         base.Awake();
-        attackDamage = 20;
+        attackDamage = 10;
         if(baseAttack != null)
             baseAttack = Instantiate(baseAttack,transform);
 
@@ -140,8 +140,6 @@ public class Player : Entity
         if (shake != null)
             StartCoroutine(shake.ShakeEffectCamera());
         gameObject.GetComponentInChildren<Animator>().Play("TakeDamage");
-
-        Debug.Log($"{currentHp} / {MaxHp}");
         UIManager.Instance.SetHpBar((float)currentHp / GetMaxHP());
     }
     private void BaseAttack(Vector2 mousepos)
@@ -298,5 +296,11 @@ public class Player : Entity
         this.currentHp = Mathf.Clamp(currentHp + HPoffset, 0, GetMaxHP());
 
         attackDamage = (int)(10 + 5 * Mathf.Sqrt(killCount));
+    }
+    public void SetCurHp(int addHp)
+    {
+        currentHp = Mathf.Clamp(currentHp + addHp, 0, GetMaxHP());
+        UIManager.Instance.SetHpBar((float)currentHp / GetMaxHP());
+        Debug.Log($"체력 회복량: {addHp} = cur: {currentHp} / max: {GetMaxHP()}");
     }
 }

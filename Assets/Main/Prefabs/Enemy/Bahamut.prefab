@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f136dffcfa7a52e4f886e9968f9ee990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHp: 0
-  MaxHp: 0
+  currentHp: 2400
+  MaxHp: 2400
   moveSpeed: 3
   target: {fileID: 0}
   attackRange: 4
@@ -98,7 +98,7 @@ CapsuleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1088
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 951

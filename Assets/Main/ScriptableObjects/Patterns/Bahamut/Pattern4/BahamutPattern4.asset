@@ -14,16 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   skills:
-  - {fileID: 11400000, guid: 4a53b852d49c8004bb4dd7036dfc0835, type: 2}
-  - {fileID: 11400000, guid: fadd6dfaa2af9dc42bd13466f4715881, type: 2}
+  - {fileID: 11400000, guid: 2e43e8645a7543342925e6d5e165d24f, type: 2}
+  - {fileID: 11400000, guid: 52a3bcc400f0c6c458414ff126e96a3f, type: 2}
   activeTime:
   - 0
   - 0
-  positionStates: 090000000c000000
+  positionStates: 070000000c000000
   positions:
-  - {x: 0, y: 0}
+  - {x: 0, y: 2.5}
   - {x: 0, y: 0}
   ignoreSkillCooldown: 0
   randomMin: {x: 0, y: 0}
   randomMax: {x: 0, y: 0}
   entityToPlayerScale: 0.1
+  previousPosIndex: 0
+  patternCoolTime: 12
+  patternCoolTimer: 0
+  isCoolTime: 1

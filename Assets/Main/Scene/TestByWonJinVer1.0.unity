@@ -1688,6 +1688,10 @@ PrefabInstance:
       value: phoenix
       objectReference: {fileID: 0}
     - target: {fileID: 4807187242689097693, guid: 0ccea072197aa1f409d109147c5fbaaa, type: 3}
+      propertyPath: actor
+      value: 
+      objectReference: {fileID: -8782899659279230520, guid: 7499bfc0a8fc2284085595068b4d9026, type: 3}
+    - target: {fileID: 4807187242689097693, guid: 0ccea072197aa1f409d109147c5fbaaa, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1281758707}

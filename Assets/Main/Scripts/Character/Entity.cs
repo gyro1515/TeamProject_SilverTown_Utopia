@@ -45,8 +45,8 @@ public abstract class Entity : MonoBehaviour
     {
         Debug.Log("Entity " + this.gameObject.name + " Took " +damage.ToString() + "Damage");
         currentHp -= damage;
-        Mathf.Clamp(currentHp, 0, GetMaxHP());
-        if (currentHp == 0)
+        currentHp = Mathf.Clamp(currentHp, 0, GetMaxHP());
+        if (currentHp <= 0)
         {
             Invoke("OnDead", 0);
         }
@@ -94,5 +94,6 @@ public abstract class Entity : MonoBehaviour
     {
         return MaxHp;
     }
+    
 
 }

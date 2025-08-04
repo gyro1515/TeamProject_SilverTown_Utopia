@@ -81,7 +81,7 @@ public class AudioManager : MonoBehaviour
     {
         if (bgmDictionary.TryGetValue(type, out AudioClip clip))
         {
-            Debug.Log($"{type} : {bgmSource.clip} -> {clip}");
+            //Debug.Log($"{type} : {bgmSource.clip} -> {clip}");
             if (bgmSource.clip == clip) return;
             bgmSource.Stop();
             bgmSource.clip = clip;

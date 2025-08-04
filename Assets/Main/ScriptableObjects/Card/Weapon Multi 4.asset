@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Weapon Multi 4
   m_EditorClassIdentifier: 
   cardTitle: Weapon
-  cardExplanation: Your base damage multiplies by 1.2
+  cardExplanation: Your base damage multiplies by 1.8
   cardSprite: {fileID: 21300000, guid: 693d9ca77177ec049b664aab61105e92, type: 3}
   plusHp: 0
   weaponAtkMultiplier: 1.8
