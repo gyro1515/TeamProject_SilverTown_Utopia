@@ -46,7 +46,7 @@ public class Bahamut : Enemy
         SequenceNode attack1Sequence = new SequenceNode(new List<INode>() { attack1, attack1Time }); // 공격이 끝나야 성공처리
         // 패턴 2
         ActionNode attack2 = new ActionNode(Attack2); 
-        WaitNode attack2Time = new WaitNode(2.0f); 
+        WaitNode attack2Time = new WaitNode(3.5f); 
         SequenceNode attack2Sequence = new SequenceNode(new List<INode>() { attack2, attack2Time });
         // 패턴 3
         ActionNode attack3 = new ActionNode(Attack3); 
@@ -329,8 +329,16 @@ public class Bahamut : Enemy
 
     protected override void OnDead()
     {
-        base.OnDead();
+        //base.OnDead();
+        isDead = true;
+
         // 엔딩으로 넘어가기
         Debug.Log("보스 클리어, 엔딩 씬으로 넘어가기");
+        UIManager.Instance.EndingUI.gameObject.SetActive(true);
+        UIManager.Instance.EndingUI.EndingStart();
+        // 승리 BGM 추가
+        AudioManager.Instance.PlayBGM(BGMType.Ending);
+
+        gameObject.SetActive(false); // 일단 비활성화로
     }
 }

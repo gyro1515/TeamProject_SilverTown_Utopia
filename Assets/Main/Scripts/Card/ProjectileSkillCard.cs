@@ -23,6 +23,21 @@ public class ProjectileSkillCard : UpgradeCard
             skill.UpgradeSpeed(projectileSpeed);
         if(isAuto)
             skill.isAuto = true;
+
+        int skillIdx = -1;
+        if (GameManager.Instance.Player.baseAttack == skill)
+        {
+            skillIdx = 0;
+        }
+        else if (GameManager.Instance.Player.playerSkills[0] == skill)
+        {
+            skillIdx = 1;
+        }
+        else if (GameManager.Instance.Player.playerSkills[1] == skill)
+        {
+            skillIdx = 2;
+        }
+        UIManager.Instance.MainUI.SetSkillIcon(skillIdx, cardSprite);
     }
     public void SetCard(ProjectileSkill s, Sprite sprite)
     {

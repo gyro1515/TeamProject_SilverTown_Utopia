@@ -298,9 +298,5 @@ public abstract class Enemy : Entity
     {
         OnDead();
     }
-    public IEnumerable ActiveBoss(float time)
-    {
-        yield return new WaitForSeconds(time);
-        BossState = Enemy.EBossState.Active;
-    }
+    
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 [CreateAssetMenu(menuName = "Card/RangedSkillCard")]
 public class RangedSkillCard : UpgradeCard
 {
@@ -16,6 +17,20 @@ public class RangedSkillCard : UpgradeCard
             skill.UpgradeMultiplier(damageMultiplier);
         if(sizeMultiplier != 1.0f)
             skill.UpgradeSize(sizeMultiplier);
+        int skillIdx = -1;
+        if (GameManager.Instance.Player.baseAttack == skill)
+        {
+            skillIdx = 0;
+        }
+        else if (GameManager.Instance.Player.playerSkills[0] == skill)
+        {
+            skillIdx = 1;
+        }
+        else if (GameManager.Instance.Player.playerSkills[1] == skill)
+        {
+            skillIdx = 2;
+        }
+        UIManager.Instance.MainUI.SetSkillIcon(skillIdx, cardSprite);
     }
     public void SetCard(RangedSkill s, Sprite sprite)
     {

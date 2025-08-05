@@ -750,6 +750,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainUI: {fileID: 778973974}
   selectCardUI: {fileID: 1670301754}
+  endingUI: {fileID: 649466415}
 --- !u!1 &316171618
 GameObject:
   m_ObjectHideFlags: 0
@@ -1354,7 +1355,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 924, y: -500.00006}
+  m_AnchoredPosition: {x: 924, y: -500}
   m_SizeDelta: {x: 1800, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &649466415
@@ -1370,7 +1371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 965379443}
-  scrollSpeed: 50
+  scrollSpeed: 100
   playerSpeed: 22
 --- !u!114 &649466416
 MonoBehaviour:
@@ -4002,6 +4003,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 491e4c0d143a1184094b626b9f7af500, type: 3}
   - type: 4
     clip: {fileID: 8300000, guid: 79d469d81c2def1459c8894b37fa1347, type: 3}
+  - type: 5
+    clip: {fileID: 8300000, guid: 2eec1765f9a95cd49b6f2e092a267e2f, type: 3}
   seDatas:
   - type: 0
     clip: {fileID: 0}

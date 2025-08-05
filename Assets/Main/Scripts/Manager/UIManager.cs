@@ -7,7 +7,10 @@ public class UIManager : Singleton<UIManager> // 해당 형식으로 상속하�
     [Header("사용할 UI")]
     [SerializeField] MainUI mainUI;
     [SerializeField] SelectCardUI selectCardUI;
+    [SerializeField] EndingUI endingUI;
 
+    public MainUI MainUI { get { return mainUI; } }
+    public EndingUI EndingUI { get { return endingUI; } }
     public void SetSelectCardUIActive()
     {
         selectCardUI.SetActive();
