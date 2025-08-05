@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 722e913469ae8bf4bb2ac862e20b7745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHp: 200
-  MaxHp: 200
+  currentHp: 800
+  MaxHp: 800
   moveSpeed: 5
   target: {fileID: 0}
   attackRange: 3

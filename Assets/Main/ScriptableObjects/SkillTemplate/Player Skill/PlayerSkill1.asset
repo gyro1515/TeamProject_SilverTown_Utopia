@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerSkill1
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
-  skillDamage: 30
+  skillDamage: 5
   skillMultiplier: 1
   includeEntityAttack: 0
   direction: {x: 1, y: 0}

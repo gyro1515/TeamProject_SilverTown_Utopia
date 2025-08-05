@@ -19,6 +19,9 @@ public class HitCollider : MonoBehaviour
     //if Enable, Can avoid with jump
     //if not, Can't Avoid with jump
     [SerializeField] bool isJumpAvoidable = false;
+    //Bind Animation Rotation
+    [SerializeField] bool isAnimRotationFixed = false;
+    float angle;
     //Entity who use this skill
     Entity shooter;
     //Checker of Durations
@@ -41,13 +44,14 @@ public class HitCollider : MonoBehaviour
         Cone, Other
     }
 
-    public void Init(Entity entity, Vector2 pos, float warningEnd, float remain, float attackAngle, int damage, GameObject animPrefab)
+    public void Init(Entity entity, Vector2 pos, float warningEnd, float remain, float attackAngle, int damage, GameObject animPrefab, bool isanimfixed = false)
     {
         //During Warning, disable Collider
         hitCollider.enabled = false;
         //Init
         shooter = entity;
         transform.localPosition = pos;
+        angle = attackAngle;
         transform.rotation = Quaternion.Euler(xAngle, 0.0f, attackAngle);
         warningDuration = warningEnd;
         attackRemain = remain;
@@ -64,6 +68,7 @@ public class HitCollider : MonoBehaviour
         this.damage = damage;
         //Start show Warning
         StartCoroutine(showWarning(animPrefab));
+        isAnimRotationFixed = isanimfixed;
     }
 
     //Show warning zone
@@ -91,8 +96,12 @@ public class HitCollider : MonoBehaviour
             {
                 //Debug.Log(animPrefab.name);
                 skillObject = Instantiate(animPrefab);
-                skillObject.gameObject.transform.rotation = transform.rotation;
+                if (!isAnimRotationFixed)
+                    skillObject.gameObject.transform.rotation = transform.rotation;
+                else
+                    skillObject.transform.Rotate(Vector3.forward, angle);
                 skillObject.gameObject.transform.position = transform.position;
+
                 /*Vector3 rot = transform.rotation.eulerAngles;
                 rot.z += 90.0f;
                 
@@ -119,7 +128,6 @@ public class HitCollider : MonoBehaviour
         Destroy(gameObject, attackRemain + 0.1f);
         if (skillObject != null)
         {
-            skillObject.GetComponent<Animator>().transform.rotation = new Quaternion(0, 0, transform.rotation.z, transform.rotation.w);
             AnimatorStateInfo stateInfo = skillObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
             float animLength = stateInfo.length;
             Destroy(skillObject, (attackRemain > animLength ? attackRemain : animLength) + 0.1f);
