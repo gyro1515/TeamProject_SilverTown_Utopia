@@ -102,11 +102,11 @@ Mapping.gif
 
 ---
 - <p align="center">
-  <img src="https://raw.githubusercontent.com/gyro1515/TeamProject_SilverTown_Utopia/main/README_Images/PF1.png" alt="SilverTown Utopia 로고" width="600"/>
+  <img src="https://raw.githubusercontent.com/gyro1515/TeamProject_SilverTown_Utopia/main/README_Images/PF1.png" alt="SilverTown Utopia 로고"/>
 
   
 </p>- <p align="center">
-  <img src="https://raw.githubusercontent.com/gyro1515/TeamProject_SilverTown_Utopia/main/README_Images/PF2.png" alt="SilverTown Utopia 로고" width="600"/>
+  <img src="https://raw.githubusercontent.com/gyro1515/TeamProject_SilverTown_Utopia/main/README_Images/PF2.png" alt="SilverTown Utopia 로고"/>
 </p>
 
 ## 🛠️ Trouble Shooting
