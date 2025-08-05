@@ -1913,6 +1913,10 @@ PrefabInstance:
       propertyPath: bossBGM
       value: 
       objectReference: {fileID: 8300000, guid: 2eec1765f9a95cd49b6f2e092a267e2f, type: 3}
+    - target: {fileID: 4807187242689097693, guid: 0ccea072197aa1f409d109147c5fbaaa, type: 3}
+      propertyPath: currentHp
+      value: 800
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2925,6 +2929,14 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1799361076}
+    - target: {fileID: 6812867654055286121, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: skillCooldown.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812867654055286121, guid: bf3e82190327c1c439d27934d8bc05dd, type: 3}
+      propertyPath: skillCooldown.Array.data[1]
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3755,7 +3767,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639927277982300351, guid: bc58a9a92af41ce4495d40b0d7faccd4, type: 3}
       propertyPath: MaxHp
-      value: 600
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 7639927277982300351, guid: bc58a9a92af41ce4495d40b0d7faccd4, type: 3}
       propertyPath: target
@@ -3767,7 +3779,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 43b9d0ef5d30e654bae3d432ee707e5f, type: 3}
     - target: {fileID: 7639927277982300351, guid: bc58a9a92af41ce4495d40b0d7faccd4, type: 3}
       propertyPath: currentHp
-      value: 600
+      value: 800
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
