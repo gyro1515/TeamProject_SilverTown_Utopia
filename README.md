@@ -100,14 +100,17 @@ Mapping.gif
 ## 📁 프로젝트 파일 구조
 
 
----
-- <p align="center">
-  <img src="https://raw.githubusercontent.com/gyro1515/TeamProject_SilverTown_Utopia/main/README_Images/PF1.png" alt="SilverTown Utopia 로고"/>
+<table>
+  <tr>
+    <td>
+      <img src="https://raw.githubusercontent.com/gyro1515/TeamProject_SilverTown_Utopia/main/README_Images/PF1.png" alt="PF1" width="400"/>
+    </td>
+    <td>
+      <img src="https://raw.githubusercontent.com/gyro1515/TeamProject_SilverTown_Utopia/main/README_Images/PF2.png" alt="PF2" width="400"/>
+    </td>
+  </tr>
+</table>
 
-  
-</p>- <p align="center">
-  <img src="https://raw.githubusercontent.com/gyro1515/TeamProject_SilverTown_Utopia/main/README_Images/PF2.png" alt="SilverTown Utopia 로고"/>
-</p>
 
 ## 🛠️ Trouble Shooting
 
