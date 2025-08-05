@@ -22,7 +22,6 @@ public class BossWallCollision : MonoBehaviour
     {
         if (!isBossRoom || isInBossRoom) return;
 
-        Debug.Log("콜리전");
         col.isTrigger = true;
         Color color = map.color;
         color.a = 0;
@@ -31,7 +30,6 @@ public class BossWallCollision : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (!isBossRoom) return;
-        Debug.Log("트리거 아웃");
         col.isTrigger = false;
         Color color = map.color;
         color.a = 1;

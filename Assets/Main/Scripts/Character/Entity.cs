@@ -43,7 +43,6 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void TakeDamage(int damage, bool isJumpAvoidable = false, bool canParring = true) 
     {
-        Debug.Log("Entity " + this.gameObject.name + " Took " +damage.ToString() + "Damage");
         currentHp -= damage;
         currentHp = Mathf.Clamp(currentHp, 0, GetMaxHP());
         if (currentHp <= 0)

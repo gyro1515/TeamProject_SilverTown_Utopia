@@ -13,7 +13,6 @@ public class AbilityCard : UpgradeCard
 
     public override void ApplySelectedCard()
     {
-        Debug.Log("능력치 강화");
         if (plusHp != 0)
         {
             player.UpgradeHP(plusHp);

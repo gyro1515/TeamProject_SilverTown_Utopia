@@ -81,14 +81,12 @@ public class DeathNight : Enemy
         // 스킬 쿨타임 여부
         if (!actor.patternList[0].isCoolTime) // 쿨타임이 다 돌았다면
         {
-            Debug.Log("스킬 패턴1 사용!!");
             this.isPatternEnd = false;
             actor.StartCoroutine(actor.ActivePattern(0));
             return INode.ENodeState.Success;
         }
         else
         {
-            Debug.Log("스킬 패턴1은 쿨타임입니다.");
             return INode.ENodeState.Failure;
         }
 
@@ -104,14 +102,12 @@ public class DeathNight : Enemy
         }
         if (!actor.patternList[1].isCoolTime) // 쿨타임이 다 돌았다면
         {
-            Debug.Log("스킬 패턴2 사용!!");
             this.isPatternEnd = false;
             actor.StartCoroutine(actor.ActivePattern(1));
             return INode.ENodeState.Success;
         }
         else
         {
-            Debug.Log("스킬 패턴2은 쿨타임입니다.");
             return INode.ENodeState.Failure;
         }
     }
@@ -126,14 +122,12 @@ public class DeathNight : Enemy
         // 스킬 쿨타임 여부
         if (!actor.patternList[2].isCoolTime) // 쿨타임이 다 돌았다면
         {
-            Debug.Log("스킬 패턴3 사용!!");
             this.isPatternEnd = false;
             actor.StartCoroutine(actor.ActivePattern(2));
             return INode.ENodeState.Success;
         }
         else
         {
-            Debug.Log("스킬 패턴3은 쿨타임입니다.");
             return INode.ENodeState.Failure;
         }
     }
@@ -148,14 +142,12 @@ public class DeathNight : Enemy
         // 스킬 쿨타임 여부
         if (!actor.patternList[3].isCoolTime) // 쿨타임이 다 돌았다면
         {
-            Debug.Log("스킬 패턴4 사용!!");
             this.isPatternEnd = false;
             actor.StartCoroutine(actor.ActivePattern(3));
             return INode.ENodeState.Success;
         }
         else
         {
-            Debug.Log("스킬 패턴4은 쿨타임입니다.");
             return INode.ENodeState.Failure;
         }
     }

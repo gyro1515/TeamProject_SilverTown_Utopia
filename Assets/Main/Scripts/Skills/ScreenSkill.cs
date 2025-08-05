@@ -84,7 +84,6 @@ public class ScreenSkill : MonoBehaviour
         Vector2 lerpPos = Vector2.Lerp(enemy.transform.position, camPos, timer / flyTime);
         enemy.gameObject.transform.position = lerpPos;
         if (timer < flyTime) return;
-        Debug.Log(timer);
         timer = 0.0f;
         skillState = EScreenSKillState.MoveToCamera;
     }

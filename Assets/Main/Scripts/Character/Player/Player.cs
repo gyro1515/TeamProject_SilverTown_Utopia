@@ -82,13 +82,6 @@ public class Player : Entity
         direction = new Vector2(direction.x, direction.y).normalized;*/
         // 방향을 정하고 애니메이션이 실행되도록
         base.Update();
-
-        // UI 테스트용도
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            UIManager.Instance.SetSelectCardUIActive();
-        }
-
     }
 
     /*private void OnCollisionEnter2D(Collision2D collision)
@@ -113,7 +106,6 @@ public class Player : Entity
         parringStartTime = Time.fixedTime;
         actionTime = Time.fixedTime;
 
-        Debug.Log("Parring tried at : " + parringStartTime.ToString());
     }
     protected override void TakeDamage(int damage, bool isJumpAvoidable = false, bool canParring = true)
     {
@@ -141,7 +133,6 @@ public class Player : Entity
         damageStartTime = Time.fixedTime;
 
         base.TakeDamage(damage);
-        Debug.Log("afterTakeDamage");
 
         // 데미지를 입었을때 카메라 흔들고 데미지 애니매이션 재생
         ShakeCamera shake = Camera.main.GetComponent<ShakeCamera>();
@@ -298,7 +289,6 @@ public class Player : Entity
 
     public void Levelup()
     {
-        Debug.Log("Levelup");
         MaxHp = (int)(100 + 20 * Mathf.Sqrt(killCount));
         int HPoffset =  MaxHp - (int)(100 + 20 * Mathf.Sqrt(killCount - 1));
         this.currentHp = Mathf.Clamp(currentHp + HPoffset, 0, GetMaxHP());
@@ -309,7 +299,6 @@ public class Player : Entity
     {
         currentHp = Mathf.Clamp(currentHp + addHp, 0, GetMaxHP());
         UIManager.Instance.SetHpBar((float)currentHp / GetMaxHP());
-        Debug.Log($"체력 회복량: {addHp} = cur: {currentHp} / max: {GetMaxHP()}");
     }
     protected override void OnDead()
     {
