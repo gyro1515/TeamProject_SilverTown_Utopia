@@ -522,6 +522,7 @@ public class MapGenerater : MonoBehaviour
                 if (testBoss.gameObject.activeSelf && testBoss?.MyRoom.RoomIdx == i) // 보스가 활성화 되어 있고 보스방이라면 보스 방 활성화
                 {
                     testBoss.BossState = Enemy.EBossState.Active;
+                    StartCoroutine(ActiveBoss(testBoss, 1.0f));
                     CloseBossRoom(testBoss.MyRoom.RoomWallIdx);
                     AudioManager.Instance.SetBossBattleBGM(testBoss.BossBGM);
                     curEnemy = testBoss;
@@ -535,7 +536,8 @@ public class MapGenerater : MonoBehaviour
                     Enemy enemy = enemys[j]?.GetComponent<Enemy>();
                     if (enemy?.MyRoom.RoomIdx != i) continue;
 
-                    enemy.BossState = Enemy.EBossState.Active;
+                    //enemy.BossState = Enemy.EBossState.Active;
+                    StartCoroutine(ActiveBoss(enemy, 1.0f));
                     CloseBossRoom(enemy.MyRoom.RoomWallIdx);
                     AudioManager.Instance.SetBossBattleBGM(enemy.BossBGM);
                     curEnemy = enemy;
@@ -615,5 +617,10 @@ public class MapGenerater : MonoBehaviour
     {
         if (curEnemy == null) return;
         curEnemy.KillBoss();
+    }
+    IEnumerator ActiveBoss(Enemy _enemy, float time)
+    {
+        yield return new WaitForSeconds(time);
+        _enemy.BossState = Enemy.EBossState.Active;
     }
 }
