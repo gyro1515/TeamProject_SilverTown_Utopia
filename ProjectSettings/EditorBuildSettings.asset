@@ -5,10 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Yonggyu/Scenes/MainScene_Yonggyu.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Main/Scene/TestByWonJinVer1.0.unity
+    path: Assets/Main/Scene/MainScene.unity
     guid: 7297163404ff39d48b0db50094e98c50
   m_configObjects: {}
