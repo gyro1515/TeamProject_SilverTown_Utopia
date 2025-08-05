@@ -109,7 +109,6 @@ public class WireAction : MonoBehaviour
             WireState = EWireState.Fire; // 와이어 액션 상태를 발사로 변경
             colGO = wireHit.collider.gameObject; // 와이어에 닿은 장애물 게임오브젝트 ->  와이어 이동 중, 장애물 충돌에 사용
 
-            Debug.Log("와이어 액션 가능");
         }
         else
         {
@@ -117,7 +116,6 @@ public class WireAction : MonoBehaviour
             WireState = EWireState.FailFire; // 와이어 액션 상태를 실패 발사로
             colGO = null; // 닿은 장애물 없음 판정
 
-            Debug.Log("와이어가 짧거나, 거리 내에 장애물이 없다");
         }
         // 디버그 와이어 그리기
         Debug.DrawLine(startPoint, wirePoint, UnityEngine.Color.blue, 1.0f);

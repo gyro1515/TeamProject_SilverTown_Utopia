@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: FireBall
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
-  skillDamage: 0
+  skillDamage: 30
+  skillMultiplier: 1
+  includeEntityAttack: 0
   direction: {x: 1, y: 0}
   positionCenter: {x: 0, y: 0, z: 0}
   animPrefab: {fileID: 2476545726243265464, guid: 24f5aed2043675a4597046efe666f143, type: 3}

@@ -23,7 +23,6 @@ public class MainUI : MonoBehaviour
     {
         if (skillIdx >= skillIcons.Count)
         {
-            Debug.Log("스킬 아이콘 인덱스 범위 초과");
             return;
         }
         skillIcons[skillIdx].sprite = skillIconSprite;

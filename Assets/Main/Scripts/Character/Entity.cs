@@ -41,20 +41,19 @@ public abstract class Entity : MonoBehaviour
         Move();
     }
 
-    protected virtual void TakeDamage(int damage, bool isJumpAvoidable = false) 
+    protected virtual void TakeDamage(int damage, bool isJumpAvoidable = false, bool canParring = true) 
     {
-        Debug.Log("Entity " + this.gameObject.name + " Took " +damage.ToString() + "Damage");
         currentHp -= damage;
-        Mathf.Clamp(currentHp, 0, MaxHp);
-        if (currentHp == 0)
+        currentHp = Mathf.Clamp(currentHp, 0, GetMaxHP());
+        if (currentHp <= 0)
         {
             Invoke("OnDead", 0);
         }
     }
 
-    public void ApplyDamage(Entity e, int damage = 0, bool isJumpAvoidable = false) 
+    public void ApplyDamage(Entity e, int damage = 0, bool isJumpAvoidable = false, bool canParring = true) 
     {
-        e.TakeDamage(damage, isJumpAvoidable);
+        e.TakeDamage(damage, isJumpAvoidable, canParring);
     }
 
     protected void Move()
@@ -75,6 +74,11 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
+    public virtual int GetAttackDamage()
+    {
+        return attackDamage;
+    }
+
     protected virtual void OnDead()
     {
         isDead = true;
@@ -84,5 +88,11 @@ public abstract class Entity : MonoBehaviour
     {
         currentHp = MaxHp;
     }
+
+    protected virtual int GetMaxHP()
+    {
+        return MaxHp;
+    }
+    
 
 }

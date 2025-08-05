@@ -115,12 +115,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3226536097430408011}
+  - component: {fileID: 6778490003573116259}
   - component: {fileID: 5001150857839329545}
   - component: {fileID: 8696276551096820673}
-  - component: {fileID: 6778490003573116259}
   m_Layer: 0
   m_Name: DeathNight
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,6 +141,30 @@ Transform:
   - {fileID: 2627785088864716502}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6778490003573116259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6704106922036302281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04de683df86acf84bbf2a812d267a363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHp: 800
+  MaxHp: 800
+  moveSpeed: 5
+  target: {fileID: 0}
+  attackRange: 3
+  chaseRange: 10
+  bodyDamage: 1
+  bodyDamageTime: 0.1
+  dashMultiple: 3
+  actor: {fileID: -2524123634477253528, guid: 8aac238eca0791942b1c3d1129b0aa5b, type: 3}
+  bossBGM: {fileID: 8300000, guid: f10089e1dcfe44a4cbc379f0c6aaacb7, type: 3}
+  isPatternEnd: 1
 --- !u!50 &5001150857839329545
 Rigidbody2D:
   serializedVersion: 4
@@ -180,7 +204,7 @@ CapsuleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1088
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 951
@@ -203,26 +227,3 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.7951759}
   m_Size: {x: 1.2345352, y: 1.7898629}
   m_Direction: 0
---- !u!114 &6778490003573116259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6704106922036302281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04de683df86acf84bbf2a812d267a363, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHp: 0
-  MaxHp: 0
-  moveSpeed: 5
-  target: {fileID: 0}
-  attackRange: 3
-  chaseRange: 10
-  bodyDamage: 1
-  bodyDamageTime: 0.1
-  dashMultiple: 3
-  actor: {fileID: -2524123634477253528, guid: 8aac238eca0791942b1c3d1129b0aa5b, type: 3}
-  isPatternEnd: 1

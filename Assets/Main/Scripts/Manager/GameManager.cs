@@ -9,6 +9,7 @@ public class GameManager : Singleton<GameManager>
     public MapGenerater MapGenerater { get { return mapGenerater; } }
     Player player;
     public Player Player { get { return player; } }
+    public const bool DEBUGMODE = false;
 
     protected override void Awake()
     {

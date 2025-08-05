@@ -35,7 +35,7 @@ public class Phoenix : Enemy
         WaitNode attack4Time = new WaitNode(1.5f);
         SequenceNode attack4Sequence = new SequenceNode(new List<INode>() { attack4, attack4Time });
         // 패턴 셀렉터, 패턴 중 사용 가능한 패턴부터 사용.
-        SelectorNode patternSelector = new SelectorNode(new List<INode>() { attack3Sequence, attack4Sequence, attack1Sequence, attack2Sequence }); // 쿨타임 긴 순서대로 설정하기
+        SelectorNode patternSelector = new SelectorNode(new List<INode>() { attack1Sequence, attack2Sequence, attack3Sequence, attack4Sequence }); // 쿨타임 긴 순서대로 설정하기
         // 패턴 시전 가능 체크하고, 사용 가능한 패턴들 체크(패턴 쿨타임 체크)
         SequenceNode patternSequence = new SequenceNode(new List<INode>() { canAttack, patternSelector });
 
@@ -82,14 +82,12 @@ public class Phoenix : Enemy
         // 스킬 쿨타임 여부
         if (!actor.patternList[0].isCoolTime) // 쿨타임이 다 돌았다면
         {
-            Debug.Log("스킬 패턴1 사용!!");
             this.isPatternEnd = false;
             actor.StartCoroutine(actor.ActivePattern(0));
             return INode.ENodeState.Success;
         }
         else
         {
-            Debug.Log("스킬 패턴1은 쿨타임입니다.");
             return INode.ENodeState.Failure;
         }
 
@@ -105,14 +103,12 @@ public class Phoenix : Enemy
         }
         if (!actor.patternList[1].isCoolTime) // 쿨타임이 다 돌았다면
         {
-            Debug.Log("스킬 패턴2 사용!!");
             this.isPatternEnd = false;
             actor.StartCoroutine(actor.ActivePattern(1));
             return INode.ENodeState.Success;
         }
         else
         {
-            Debug.Log("스킬 패턴2은 쿨타임입니다.");
             return INode.ENodeState.Failure;
         }
     }
@@ -127,14 +123,12 @@ public class Phoenix : Enemy
         // 스킬 쿨타임 여부
         if (!actor.patternList[2].isCoolTime) // 쿨타임이 다 돌았다면
         {
-            Debug.Log("스킬 패턴3 사용!!");
             this.isPatternEnd = false;
             actor.StartCoroutine(actor.ActivePattern(2));
             return INode.ENodeState.Success;
         }
         else
         {
-            Debug.Log("스킬 패턴3은 쿨타임입니다.");
             return INode.ENodeState.Failure;
         }
     }
@@ -149,14 +143,12 @@ public class Phoenix : Enemy
         // 스킬 쿨타임 여부
         if (!actor.patternList[3].isCoolTime) // 쿨타임이 다 돌았다면
         {
-            Debug.Log("스킬 패턴4 사용!!");
             this.isPatternEnd = false;
             actor.StartCoroutine(actor.ActivePattern(3));
             return INode.ENodeState.Success;
         }
         else
         {
-            Debug.Log("스킬 패턴4은 쿨타임입니다.");
             return INode.ENodeState.Failure;
         }
     }

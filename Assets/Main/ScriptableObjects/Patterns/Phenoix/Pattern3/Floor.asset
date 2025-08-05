@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Floor
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
-  skillDamage: 0
+  skillDamage: 10
+  skillMultiplier: 1
+  includeEntityAttack: 0
   direction: {x: 0, y: 0}
   positionCenter: {x: 0, y: 0, z: 0}
   animPrefab: {fileID: 3072376599235886547, guid: 3b551b9ee01e6cd4089da107214d89d7, type: 3}

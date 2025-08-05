@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: SpreadProjectile
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
-  skillDamage: 0
+  skillDamage: 15
+  skillMultiplier: 1
+  includeEntityAttack: 0
   direction: {x: 1, y: 0}
   positionCenter: {x: 0, y: 0, z: 0}
   animPrefab: {fileID: 4909078036648752693, guid: 9eea79e077843aa4ea2cfec8f7b1071f, type: 3}

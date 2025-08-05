@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Collections.LowLevel.Unsafe;
-using UnityEditor.Experimental.GraphView;
+using Unity.VisualScripting;
+//using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,6 +24,11 @@ public class SelectCardUI : MonoBehaviour
     [SerializeField] RangedSkillCard[] rangedSkillCardPrefabs = new RangedSkillCard[2];
     [SerializeField] AbilityCard[] AbilityCardPrefabs = new AbilityCard[3];
 
+    [Header("스킬 이미지")]
+    [SerializeField] Sprite baseAttackSprite;
+    [SerializeField] Sprite[] skillSprites;
+
+
 
     // 아래는 테스트 용도, 추후 지울 수도...?
     private bool isActive = false;
@@ -41,15 +47,16 @@ public class SelectCardUI : MonoBehaviour
         //Add stat upgrades
         foreach (AbilityCard card in AbilityCardPrefabs)
         {
+            if (card == null) continue;
             AbilityCard copycard = Instantiate(card, transform);
             copycard.SetCard(player);
             upgradeCard.Add(copycard);
         }
         //Add Skill Upgrades
-        AddUpgrades(player.baseAttack);
-        foreach (Skill skill in player.playerSkills)
+        AddUpgrades(player.baseAttack, baseAttackSprite);
+        for(int i = 0; i < player.playerSkills.Count; i++)
         {
-            AddUpgrades(skill);
+            AddUpgrades(player.playerSkills[i], skillSprites[i]);
         }
         isInitialized = true;
         Debug.Log("InitializeCards");
@@ -72,7 +79,16 @@ public class SelectCardUI : MonoBehaviour
                 tmpIdx = Random.Range(0, upgradeCard.Count); // 우선 랜덤으로 하나 뽑고
             }
             while (selectedUpgradeCards.Contains(tmpIdx)); // 처음 뽑은 카드라면 종료
-            Debug.Log($"{tmpIdx} / {i}");
+            if (upgradeCard[tmpIdx] is ProjectileSkillCard)
+            {
+                ProjectileSkillCard tempcard = upgradeCard[tmpIdx] as ProjectileSkillCard;
+                if (tempcard.isAuto && tempcard.skill.isAuto)
+                {
+                    upgradeCard.Remove(tempcard);
+                    i--;
+                    continue;
+                }
+            }
             selectedUpgradeCards.Add(tmpIdx);
             cards[i].SetCardData(upgradeCard[tmpIdx]);
         }
@@ -80,19 +96,19 @@ public class SelectCardUI : MonoBehaviour
     }
     public void SetActive()
     {
-        isActive = !isActive;
+        isActive = true;
         if (isActive) SetCard();
         gameObject.SetActive(isActive);
     }
 
-    private void AddUpgrades(Skill skill)
+    private void AddUpgrades(Skill skill, Sprite sprite)
     {
         if (skill is RangedSkill)
         {
             foreach (RangedSkillCard card in rangedSkillCardPrefabs)
             {
                 RangedSkillCard copycard = Instantiate(card,transform);
-                copycard.SetCard(skill as RangedSkill);
+                copycard.SetCard(skill as RangedSkill, sprite);
                 upgradeCard.Add(copycard);
             }
 
@@ -102,7 +118,7 @@ public class SelectCardUI : MonoBehaviour
             foreach (ProjectileSkillCard card in projectileSkillCardPrefabs)
             {
                 ProjectileSkillCard copycard = Instantiate(card, transform);
-                copycard.SetCard(skill as ProjectileSkill);
+                copycard.SetCard(skill as ProjectileSkill, sprite);
                 upgradeCard.Add(copycard);
             }
         }
