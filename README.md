@@ -99,80 +99,15 @@ Mapping.gif
 
 ## 📁 프로젝트 파일 구조
 
-Assets/
-├── Main/
-│   ├── Animations/           # 애니메이션 (Enemy, Player, Skill, Weapon)
-│   │   ├── Enemy/
-│   │   ├── Player/
-│   │   ├── Skill/
-│   │   └── Weapon/
-│   ├── Artwork/              # 배경/타일셋
-│   │   ├── Cave/
-│   │   ├── RockCave/
-│   │   └── TestTile/
-│   ├── Fonts/
-│   ├── Input/
-│   ├── Materials/
-│   ├── Prefabs/              # 프리팹 모음
-│   │   ├── Collidables/
-│   │   ├── Enemy/
-│   │   ├── Item/
-│   │   ├── MeleeAttack/
-│   │   ├── Obstacle/
-│   │   ├── Player/
-│   │   ├── Room/
-│   │   └── Skill/
-│   ├── Resources/
-│   ├── Scene/
-│   ├── ScriptableObjects/    # 스크립터블 오브젝트 모음
-│   ├── Scripts/              # 스크립트 전체
-│   │   ├── BehaviorTree/
-│   │   ├── Cam/
-│   │   ├── CameraEffect/
-│   │   ├── Card/
-│   │   ├── Character/
-│   │   ├── Collidables/
-│   │   ├── Enum/
-│   │   ├── Item/
-│   │   ├── Manager/
-│   │   ├── Map/
-│   │   ├── Pattern/
-│   │   ├── Skills/
-│   │   └── UI/
-│   └── Sounds/               # 사운드
-│       ├── BGM/
-│       ├── Interact/
-│       ├── Monster/
-│       └── Players/
-├── TestAssets/               # 테스트용 애셋 (개발용)
-│   ├── Animations/
-│   │   ├── Enemy/
-│   │   ├── Player/
-│   │   ├── Skill/
-│   │   └── Weapon/
-│   ├── Artworks/
-│   │   └── Tilemap/
-│   ├── ExternalAssets/
-│   │   ├── Effect/
-│   │   ├── Item/
-│   │   ├── Monster/
-│   │   ├── Player/
-│   │   ├── Tilemap/
-│   │   ├── UI/
-│   │   └── Weapon Skill/
-│   ├── Prefabs/
-│   │   ├── Enemy/
-│   │   ├── MeleeAttack/
-│   │   ├── Parrying/
-│   │   ├── Player/
-│   │   └── Skill/
-│   └── Resources/
-│       ├── Sprite/
-│       └── Tilemap/
-├── TextMesh Pro/
-└── Unity.VisualScripting.Generated/
 
 ---
+- <p align="center">
+  <img src="https://raw.githubusercontent.com/gyro1515/TeamProject_SilverTown_Utopia/main/README_Images/PF1.png" alt="SilverTown Utopia 로고" width="600"/>
+
+  
+</p>- <p align="center">
+  <img src="https://raw.githubusercontent.com/gyro1515/TeamProject_SilverTown_Utopia/main/README_Images/PF2.png" alt="SilverTown Utopia 로고" width="600"/>
+</p>
 
 ## 🛠️ Trouble Shooting
 
