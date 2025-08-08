@@ -66,7 +66,7 @@
 ## 💜 주요기능
 
 ### 1. 절차적 맵 생성
-- 충돌 분산 알고리즘(Room Separation)과 MST(Minimum Spanning Tree)을 접목하여
+- 충돌 배치와 MST(Minimum Spanning Tree)을 접목하여
 - **매번 다른 형태의 맵**을 자동으로 생성하도록 구성
 
 - <p align="center">
